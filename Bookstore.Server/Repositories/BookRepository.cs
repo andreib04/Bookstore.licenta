@@ -1,5 +1,6 @@
 using Bookstore.Server.Data;
 using Bookstore.Server.Data.Models;
+using Bookstore.Server.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bookstore.Server.Repositories;

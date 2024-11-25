@@ -1,4 +1,5 @@
 using Bookstore.Server.Data.Models;
+using Bookstore.Server.DTO;
 using Bookstore.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +9,9 @@ namespace Bookstore.Server.Controllers;
 [Route("/api/[controller]")]
 public class BookController : ControllerBase
 {
-    private readonly IService<Book> _service;
+    private readonly IService<BookDTO> _service;
 
-    public BookController(IService<Book> service)
+    public BookController(IService<BookDTO> service)
     {
         _service = service;
     }
@@ -50,7 +51,7 @@ public class BookController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddBook([FromBody]Book book)
+    public async Task<IActionResult> AddBook([FromBody]BookDTO book)
     {
         try
         {
@@ -64,7 +65,7 @@ public class BookController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateBook(int id,[FromBody] Book book)
+    public async Task<IActionResult> UpdateBook(int id,[FromBody] BookDTO book)
     {
         if(id != book.Id)
             return BadRequest();
