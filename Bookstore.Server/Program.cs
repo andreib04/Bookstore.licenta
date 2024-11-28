@@ -1,5 +1,6 @@
 using Bookstore.Server.Data;
 using Bookstore.Server.Data.Models;
+using Bookstore.Server.DTO;
 using Bookstore.Server.Repositories;
 using Bookstore.Server.Services;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DatabaseContext>(options =>
 				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
-//builder.Services.AddScoped<IBookService<Book>, BookService>();
+//builder.Services.AddScoped<IService, BookService>();
 
 var app = builder.Build();
 

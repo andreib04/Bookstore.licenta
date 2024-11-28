@@ -23,7 +23,7 @@ public class BookService : IService<BookDTO>
     public async Task<BookDTO> GetByIdAsync(int id)
     {
         var book = await _bookRepository.GetByIdAsync(id);
-        return book.toBookDTO();
+        return book.ToBookDto();
     }
 
     public async Task AddAsync(BookDTO book)
@@ -41,7 +41,7 @@ public class BookService : IService<BookDTO>
         dbBook.Price = book.Price;
         dbBook.Stock = book.Stock;
         dbBook.Image = book.Image;
-        dbBook.Category = book.Category;
+       // dbBook.Category = book.Category;
         
         _bookRepository.UpdateAsync(dbBook);
     }

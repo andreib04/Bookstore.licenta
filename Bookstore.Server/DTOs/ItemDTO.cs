@@ -1,4 +1,5 @@
 using Bookstore.Server.Data.Models;
+using Bookstore.Server.DTOs;
 
 namespace Bookstore.Server.DTO;
 
@@ -11,6 +12,5 @@ public class ItemDTO
     public int Stock { get; set; }
     public string ItemType { get; set; }
     public string Image { get; set; }       
-    public Category Category { get; set; }
-    public int CategoryId { get; set; }
+    public CategoryDTO CategoryDTO { get; set; }
 }

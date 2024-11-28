@@ -5,7 +5,7 @@ namespace Bookstore.Server.Mappers;
 
 public static class BookMapper
 {
-    public static BookDTO toBookDTO(this Book bookModel)
+    public static BookDTO ToBookDto(this Book bookModel)
     {
         return new BookDTO
         {
@@ -17,23 +17,23 @@ public static class BookMapper
             Stock = bookModel.Stock,
             Image = bookModel.Image,
             ItemType = bookModel.ItemType,
-            CategoryId = bookModel.CategoryId
+            // CategoryId = bookModel.CategoryId
         };
     }
 
-    public static Book ToBookModel(this BookDTO bookDTO)
+    public static Book ToBookModel(this BookDTO bookDto)
     {
         return new Book
         {
-            Id = bookDTO.Id,
-            Title = bookDTO.Title,
-            Author = bookDTO.Author,
-            Description = bookDTO.Description,
-            Price = bookDTO.Price,
-            Stock = bookDTO.Stock,
-            Image = bookDTO.Image,
-            ItemType = bookDTO.ItemType,
-            CategoryId = bookDTO.CategoryId
+            Id = bookDto.Id,
+            Title = bookDto.Title,
+            Author = bookDto.Author,
+            Description = bookDto.Description,
+            Price = bookDto.Price,
+            Stock = bookDto.Stock,
+            Image = bookDto.Image,
+            ItemType = bookDto.ItemType,
+            // CategoryId = bookDto.CategoryId
         };
     }
     
@@ -42,7 +42,7 @@ public static class BookMapper
         var dtoList = new List<BookDTO>();
         foreach (var bookModel in bookModelList)
         {
-            dtoList.Add(toBookDTO(bookModel));
+            dtoList.Add(ToBookDto(bookModel));
         }
         return dtoList;
     }
