@@ -17,7 +17,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DatabaseContext>(options =>
 				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
-//builder.Services.AddScoped<IService, BookService>();
+builder.Services.AddScoped<IRepository<Book>, BookRepository>();
+builder.Services.AddScoped<IService<BookDTO>, BookService>();
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 
