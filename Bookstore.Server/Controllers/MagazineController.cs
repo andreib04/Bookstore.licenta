@@ -1,4 +1,5 @@
 using Bookstore.Server.Data.Models;
+using Bookstore.Server.DTOs;
 using Bookstore.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +9,9 @@ namespace Bookstore.Server.Controllers;
 [Route("/api/[controller]")]
 public class MagazineController : ControllerBase
 {
-    private readonly IService<Magazine> _magazineService;
+    private readonly IService<MagazineDTO> _magazineService;
 
-    public MagazineController(IService<Magazine> magazineService)
+    public MagazineController(IService<MagazineDTO> magazineService)
     {
         _magazineService = magazineService;
     }
@@ -50,7 +51,7 @@ public class MagazineController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddMagazine([FromBody] Magazine magazine)
+    public async Task<IActionResult> AddMagazine([FromBody] MagazineDTO magazine)
     {
         try
         {
@@ -64,7 +65,7 @@ public class MagazineController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateMagazine(int id, [FromBody] Magazine magazine)
+    public async Task<IActionResult> UpdateMagazine(int id, [FromBody] MagazineDTO magazine)
     {
         if (id != magazine.Id)
             return BadRequest();

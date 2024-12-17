@@ -17,7 +17,7 @@ public static class BookMapper
             Stock = bookModel.Stock,
             Image = bookModel.Image,
             ItemType = bookModel.ItemType,
-            // CategoryId = bookModel.CategoryId
+            CategoryDTO = bookModel.Category.ToDTO()
         };
     }
 
@@ -33,7 +33,7 @@ public static class BookMapper
             Stock = bookDto.Stock,
             Image = bookDto.Image,
             ItemType = bookDto.ItemType,
-            // CategoryId = bookDto.CategoryId
+            CategoryId = bookDto.CategoryDTO.CategoryId
         };
     }
     

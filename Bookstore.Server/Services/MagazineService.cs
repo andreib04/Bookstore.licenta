@@ -1,9 +1,11 @@
 using Bookstore.Server.Data.Models;
+using Bookstore.Server.DTOs;
+using Bookstore.Server.Mappers;
 using Bookstore.Server.Repositories;
 
 namespace Bookstore.Server.Services;
 
-public class MagazineService : IService<Magazine>
+public class MagazineService : IService<MagazineDTO>
 {
     private readonly IRepository<Magazine> _magazineRepository;
 
@@ -12,22 +14,25 @@ public class MagazineService : IService<Magazine>
         _magazineRepository = magazineRepository;
     }
     
-    public async Task<IEnumerable<Magazine>> GetAllAsync()
+    public async Task<IEnumerable<MagazineDTO>> GetAllAsync()
     {
-        return await _magazineRepository.GetAllAsync();
+        var list = await _magazineRepository.GetAllAsync();
+        return list.ToMagazineDTOList();
     }
 
-    public async Task<Magazine> GetByIdAsync(int id)
+    public async Task<MagazineDTO> GetByIdAsync(int id)
     {
-        return await _magazineRepository.GetByIdAsync(id);
+        var magazine = await _magazineRepository.GetByIdAsync(id);
+        return magazine.ToMagazineDTO();
     }
 
-    public async Task AddAsync(Magazine magazine)
+    public async Task<MagazineDTO> AddAsync(MagazineDTO magazine)
     {
-        await _magazineRepository.AddAsync(magazine);
+        await _magazineRepository.AddAsync(magazine.ToMagazineModel());
+        return magazine;
     }
 
-    public async Task UpdateAsync(Magazine magazine)
+    public async Task UpdateAsync(MagazineDTO magazine)
     {
         var dbMagazine = await _magazineRepository.GetByIdAsync(magazine.Id);
         
@@ -37,7 +42,8 @@ public class MagazineService : IService<Magazine>
         dbMagazine.Price = magazine.Price;
         dbMagazine.Stock = magazine.Stock;
         dbMagazine.Image = magazine.Image;
-        dbMagazine.Category = magazine.Category;
+        dbMagazine.ReleaseDate = magazine.ReleaseDate;
+        //dbMagazine.Category = magazine.Category;
         
         _magazineRepository.UpdateAsync(dbMagazine);
     }

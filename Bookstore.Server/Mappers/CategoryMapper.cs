@@ -6,7 +6,7 @@ namespace Bookstore.Server.Mappers;
 
 public static class CategoryMapper
 {
-    public static CategoryDTO ToCategoryDTO(this Category categoryModel)
+    public static CategoryDTO ToDTO(this Category categoryModel)
     {
         return new CategoryDTO()
         {
@@ -15,7 +15,7 @@ public static class CategoryMapper
         };
     }
 
-    public static Category ToCategoryModel(this CategoryDTO categoryDTO)
+    public static Category ToModel(this CategoryDTO categoryDTO)
     {
         return new Category
         {
@@ -29,7 +29,7 @@ public static class CategoryMapper
         var dtoList = new List<CategoryDTO>();
         foreach (var categoryModel in categoryModelList)
         {
-            dtoList.Add(ToCategoryDTO(categoryModel));
+            dtoList.Add(ToDTO(categoryModel));
         }
 
         return dtoList;

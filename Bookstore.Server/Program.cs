@@ -1,6 +1,7 @@
 using Bookstore.Server.Data;
 using Bookstore.Server.Data.Models;
 using Bookstore.Server.DTO;
+using Bookstore.Server.DTOs;
 using Bookstore.Server.Repositories;
 using Bookstore.Server.Services;
 using Microsoft.EntityFrameworkCore;
@@ -18,10 +19,26 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 builder.Services.AddScoped<IRepository<Book>, BookRepository>();
-builder.Services.AddScoped<IService<BookDTO>, BookService>();
+builder.Services.AddTransient<IBookService, BookService>();
+
+builder.Services.AddScoped<IRepository<Magazine>, MagazineRepository>();
+builder.Services.AddTransient<IService<MagazineDTO>, MagazineService>();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddTransient<ICategoryService, CategoryService>();
+
+const string policyName = "Policy";
+
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy(name: policyName,
+		policy =>
+		{
+			policy.WithOrigins("http://localhost:4200");
+			policy.WithMethods("GET", "POST", "PUT","HEAD", "DELETE", "OPTIONS");
+			policy.WithHeaders("Access-Control-Allow-Headers", "Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers");
+		});
+});
 
 var app = builder.Build();
 
@@ -36,6 +53,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(policyName);
 
 app.UseAuthorization();
 

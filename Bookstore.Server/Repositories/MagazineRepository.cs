@@ -34,11 +34,12 @@ public class MagazineRepository : IRepository<Magazine>
         return magazine;
     }
 
-    public async Task AddAsync(Magazine magazine)
+    public async Task<Magazine> AddAsync(Magazine magazine)
     {
         magazine.ItemType = "Magazine";
         _dbContext.Magazines.Add(magazine);
         await _dbContext.SaveChangesAsync();
+        return magazine;
     }
 
     public void UpdateAsync(Magazine magazine)

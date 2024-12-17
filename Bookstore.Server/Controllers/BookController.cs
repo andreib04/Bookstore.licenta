@@ -9,9 +9,9 @@ namespace Bookstore.Server.Controllers;
 [Route("/api/[controller]")]
 public class BookController : ControllerBase
 {
-    private readonly IService<BookDTO> _service;
+    private readonly IBookService _service;
 
-    public BookController(IService<BookDTO> service)
+    public BookController(IBookService service)
     {
         _service = service;
     }
@@ -56,7 +56,7 @@ public class BookController : ControllerBase
         try
         {
             await _service.AddAsync(book);
-            return CreatedAtAction(nameof(GetBookById), new { id = book.Id }, book);
+            return Ok();
         }
         catch(KeyNotFoundException e)
         {

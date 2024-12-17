@@ -12,10 +12,7 @@ namespace Bookstore.Server.Data.Models
         public float Price { get; set; }
         public int Stock { get; set; }
         public string ItemType { get; set; }
-
         public string Image { get; set; }
-
-
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
 

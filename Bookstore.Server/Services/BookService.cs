@@ -1,11 +1,13 @@
+using System.Collections;
 using Bookstore.Server.Data.Models;
 using Bookstore.Server.DTO;
 using Bookstore.Server.Mappers;
 using Bookstore.Server.Repositories;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Bookstore.Server.Services;
 
-public class BookService : IService<BookDTO>
+public class BookService : IBookService
 {
     private readonly IRepository<Book> _bookRepository;
 
@@ -14,7 +16,7 @@ public class BookService : IService<BookDTO>
         _bookRepository = bookRepository;
     }
     
-    public async Task<IEnumerable<BookDTO>> GetAllAsync()
+    public async Task<IEnumerable> GetAllAsync()
     {
         var list = await _bookRepository.GetAllAsync();
         return list.ToBookDTOList();
@@ -26,9 +28,10 @@ public class BookService : IService<BookDTO>
         return book.ToBookDto();
     }
 
-    public async Task AddAsync(BookDTO book)
+    public async Task<BookDTO> AddAsync(BookDTO book)
     {
         await _bookRepository.AddAsync(book.ToBookModel());
+        return book;
     }
 
     public async Task UpdateAsync(BookDTO book)

@@ -23,12 +23,12 @@ public class CategoryService : ICategoryService
     public async Task<CategoryDTO> GetCategoryByIdAsync(int id)
     {
         var category = await _categoryRepository.GetCategoryByIdAsync(id);
-        return category.ToCategoryDTO();
+        return category.ToDTO();
     }
 
     public async Task AddCategoryAsync(CategoryDTO category)
     {
-        await _categoryRepository.AddCategoryAsync(category.ToCategoryModel());
+        await _categoryRepository.AddCategoryAsync(category.ToModel());
     }
 
     public async Task UpdateCategoryAsync(CategoryDTO category)

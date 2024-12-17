@@ -35,11 +35,12 @@ public class BookRepository : IRepository<Book>
         return book; 
     }
 
-    public async Task AddAsync(Book book)
+    public async Task<Book> AddAsync(Book book)
     {
         book.ItemType = "Book";
         _dBContext.Books.Add(book);
         await _dBContext.SaveChangesAsync();
+        return book;
     }
 
     public void UpdateAsync(Book book)
