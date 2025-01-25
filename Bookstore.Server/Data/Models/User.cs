@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace Bookstore.Server.Data.Models;
 
-public class UserModel
+public class User
 {
     public int Id { get; set; }
     public string FirstName { get; set; }

@@ -12,24 +12,24 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
     
-    public async Task<IEnumerable<UserModel>> GetAllUsers()
+    public async Task<IEnumerable<User>> GetAllUsers()
     {
         var list = await _userRepository.GetAllUsers();
         return list;
     }
 
-    public async Task<UserModel?> GetUserById(string id)
+    public async Task<User?> GetUserById(string id)
     {
         var user = await _userRepository.GetUserById(id);
         return user;
     }
 
-    public async Task AddUser(UserModel user)
+    public async Task AddUser(User user)
     {
         await _userRepository.AddUser(user);
     }
 
-    public async Task EditUser(UserModel user)
+    public async Task EditUser(User user)
     {
         var dbUser = await _userRepository.GetUserById(user.Id.ToString());
         

@@ -37,7 +37,7 @@ public class LoginController : ControllerBase
         return NotFound("User not found");
     }
 
-    private UserModel Authenticate(UserLogin userLogin)
+    private User Authenticate(UserLogin userLogin)
     {
         var currentUser = _dbContext.Users.FirstOrDefault(u => u.Email.ToLower() == userLogin.Email.ToLower() && u.Password == userLogin.Password);
         
@@ -47,7 +47,7 @@ public class LoginController : ControllerBase
         return currentUser;
     }
     
-    private string Generate(UserModel user)
+    private string Generate(User user)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);

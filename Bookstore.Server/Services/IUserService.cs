@@ -4,9 +4,9 @@ namespace Bookstore.Server.Services;
 
 public interface IUserService
 {
-    Task<IEnumerable<UserModel>> GetAllUsers();
-    Task<UserModel?> GetUserById(string id);
-    Task AddUser(UserModel user);
-    Task EditUser(UserModel user);
+    Task<IEnumerable<User>> GetAllUsers();
+    Task<User?> GetUserById(string id);
+    Task AddUser(User user);
+    Task EditUser(User user);
     Task DeleteUser(string id);
 }

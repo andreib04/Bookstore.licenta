@@ -4,9 +4,9 @@ namespace Bookstore.Server.Repositories;
 
 public interface IUserRepository
 {
-    Task<IEnumerable<UserModel>> GetAllUsers();
-    Task<UserModel?> GetUserById(string id);
-    Task AddUser(UserModel user);
-    void EditUser(UserModel user);
+    Task<IEnumerable<User>> GetAllUsers();
+    Task<User?> GetUserById(string id);
+    Task AddUser(User user);
+    void EditUser(User user);
     Task DeleteUser(string id);
 }

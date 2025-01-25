@@ -7,4 +7,13 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\bookstore.client\browser\</BuildOutputFolder>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\app\core\guards\" />
+    <Folder Include="src\app\core\interceptors\" />
+    <Folder Include="src\app\features\books-page\" />
+    <Folder Include="src\app\features\magazines-page\" />
+    <Folder Include="src\app\shared\components\footer\" />
+    <Folder Include="src\app\shared\components\header\" />
+    <Folder Include="src\app\shared\pipes\" />
+  </ItemGroup>
 </Project>

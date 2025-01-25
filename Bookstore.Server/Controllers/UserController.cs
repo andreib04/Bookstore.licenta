@@ -16,7 +16,7 @@ public class UserController : ControllerBase
       _userService = userService;
    }
 
-   private UserModel GetCurrentUser()
+   private User GetCurrentUser()
    {
       var identity = HttpContext.User.Identity as ClaimsIdentity;
 
@@ -24,7 +24,7 @@ public class UserController : ControllerBase
       {
          var userClaims = identity.Claims;
 
-         return new UserModel
+         return new User
          {
             Id = int.Parse(userClaims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value),
             FirstName = userClaims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value,
@@ -71,7 +71,7 @@ public class UserController : ControllerBase
    }
 
    [HttpPost]
-   public async Task<IActionResult> AddUser([FromBody] UserModel user)
+   public async Task<IActionResult> AddUser([FromBody] User user)
    {
       try
       {
@@ -85,7 +85,7 @@ public class UserController : ControllerBase
    }
 
    [HttpPut("{id}")]
-   public async Task<IActionResult> EditUser(int id, [FromBody] UserModel user)
+   public async Task<IActionResult> EditUser(int id, [FromBody] User user)
    {
       if (id != user.Id)
          return BadRequest();

@@ -13,12 +13,12 @@ public class UserRepository : IUserRepository
         _dbContext = dbContext;
     }
     
-    public async Task<IEnumerable<UserModel>> GetAllUsers()
+    public async Task<IEnumerable<User>> GetAllUsers()
     {
         return await _dbContext.Users.ToListAsync();
     }
 
-    public async Task<UserModel?> GetUserById(string id)
+    public async Task<User?> GetUserById(string id)
     {
         var user = await _dbContext.Users.FirstOrDefaultAsync();
 
@@ -30,13 +30,13 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public async Task AddUser(UserModel user)
+    public async Task AddUser(User user)
     {
         _dbContext.Users.Add(user);
         await _dbContext.SaveChangesAsync();
     }
 
-    public void EditUser(UserModel user)
+    public void EditUser(User user)
     {
         _dbContext.Users.Update(user);
     }

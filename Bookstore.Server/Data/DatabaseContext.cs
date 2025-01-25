@@ -10,7 +10,7 @@ namespace Bookstore.Server.Data
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<Book> Books { get; set; }
 		public DbSet<Magazine> Magazines {  get; set; }
-		public DbSet<UserModel> Users { get; set; }
+		public DbSet<User> Users { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
