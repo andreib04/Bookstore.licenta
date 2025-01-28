@@ -1,0 +1,4 @@
+<h1>Dashboard</h1>
+<p *ngIf="currentUser">Welcome, {{ currentUser.FirstName }} {{ currentUser.LastName }}!</p>
+<p *ngIf="currentUser?.Role === 'Admin'">You have admin access.</p>
+<p *ngIf="currentUser?.Role === 'Member'">You have member access.</p>

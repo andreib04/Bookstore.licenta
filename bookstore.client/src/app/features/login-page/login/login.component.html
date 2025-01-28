@@ -1,0 +1,16 @@
+<div class="d-flex h-100 align-items-center">
+  <form [formGroup]="form" class="login-form shadow p-3">
+    <div>
+      <label for="emailInput">Email</label>
+      <input type="email" class="form-control" id="emailInput" formControlName="email" placeholder="Email">
+    </div>
+    <div>
+      <label for="passwordInput">Password</label>
+      <input type="password" class="form-control" id="passwordInput" formControlName="password" placeholder="Password">
+    </div>
+
+    <div>
+      <button class="btn btn-primary" (click)="login()">Login</button>
+    </div>
+  </form>
+</div>
