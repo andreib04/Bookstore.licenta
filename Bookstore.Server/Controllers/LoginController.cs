@@ -54,10 +54,11 @@ public class LoginController : ControllerBase
 
         var claims = new[]
         {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),
-            new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Role, user.Role),
+            new Claim("id", user.Id.ToString()),
+            new Claim("first_name", user.FirstName),
+            new Claim("last_name", user.LastName),
+            new Claim("email", user.Email),
+            new Claim("role", user.Role),
         };
 
         var token = new JwtSecurityToken(

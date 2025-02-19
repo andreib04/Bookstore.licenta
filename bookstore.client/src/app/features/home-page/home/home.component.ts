@@ -10,7 +10,7 @@ import {User} from '../../../core/models/user';
 export class HomeComponent implements OnInit{
   currentUser: User | null = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 
   ngOnInit() {
     this.authService.getCurrentUser().subscribe((user) => {

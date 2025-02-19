@@ -22,10 +22,14 @@ export class AuthService {
   login(userLogin: UserLogin): Observable<string> {
     return this.http.post(`${this.baseURL}${this.apiPATH}`, userLogin, { responseType: 'text' }).pipe(
       tap((token: string) => {
+        console.log("Received Token: ", token);
+
         localStorage.setItem('access_token', token);
         this.loggedIn.next(true);
 
         const user = this.decodeToken(token);
+        console.log("Decoded User: ", user);
+
         localStorage.setItem('current_user', JSON.stringify(user));
         this.currentUser.next(user);
 
@@ -37,9 +41,10 @@ export class AuthService {
   logout(): void{
     localStorage.removeItem('access_token');
     localStorage.removeItem('current_user');
+    localStorage.removeItem('token');
     this.loggedIn.next(false);
     this.currentUser.next(null);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
   }
 
   isLoggedIn(): Observable<boolean> {
@@ -56,18 +61,44 @@ export class AuthService {
 
   private getUserFromStorage(): User | null{
     const userJson = localStorage.getItem('current_user');
-    return userJson ? JSON.parse(userJson) : null;
+
+    if(!userJson)
+      return null;
+
+    try{
+      return JSON.parse(userJson);
+    }catch(error){
+      console.error("Invalid JSON in localStorage", error);
+      return null;
+    }
   }
 
+
   private decodeToken(token: string): User{
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return {
-      Id: payload.sub,
-      FirstName: payload.given_name,
-      LastName: payload.family_name,
-      Email: payload.email,
-      Password: '',
-      Role: payload.role,
-    };
+    try{
+      const payload = JSON.parse(atob(token.split('.')[1]));
+
+      console.log("Decoded token payload: ",payload);
+
+      return{
+        Id: payload?.id || '',
+        FirstName: payload?.first_name || '',
+        LastName: payload?.last_name || '',
+        Email: payload?.email || '',
+        Password: '',
+        Role: payload?.role || 'Member',
+      };
+    }catch(error){
+      console.error("Error decoding token: ", error);
+      return{
+        Id: '',
+        FirstName: '',
+        LastName: '',
+        Email: '',
+        Password: '',
+        Role: 'Member',
+      }
+    }
   }
+
 }

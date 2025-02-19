@@ -1,4 +1,11 @@
-<h1>Dashboard</h1>
+<h1>Home </h1>
 <p *ngIf="currentUser">Welcome, {{ currentUser.FirstName }} {{ currentUser.LastName }}!</p>
 <p *ngIf="currentUser?.Role === 'Admin'">You have admin access.</p>
 <p *ngIf="currentUser?.Role === 'Member'">You have member access.</p>
+
+<button class="btn btn-primary" routerLink="/login">Login</button>
+
+<button
+  *ngIf="authService.isLoggedIn()"
+  class="btn btn-danger d-flex" (click)="authService.logout()">
+  Logout</button>
