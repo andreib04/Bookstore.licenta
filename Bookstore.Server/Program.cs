@@ -5,6 +5,8 @@ using Bookstore.Server.DTO;
 using Bookstore.Server.DTOs;
 using Bookstore.Server.Repositories;
 using Bookstore.Server.Services;
+using Bookstore.Server.Validations;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -33,6 +35,8 @@ builder.Services.AddTransient<ICategoryService, CategoryService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
+
+builder.Services.AddTransient<AbstractValidator<User>, UserValidator>();
 
 const string policyName = "Policy";
 

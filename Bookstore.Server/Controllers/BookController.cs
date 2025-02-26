@@ -1,6 +1,7 @@
 using Bookstore.Server.Data.Models;
 using Bookstore.Server.DTO;
 using Bookstore.Server.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bookstore.Server.Controllers;
@@ -17,6 +18,7 @@ public class BookController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllBooks()
     {
         try
@@ -34,6 +36,7 @@ public class BookController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetBookById(int id)
     {
         try
@@ -51,6 +54,7 @@ public class BookController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Policy = "Admin")]
     public async Task<IActionResult> AddBook([FromBody]BookDTO book)
     {
         try
@@ -65,6 +69,7 @@ public class BookController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Policy = "Admin")]
     public async Task<IActionResult> UpdateBook(int id,[FromBody] BookDTO book)
     {
         if(id != book.Id)
@@ -82,6 +87,7 @@ public class BookController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Policy = "Admin")]
     public async Task<IActionResult> DeleteBook(int id)
     {
         try

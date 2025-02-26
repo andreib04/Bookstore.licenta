@@ -1,7 +1,9 @@
 using System.Security.Claims;
 using Bookstore.Server.Data.Models;
 using Bookstore.Server.Services;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bookstore.Server.Controllers;
 
@@ -10,12 +12,16 @@ namespace Bookstore.Server.Controllers;
 public class UserController : ControllerBase
 {
    private readonly IUserService _userService;
+   private readonly AbstractValidator<User> _userValidator;
 
-   public UserController(IUserService userService)
+   public UserController(IUserService userService, AbstractValidator<User> userValidator)
    {
       _userService = userService;
+      _userValidator = userValidator;
    }
 
+   [HttpGet]
+   [AllowAnonymous]
    private User GetCurrentUser()
    {
       var identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -37,6 +43,7 @@ public class UserController : ControllerBase
    }
 
    [HttpGet]
+   [AllowAnonymous]
    public async Task<IActionResult> GetAllUsers()
    {
       try
@@ -54,8 +61,10 @@ public class UserController : ControllerBase
    }
 
    [HttpGet("{id}")]
+   [AllowAnonymous]
    public async Task<IActionResult> GetUserById(int id)
    {
+      
       try
       {
          var user = await _userService.GetUserById(id.ToString());
@@ -71,10 +80,18 @@ public class UserController : ControllerBase
    }
 
    [HttpPost]
+   [Authorize(Policy = "Admin")]
    public async Task<IActionResult> AddUser([FromBody] User user)
    {
       try
       {
+         var validation = _userValidator.Validate(user);
+
+         if (!validation.IsValid)
+         {
+            return new BadRequestObjectResult(validation.Errors.Select(error => error.ErrorMessage));
+         }
+         
          await _userService.AddUser(user);
          return Ok();
       }
@@ -85,6 +102,7 @@ public class UserController : ControllerBase
    }
 
    [HttpPut("{id}")]
+   [Authorize(Policy = "Admin")]
    public async Task<IActionResult> EditUser(int id, [FromBody] User user)
    {
       if (id != user.Id)
@@ -92,6 +110,13 @@ public class UserController : ControllerBase
 
       try
       {
+         var validation = _userValidator.Validate(user);
+
+         if (validation.IsValid)
+         {
+            return new BadRequestObjectResult(validation.Errors.Select(error => error.ErrorMessage));
+         }
+         
          await _userService.EditUser(user);
          return NoContent();
       }
@@ -102,6 +127,7 @@ public class UserController : ControllerBase
    }
 
    [HttpDelete("{id}")]
+   [Authorize(Policy = "Admin")]
    public async Task<IActionResult> DeleteUser(int id)
    {
       try
