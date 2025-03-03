@@ -80,7 +80,7 @@ public class UserController : ControllerBase
    }
 
    [HttpPost]
-   [Authorize(Policy = "Admin")]
+   [AllowAnonymous]
    public async Task<IActionResult> AddUser([FromBody] User user)
    {
       try

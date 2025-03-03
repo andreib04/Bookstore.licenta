@@ -12,6 +12,11 @@ public class UserRepository : IUserRepository
     {
         _dbContext = dbContext;
     }
+
+    public async Task<User> GetUserByEmailAsync(string email)
+    {
+        return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == email.ToLower());
+    }
     
     public async Task<IEnumerable<User>> GetAllUsers()
     {

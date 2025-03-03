@@ -1,11 +1,7 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using Bookstore.Server.Data;
 using Bookstore.Server.Data.Models;
-using Microsoft.AspNetCore.Authorization;
+using Bookstore.Server.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+
 
 namespace Bookstore.Server.Controllers;
 
@@ -13,61 +9,28 @@ namespace Bookstore.Server.Controllers;
 [Controller]
 public class LoginController : ControllerBase
 {
-    private readonly IConfiguration _configuration;
-    private readonly DatabaseContext _dbContext;
-    
-    public LoginController(IConfiguration configuration, DatabaseContext dbContext)
+    private readonly IUserService _userService;
+
+    public LoginController(IUserService userService)
     {
-      _configuration = configuration;
-      _dbContext = dbContext;
+        _userService = userService;
     }
 
-    [AllowAnonymous]
-    [HttpPost]
-    public IActionResult Login([FromBody] UserLogin userLogin)
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] UserLogin userLogin)
     {
-        var user = Authenticate(userLogin);
-
-        if (user != null)
+        try
         {
-            var token = Generate(user);
-            return Ok(token);
+            var token = await _userService.LoginUser(userLogin.Email, userLogin.Password);
+            return Ok(new { Token = token });
         }
-
-        return NotFound("User not found");
-    }
-
-    private User Authenticate(UserLogin userLogin)
-    {
-        var currentUser = _dbContext.Users.FirstOrDefault(u => u.Email.ToLower() == userLogin.Email.ToLower() && u.Password == userLogin.Password);
-        
-        if(currentUser == null)
-            throw new KeyNotFoundException("Email or password is incorrect!");
-
-        return currentUser;
-    }
-    
-    private string Generate(User user)
-    {
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
-        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-        var claims = new[]
+        catch (KeyNotFoundException)
         {
-            new Claim("id", user.Id.ToString()),
-            new Claim("first_name", user.FirstName),
-            new Claim("last_name", user.LastName),
-            new Claim("email", user.Email),
-            new Claim("role", user.Role),
-        };
-
-        var token = new JwtSecurityToken(
-            _configuration["Jwt:Issuer"],
-            _configuration["Jwt:Audience"],
-            claims,
-            expires: DateTime.Now.AddMinutes(10),
-            signingCredentials: credentials);
-
-        return new JwtSecurityTokenHandler().WriteToken(token);
+            return NotFound("User not found");
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized("Invalid credentials");
+        }
     }
 }
