@@ -13,11 +13,13 @@
     <Folder Include="src\app\core\services\auth\" />
     <Folder Include="src\app\features\admin-panel\" />
     <Folder Include="src\app\features\books-page\" />
+    <Folder Include="src\app\features\categories-page\" />
     <Folder Include="src\app\features\home-page\" />
     <Folder Include="src\app\features\login-page\" />
     <Folder Include="src\app\features\magazines-page\" />
     <Folder Include="src\app\shared\components\footer\" />
     <Folder Include="src\app\shared\components\header\" />
+    <Folder Include="src\app\shared\components\search-bar\" />
     <Folder Include="src\app\shared\pipes\" />
   </ItemGroup>
 </Project>

@@ -9,13 +9,23 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { HomeComponent } from './features/home-page/home/home.component';
 import { AdminPanelComponent } from './features/admin-panel/admin-panel/admin-panel.component';
 import {AuthInterceptor} from './core/interceptors/auth.interceptor';
+import { HeaderComponent } from './shared/components/header/header/header.component';
+import { SearchBarComponent } from './shared/components/search-bar/search-bar/search-bar.component';
+import { BooksPageComponent } from './features/books-page/books-page/books-page.component';
+import { MagazinesPageComponent } from './features/magazines-page/magazines-page/magazines-page.component';
+import { CategoriesPageComponent } from './features/categories-page/categories-page/categories-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    HeaderComponent,
+    SearchBarComponent,
+    BooksPageComponent,
+    MagazinesPageComponent,
+    CategoriesPageComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
