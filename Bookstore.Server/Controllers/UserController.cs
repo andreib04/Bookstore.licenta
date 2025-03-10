@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Bookstore.Server.Data.Models;
 using Bookstore.Server.Services;
+using Bookstore.Server.Validations;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
@@ -12,12 +13,10 @@ namespace Bookstore.Server.Controllers;
 public class UserController : ControllerBase
 {
    private readonly IUserService _userService;
-   private readonly AbstractValidator<User> _userValidator;
 
-   public UserController(IUserService userService, AbstractValidator<User> userValidator)
+   public UserController(IUserService userService)
    {
       _userService = userService;
-      _userValidator = userValidator;
    }
 
    [HttpGet]
@@ -85,13 +84,6 @@ public class UserController : ControllerBase
    {
       try
       {
-         var validation = _userValidator.Validate(user);
-
-         if (!validation.IsValid)
-         {
-            return new BadRequestObjectResult(validation.Errors.Select(error => error.ErrorMessage));
-         }
-         
          await _userService.AddUser(user);
          return Ok();
       }
@@ -110,17 +102,10 @@ public class UserController : ControllerBase
 
       try
       {
-         var validation = _userValidator.Validate(user);
-
-         if (validation.IsValid)
-         {
-            return new BadRequestObjectResult(validation.Errors.Select(error => error.ErrorMessage));
-         }
-         
          await _userService.EditUser(user);
          return NoContent();
       }
-      catch (KeyNotFoundException e)
+      catch (Exception e)
       { 
          return new NotFoundObjectResult(e.Message);
       }
@@ -132,7 +117,7 @@ public class UserController : ControllerBase
    {
       try
       {
-         await _userService.DeleteUser(id.ToString());
+         await _userService.DeleteUser(id);
          return NoContent();
       }
       catch

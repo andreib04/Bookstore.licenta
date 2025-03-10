@@ -18,14 +18,15 @@ public class BookRepository : IRepository<Book>
     {
         return await _dBContext.Books
             .Where(i => i.ItemType == "Book")
+            .Include(i => i.Category)
             .ToListAsync();
     }
 
     public async Task<Book> GetByIdAsync(int id)
     {
         var book = await _dBContext.Books
-            .Where(i => i.ItemType == "Book" && i.Id == id)
-            .FirstOrDefaultAsync();
+            .Include(i => i.Category)
+            .FirstOrDefaultAsync(i => i.ItemType == "Book" && i.Id == id);
 
         if (book == null)
         {
@@ -43,9 +44,10 @@ public class BookRepository : IRepository<Book>
         return book;
     }
 
-    public void UpdateAsync(Book book)
+    public async Task UpdateAsync(Book book)
     {
         _dBContext.Books.Update(book);
+        await _dBContext.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(int id)

@@ -42,9 +42,10 @@ public class MagazineRepository : IRepository<Magazine>
         return magazine;
     }
 
-    public void UpdateAsync(Magazine magazine)
+    public async Task UpdateAsync(Magazine magazine)
     {
         _dbContext.Magazines.Update(magazine);
+        await _dbContext.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(int id)

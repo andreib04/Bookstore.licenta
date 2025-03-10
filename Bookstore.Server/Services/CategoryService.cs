@@ -38,7 +38,7 @@ public class CategoryService : ICategoryService
         dbCategory.CategoryId = category.CategoryId;
         dbCategory.CategoryName = category.CategoryName;
 
-        _categoryRepository.UpdateCategoryAsync(dbCategory);
+        await _categoryRepository.UpdateCategoryAsync(dbCategory);
     }
 
     public async Task DeleteCategoryAsync(int id)

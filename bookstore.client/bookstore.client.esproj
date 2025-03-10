@@ -17,6 +17,7 @@
     <Folder Include="src\app\features\home-page\" />
     <Folder Include="src\app\features\login-page\" />
     <Folder Include="src\app\features\magazines-page\" />
+    <Folder Include="src\app\features\register-page\" />
     <Folder Include="src\app\shared\components\footer\" />
     <Folder Include="src\app\shared\components\header\" />
     <Folder Include="src\app\shared\components\search-bar\" />

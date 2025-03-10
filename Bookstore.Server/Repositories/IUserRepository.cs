@@ -8,6 +8,6 @@ public interface IUserRepository
     Task<IEnumerable<User>> GetAllUsers();
     Task<User?> GetUserById(string id);
     Task AddUser(User user);
-    void EditUser(User user);
-    Task DeleteUser(string id);
+    Task EditUser(User user);
+    Task DeleteUser(int id);
 }

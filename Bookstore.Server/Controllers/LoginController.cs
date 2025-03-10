@@ -16,7 +16,7 @@ public class LoginController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPost("login")]
+    [HttpPost]
     public async Task<IActionResult> Login([FromBody] UserLogin userLogin)
     {
         try

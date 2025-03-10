@@ -7,7 +7,7 @@ namespace Bookstore.Server.Repositories
 		Task<IEnumerable<T>> GetAllAsync();	
 		Task<T> GetByIdAsync(int id);
 		Task<T> AddAsync(T entity);
-		void UpdateAsync(T entity);
+		Task UpdateAsync(T entity);
 		Task DeleteAsync(int id);
 	}
 }

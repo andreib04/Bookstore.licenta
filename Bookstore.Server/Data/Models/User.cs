@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel;
+using Bookstore.Server.Validations;
 
 namespace Bookstore.Server.Data.Models;
 

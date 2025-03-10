@@ -52,7 +52,7 @@ public class UserService : IUserService
             _configuration["Jwt:Issuer"],
             _configuration["Jwt:Audience"],
             claims,
-            expires: DateTime.Now.AddMinutes(10),
+            expires: DateTime.Now.AddDays(5),
             signingCredentials: credentials);
         
         return new JwtSecurityTokenHandler().WriteToken(token);
@@ -84,11 +84,12 @@ public class UserService : IUserService
         dbUser.LastName = user.LastName;
         dbUser.Email = user.Email;
         dbUser.Password = user.Password;
+        dbUser.Role = user.Role;
         
-        _userRepository.EditUser(dbUser);
+        await _userRepository.EditUser(dbUser);
     }
 
-    public async Task DeleteUser(string id)
+    public async Task DeleteUser(int id)
     {
         await _userRepository.DeleteUser(id);
     }

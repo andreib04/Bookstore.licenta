@@ -14,6 +14,7 @@ import { SearchBarComponent } from './shared/components/search-bar/search-bar/se
 import { BooksPageComponent } from './features/books-page/books-page/books-page.component';
 import { MagazinesPageComponent } from './features/magazines-page/magazines-page/magazines-page.component';
 import { CategoriesPageComponent } from './features/categories-page/categories-page/categories-page.component';
+import { RegisterComponent } from './features/register-page/register/register.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CategoriesPageComponent } from './features/categories-page/categories-p
     SearchBarComponent,
     BooksPageComponent,
     MagazinesPageComponent,
-    CategoriesPageComponent
+    CategoriesPageComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

@@ -25,7 +25,7 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> GetUserById(string id)
     {
-        var user = await _dbContext.Users.FirstOrDefaultAsync();
+        var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id.ToString() == id);
 
         if (user == null)
         {
@@ -41,12 +41,13 @@ public class UserRepository : IUserRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public void EditUser(User user)
+    public async Task EditUser(User user)
     {
         _dbContext.Users.Update(user);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public async Task DeleteUser(string id)
+    public async Task DeleteUser(int id)
     {
         var user = await _dbContext.Users.FindAsync(id);
         

@@ -9,5 +9,5 @@ public interface IUserService
     Task<User?> GetUserById(string id);
     Task AddUser(User user);
     Task EditUser(User user);
-    Task DeleteUser(string id);
+    Task DeleteUser(int id);
 }

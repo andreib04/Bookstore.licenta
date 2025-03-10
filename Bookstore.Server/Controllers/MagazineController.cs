@@ -60,9 +60,9 @@ public class MagazineController : ControllerBase
         try
         {
             await _magazineService.AddAsync(magazine);
-            return CreatedAtAction(nameof(GetMagazineById), new { id = magazine.Id }, magazine);
+            return Ok();
         }
-        catch (KeyNotFoundException e)
+        catch (Exception e)
         {
             return new NotFoundObjectResult(e.Message);
         }

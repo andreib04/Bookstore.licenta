@@ -8,9 +8,12 @@ import {RoleGuard} from './core/guards/role-guard.guard';
 import {BooksPageComponent} from './features/books-page/books-page/books-page.component';
 import {MagazinesPageComponent} from './features/magazines-page/magazines-page/magazines-page.component';
 import {CategoriesPageComponent} from './features/categories-page/categories-page/categories-page.component';
+import {RegisterComponent} from './features/register-page/register/register.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+
   {path: 'home', component: HomeComponent},
   {path: 'books', component: BooksPageComponent},
   {path: 'magazines', component: MagazinesPageComponent},

@@ -21,7 +21,7 @@ public class CategoryRepository : ICategoryRepository
     public async Task<Category> GetCategoryByIdAsync(int id)
     {
         var category = await _dbContext.Categories
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(i => i.CategoryId == id);
         
         if(category == null)
             throw new Exception($"Category with id {id} not found");
@@ -35,9 +35,10 @@ public class CategoryRepository : ICategoryRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public void UpdateCategoryAsync(Category category)
+    public async Task UpdateCategoryAsync(Category category)
     {
         _dbContext.Categories.Update(category);
+        await _dbContext.SaveChangesAsync();
     }
 
     public async Task DeleteCategoryAsync(int id)

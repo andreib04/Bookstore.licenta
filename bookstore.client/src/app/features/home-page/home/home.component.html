@@ -6,7 +6,7 @@ home page works
 <p *ngIf="currentUser?.Role === 'Member'">You have member access.</p>
 
 
-<!--<button-->
-<!--  *ngIf="authService.isLoggedIn()"-->
-<!--  class="btn btn-danger d-flex" (click)="authService.logout()">-->
-<!--  Logout</button>-->
+<button
+  *ngIf="authService.isLoggedIn()"
+  class="btn btn-danger d-flex" (click)="authService.logout()">
+  Logout</button>

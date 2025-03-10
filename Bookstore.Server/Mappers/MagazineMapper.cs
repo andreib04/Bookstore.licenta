@@ -17,7 +17,7 @@ public static class MagazineMapper
             ItemType = magazine.ItemType,
             Publisher = magazine.Publisher,
             ReleaseDate = magazine.ReleaseDate,
-            CategoryDTO = magazine.Category.ToDTO(),
+            CategoryDTO = magazine.Category.ToDTO()
         };
     }
 
@@ -27,6 +27,7 @@ public static class MagazineMapper
         {
             Id = magazineDTO.Id,
             Title = magazineDTO.Title,
+            Description = magazineDTO.Description,
             Price = magazineDTO.Price,
             Stock = magazineDTO.Stock,
             Image = magazineDTO.Image,
