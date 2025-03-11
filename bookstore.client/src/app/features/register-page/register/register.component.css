@@ -24,3 +24,8 @@ label{
   text-decoration: none;
   color: blue;
 }
+
+.error{
+  color: red;
+  font-size: 12px;
+}

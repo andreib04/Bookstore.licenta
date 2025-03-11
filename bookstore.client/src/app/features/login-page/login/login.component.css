@@ -22,10 +22,10 @@ label{
   color: blue;
 }
 
-.registerOption{
-  margin-left: 55px;
-  margin-top: 30px;
-}
+  .registerOption{
+    margin-left: 55px;
+    margin-top: 30px;
+  }
 
 .registerLink{
   text-decoration: none;

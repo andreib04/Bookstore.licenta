@@ -9,7 +9,7 @@ import {User} from '../../models/user';
 })
 export class UsersServiceService {
 
-  baseURL = environment.baseURL;
+  baseURL = "https://localhost:44305/";
   apiPATH = "api/User";
   constructor(private http: HttpClient) { }
 

@@ -80,7 +80,7 @@ public class MagazineController : ControllerBase
             await _magazineService.UpdateAsync(magazine);
             return NoContent();
         }
-        catch (KeyNotFoundException e)
+        catch (Exception e)
         {
             return new NotFoundObjectResult(e.Message);
         }

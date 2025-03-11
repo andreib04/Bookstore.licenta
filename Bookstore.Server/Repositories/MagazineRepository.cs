@@ -17,6 +17,7 @@ public class MagazineRepository : IRepository<Magazine>
     {
         return await _dbContext.Magazines
             .Where(i => i.ItemType == "Magazine")
+            .Include(i => i.Category)
             .ToListAsync();
     }
 
@@ -24,6 +25,7 @@ public class MagazineRepository : IRepository<Magazine>
     {
         var magazine = await _dbContext.Magazines
             .Where(i => i.ItemType == "Magazine" && i.Id == id)
+            .Include(i => i.Category)
             .FirstOrDefaultAsync();
 
         if (magazine == null)

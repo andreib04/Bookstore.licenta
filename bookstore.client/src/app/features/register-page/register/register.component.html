@@ -11,29 +11,57 @@
             <p class="small text-muted">We're happy to see you here. Feel free to sign up!</p>
           </div>
 
-          <form [formGroup]="form" class="register-form">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()"  class="register-form">
             <div class="mb-2">
               <label for="firstNameInput" class="form-label small">First name</label>
               <input type="text" class="form-control form-control-sm" id="firstNameInput" formControlName="firstName" placeholder="John">
+              <div *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid" class="error">
+                  <span *ngIf="form.get('firstName')?.errors?.['required']">First Name is required</span>
+              </div>
             </div>
+
+
             <div class="mb-2">
               <label for="lastNameInput" class="form-label small">Last name</label>
               <input type="text" class="form-control form-control-sm" id="lastNameInput" formControlName="lastName" placeholder="Doe">
+              <div *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid" class="error">
+                <span *ngIf="form.get('lastName')?.errors?.['required']">Last Name is required</span>
+              </div>
             </div>
+
             <div class="mb-2">
               <label for="emailInput" class="form-label small">Email</label>
               <input type="email" class="form-control form-control-sm" id="emailInput" formControlName="email" placeholder="example@email.com">
+              <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="error">
+                <span *ngIf="form.get('email')?.errors?.['required']">Email is required</span>
+                <span *ngIf="form.get('email')?.errors?.['email']">Invalid email format</span>
+              </div>
             </div>
+
             <div class="mb-2">
               <label for="passwordInput" class="form-label small">Password</label>
               <input type="password" class="form-control form-control-sm" id="passwordInput" formControlName="password" placeholder="Password">
+              <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid" class="error">
+                <span *ngIf="form.get('password')?.errors?.['required']">Password is required.</span>
+                <span *ngIf="form.get('password')?.errors?.['minlength']">Minimum length is 8 characters.<br></span>
+                <span *ngIf="form.get('password')?.errors?.['upper']">Must contain an uppercase letter.<br></span>
+                <span *ngIf="form.get('password')?.errors?.['number']">Must contain a number. <br></span>
+              </div>
             </div>
+
             <div class="mb-2">
               <label for="confirmPasswordInput" class="form-label small">Cofirm Password</label>
               <input type="password" class="form-control form-control-sm" id="confirmPasswordInput" formControlName="confirmPassword" placeholder="Confirm Password">
+              <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid" class="error">
+                <span *ngIf="form.get('password')?.errors?.['required']">Confirm Password is required.</span>
+              </div>
+
+              <div *ngIf="form.errors?.['passwordmatcherror']" class="error">
+                Passwords do not match.
+              </div>
             </div>
 
-            <button class="btn btn-primary btn-sm" type="button">Sign up</button>
+            <button class="btn btn-primary btn-sm" type="submit" [disabled]="form.invalid">Sign up</button>
 
             <div class="registerOption">
               <p class="small">Already have an account? <a class="registerLink text-decoration-none" routerLink="/login">Sign in!</a></p>
