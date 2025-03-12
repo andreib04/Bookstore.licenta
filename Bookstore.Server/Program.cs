@@ -25,7 +25,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 builder.Services.AddScoped<IRepository<Book>, BookRepository>();
-builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddTransient<IService<BookDTO>, BookService>();
 
 builder.Services.AddScoped<IRepository<Magazine>, MagazineRepository>();
 builder.Services.AddTransient<IService<MagazineDTO>, MagazineService>();

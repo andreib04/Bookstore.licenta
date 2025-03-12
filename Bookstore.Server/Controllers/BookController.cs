@@ -10,9 +10,9 @@ namespace Bookstore.Server.Controllers;
 [Route("/api/[controller]")]
 public class BookController : ControllerBase
 {
-    private readonly IBookService _service;
+    private readonly IService<BookDTO> _service;
 
-    public BookController(IBookService service)
+    public BookController(IService<BookDTO> service)
     {
         _service = service;
     }

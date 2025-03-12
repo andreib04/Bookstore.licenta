@@ -15,6 +15,7 @@ import { BooksPageComponent } from './features/books-page/books-page/books-page.
 import { MagazinesPageComponent } from './features/magazines-page/magazines-page/magazines-page.component';
 import { CategoriesPageComponent } from './features/categories-page/categories-page/categories-page.component';
 import { RegisterComponent } from './features/register-page/register/register.component';
+import { CartPageComponent } from './features/cart-page/cart-page/cart-page.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RegisterComponent } from './features/register-page/register/register.co
     BooksPageComponent,
     MagazinesPageComponent,
     CategoriesPageComponent,
-    RegisterComponent
+    RegisterComponent,
+    CartPageComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

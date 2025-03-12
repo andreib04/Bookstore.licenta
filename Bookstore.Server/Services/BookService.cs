@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Bookstore.Server.Services;
 
-public class BookService : IBookService
+public class BookService : IService<BookDTO>
 {
     private readonly IRepository<Book> _bookRepository;
 
@@ -16,7 +16,7 @@ public class BookService : IBookService
         _bookRepository = bookRepository;
     }
     
-    public async Task<IEnumerable> GetAllAsync()
+    public async Task<IEnumerable<BookDTO>> GetAllAsync()
     {
         var list = await _bookRepository.GetAllAsync();
         return list.ToBookDTOList();
@@ -44,9 +44,8 @@ public class BookService : IBookService
         dbBook.Price = book.Price;
         dbBook.Stock = book.Stock;
         dbBook.Image = book.Image;
-       // dbBook.Category = book.Category;
         
-        _bookRepository.UpdateAsync(dbBook);
+        await _bookRepository.UpdateAsync(dbBook);
     }
 
     public async Task DeleteAsync(int id)

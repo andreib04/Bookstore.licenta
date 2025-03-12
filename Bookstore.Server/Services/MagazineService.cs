@@ -43,9 +43,8 @@ public class MagazineService : IService<MagazineDTO>
         dbMagazine.Stock = magazine.Stock;
         dbMagazine.Image = magazine.Image;
         dbMagazine.ReleaseDate = magazine.ReleaseDate;
-        //dbMagazine.Category = magazine.Category;
         
-        _magazineRepository.UpdateAsync(dbMagazine);
+        await _magazineRepository.UpdateAsync(dbMagazine);
     }
 
     public async Task DeleteAsync(int id)
