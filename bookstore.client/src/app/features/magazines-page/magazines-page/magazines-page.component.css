@@ -1,0 +1,53 @@
+.shadow-left-right{
+  box-shadow: -8px 0 8px -6px rgba(0,0,0,0.2),
+  8px 0 8px -6px rgba(0,0,0,0.2);
+  padding: 2rem;
+  background-color: #fff;
+}
+
+.category-sidebar{
+  min-height: 100vh;
+  border-right: 1px solid #ddd;
+}
+
+.card{
+  max-width: calc(20% - 20px);
+  margin-bottom: 20px;
+  flex: 1 1 calc(20% - 20px);
+}
+
+.card-image{
+  width: 40px;
+  height: 250px;
+}
+.firstLineItem{
+  margin-top: 3px;
+  padding: 1px;
+}
+
+
+.pagination{
+  margin-right: 36px;
+}
+
+
+@media(max-width: 1200px){
+  .magazines .card{
+    flex: 1 1 calc(33.333% - 20px);
+    max-width: calc(33.333% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .magazines .card {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 576px) {
+  .magazines .card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}

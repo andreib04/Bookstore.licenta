@@ -16,6 +16,7 @@ import { MagazinesPageComponent } from './features/magazines-page/magazines-page
 import { CategoriesPageComponent } from './features/categories-page/categories-page/categories-page.component';
 import { RegisterComponent } from './features/register-page/register/register.component';
 import { CartPageComponent } from './features/cart-page/cart-page/cart-page.component';
+import { FooterComponent } from './shared/components/footer/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CartPageComponent } from './features/cart-page/cart-page/cart-page.comp
     MagazinesPageComponent,
     CategoriesPageComponent,
     RegisterComponent,
-    CartPageComponent
+    CartPageComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
