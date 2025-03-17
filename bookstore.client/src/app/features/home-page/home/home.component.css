@@ -1,0 +1,102 @@
+.icons{
+  margin-top: 150px;
+  margin-right: 100px;
+  margin-left: 100px;
+}
+
+.icon-size{
+  font-size: 60px;
+}
+
+.lastBooks{
+  margin-top: 150px
+}
+
+.books{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.card{
+  flex: 1 1 30%;
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+.card-image{
+  height: 350px;
+  object-fit: cover;
+}
+
+.lastMagazines{
+  margin-top: 150px;
+}
+
+.magazines{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.find{
+  margin-top: 150px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.left{
+  align-items: center;
+  margin-top: 150px;
+}
+
+.explore{
+  max-width: 300px;
+  padding: 20px;
+}
+
+
+@media (max-width: 575px){
+  .card{
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 768px){
+  .icons{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  }
+
+  .text-center{
+    margin-bottom: 30px;
+  }
+
+  .c-img{
+    height: 50px;
+  }
+}
+
+@media (max-width: 991px){
+  .card{
+    flex: 1 1 45%;
+  }
+
+  .find{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mb-3{
+    font-size: 20px;
+  }
+
+  .btn{
+    font-size: 30px;
+  }
+}

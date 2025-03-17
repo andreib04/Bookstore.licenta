@@ -3,9 +3,7 @@ import {BehaviorSubject, Observable, tap} from 'rxjs';
 import {User} from '../../models/user';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {Token} from '../../models/token';
 import {UserLogin} from '../../models/userLogin';
-import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -71,6 +69,10 @@ export class AuthService {
       console.error("Invalid JSON in localStorage", error);
       return null;
     }
+  }
+
+  getSomething(): User | null {
+    return this.getUserFromStorage();
   }
 
 

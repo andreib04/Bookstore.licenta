@@ -1,12 +1,156 @@
-<app-search-bar></app-search-bar>
-home page works
+<div class="home-page min-vh-100">
+  <app-search-bar></app-search-bar>
 
-<p *ngIf="currentUser">Welcome, {{ currentUser.FirstName }} {{ currentUser.LastName }}!</p>
-<p *ngIf="currentUser?.Role === 'Admin'">You have admin access.</p>
-<p *ngIf="currentUser?.Role === 'Member'">You have member access.</p>
+  <div class="mt-5">
+    <div id="carouselExample" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="c-img d-block w-100 object-fit-cover rounded" style="height: 450px; object-fit: cover" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1531988042231-d39a9cc12a9a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="c-img d-block w-100 object-fit-cover rounded" style="height: 450px; object-fit: cover" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1513185041617-8ab03f83d6c5?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="c-img d-block w-100 object-fit-cover rounded" style="height: 450px; object-fit: cover" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="icons d-flex justify-content-between flex-sm-row">
+    <div class="package text-center">
+      <i class="bi bi-gift-fill icon-size"></i>
+      <h5 class="mb-3 fw-bold">Lorem ipsum</h5>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum, explicabo?</p>
+    </div>
+    <div class="shipping text-center">
+      <i class="bi bi-truck icon-size"></i>
+      <h5 class="mb-3 fw-bold">Lorem ipsum</h5>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, deleniti.</p>
+    </div>
+    <div class="fidelity text-center">
+      <i class="bi bi-postcard-fill icon-size"></i>
+      <h5 class="mb-3 fw-bold">Lorem ipsum</h5>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, minima.</p>
+    </div>
+  </div>
+
+  <div class="lastBooks">
+    <div class="title text-center">
+      <h3 class="fw-bold">Last released Books</h3>
+    </div>
+    <div class="books d-flex justify-content-center flex-wrap gap-4">
+      <div class="card" style="flex: 0 0 30%;">
+        <img class="card-image w-100 object-fit-cover"
+             src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+             alt="Book Image">
+        <div class="card-body">
+          <div class="firstLine d-flex justify-content-between">
+            <p class="firstLine-item fw-bold">Title</p>
+            <p class="firstLine-item fw-bold">$10.00</p>
+          </div>
+          <span class="author">Author</span><br>
+          <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
+        </div>
+      </div>
+
+      <div class="card" style="flex: 0 0 30%;">
+        <img class="card-image w-100 object-fit-cover"
+             src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+             alt="Book Image">
+        <div class="card-body">
+          <div class="firstLine d-flex justify-content-between">
+            <p class="firstLine-item fw-bold">Title</p>
+            <p class="firstLine-item fw-bold">$10.00</p>
+          </div>
+          <span class="author">Author</span><br>
+          <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
+        </div>
+      </div>
+
+      <div class="card" style="flex: 0 0 30%;">
+        <img class="card-image w-100 object-fit-cover"
+             src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+             alt="Book Image">
+        <div class="card-body">
+          <div class="firstLine d-flex justify-content-between">
+            <p class="firstLine-item fw-bold">Title</p>
+            <p class="firstLine-item fw-bold">$10.00</p>
+          </div>
+          <span class="author">Author</span><br>
+          <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="find shadow p-5">
+      <div class="left ms-5 align-items-center">
+        <h1 class="mb-3" style="font-size: 56px; font-weight: bold"> Find your <br> &nbsp; &nbsp; next obsession</h1>
+        <p class="mb-3" style="font-size: 20px;">Lorem ipsum dolor sit amet, consectetur <br> adipisicing elit. Eaque, enim.</p>
+        <div class="explore d-flex flex-column">
+          <button type="button" class="btn btn-outline-dark fs-5" routerLink="/books">Explore our books</button>
+          <button type="button" class="btn btn-outline-dark fs-5 mt-3" routerLink="/magazines">Explore our magazines</button>
+        </div>
+      </div>
+      <div class="right me-5">
+        <img class="object-fit-cover rounded" style="max-width: 579px; height: 600px" src="https://images.unsplash.com/photo-1513001900722-370f803f498d?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image not found">
+      </div>
+    </div>
 
 
-<button
-  *ngIf="authService.isLoggedIn()"
-  class="btn btn-danger d-flex" (click)="authService.logout()">
-  Logout</button>
+    <div class="lastMagazines">
+      <div class="title text-center">
+        <h3 class="fw-bold">Last released Magazines</h3>
+      </div>
+      <div class="magazines d-flex justify-content-center flex-wrap gap-4">
+        <div class="card" style="flex: 0 0 30%;">
+          <img class="card-image w-100 object-fit-cover"
+               src="https://images.unsplash.com/photo-1515443423862-b79d32c1b8f7?q=80&w=1387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+               alt="Magazine Image">
+          <div class="card-body">
+            <div class="firstLine d-flex justify-content-between">
+              <p class="firstLine-item fw-bold">Title</p>
+              <p class="firstLine-item fw-bold">$10.00</p>
+            </div>
+            <span class="author">Publisher</span><br>
+            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
+          </div>
+        </div>
+        <div class="card" style="flex: 0 0 30%;">
+          <img class="card-image w-100 object-fit-cover"
+               src="https://images.unsplash.com/photo-1515443423862-b79d32c1b8f7?q=80&w=1387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+               alt="Magazine Image">
+          <div class="card-body">
+            <div class="firstLine d-flex justify-content-between">
+              <p class="firstLine-item fw-bold">Title</p>
+              <p class="firstLine-item fw-bold">$10.00</p>
+            </div>
+            <span class="author">Publisher</span><br>
+            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
+          </div>
+        </div>
+        <div class="card" style="flex: 0 0 30%;">
+          <img class="card-image w-100 object-fit-cover"
+               src="https://images.unsplash.com/photo-1515443423862-b79d32c1b8f7?q=80&w=1387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+               alt="Magazine Image">
+          <div class="card-body">
+            <div class="firstLine d-flex justify-content-between">
+              <p class="firstLine-item fw-bold">Title</p>
+              <p class="firstLine-item fw-bold">$10.00</p>
+            </div>
+            <span class="author">Publisher</span><br>
+            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+</div>

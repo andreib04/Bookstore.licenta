@@ -8,3 +8,8 @@
   font-size: 20px;
   margin-right: 10px;
 }
+
+.dropdown-item:hover{
+  background-color: gray;
+  color: white;
+}

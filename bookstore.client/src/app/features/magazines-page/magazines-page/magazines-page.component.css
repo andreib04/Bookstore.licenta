@@ -36,6 +36,11 @@
     flex: 1 1 calc(33.333% - 20px);
     max-width: calc(33.333% - 20px);
   }
+
+  .pagination{
+    display: flex;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 768px) {

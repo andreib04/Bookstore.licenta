@@ -27,9 +27,30 @@
         <li class="nav-item align-items-center d-flex">
           <a class="cart-link" routerLink="/cart"><i class="bi bi-cart4"></i></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!(isLoggedIn$ | async)">
           <a class="nav-link" routerLink="/login">Sign In</a>
         </li>
+
+        <li class="nav-item dropdown" *ngIf="isLoggedIn$ | async">
+          <div class="dropdown drop-down">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <ng-container *ngIf="currentUser$ | async as user">
+                Welcome, {{ user.FirstName }}!
+              </ng-container>
+            </button>
+
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item small" href="#">Profile</a></li>
+              <li><button class="dropdown-item small" (click)="authService.logout()">Logout</button></li>
+            </ul>
+          </div>
+        </li>
+
       </ul>
     </div>
   </div>
