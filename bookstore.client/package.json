@@ -23,6 +23,7 @@
     "@angular/router": "^18.2.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
+    "caniuse-lite": "^1.0.30001705",
     "jest-editor-support": "*",
     "run-script-os": "*",
     "rxjs": "~7.8.0",
@@ -31,7 +32,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.11",
-    "@angular/cli": "^18.2.11",
+    "@angular/cli": "^18.2.15",
     "@angular/compiler-cli": "^18.2.0",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.2.0",

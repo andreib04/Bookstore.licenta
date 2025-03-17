@@ -17,6 +17,7 @@ import { CategoriesPageComponent } from './features/categories-page/categories-p
 import { RegisterComponent } from './features/register-page/register/register.component';
 import { CartPageComponent } from './features/cart-page/cart-page/cart-page.component';
 import { FooterComponent } from './shared/components/footer/footer/footer.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { FooterComponent } from './shared/components/footer/footer/footer.compon
   ],
   imports: [
     BrowserModule, HttpClientModule,
-    AppRoutingModule, ReactiveFormsModule
+    AppRoutingModule, ReactiveFormsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
