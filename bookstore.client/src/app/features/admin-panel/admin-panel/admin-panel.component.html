@@ -1,1 +1,59 @@
-<p>admin-panel works!</p>
+<div class="d-flex flex-column flex-shrink-0" style="width: 280px;">
+  <a routerLink="/home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+    <svg class="bi pe-none me-2" width="40" height="32"></svg>
+    <span class="fs-4">Bookstore</span>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a href="#" class="nav-link active" aria-current="page">
+        <svg class="bi pe-none me-2" width="16" height="16"></svg>
+        Dashboard
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link link-body-emphasis">
+        <svg class="bi pe-none me-2" width="16" height="16"></svg>
+        Books
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link link-body-emphasis">
+        <svg class="bi pe-none me-2" width="16" height="16"></svg>
+        Magazines
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link link-body-emphasis">
+        <svg class="bi pe-none me-2" width="16" height="16"></svg>
+        Users
+      </a>
+    </li>
+  </ul>
+  <hr>
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item" *ngIf="!(isLoggedIn$ | async)">
+      <a class="nav-link" routerLink="/login">Sign In</a>
+    </li>
+
+    <li class="nav-item dropdown" *ngIf="isLoggedIn$ | async">
+      <div class="dropdown drop-down">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <ng-container *ngIf="currentUser$ | async as user">
+            Welcome, {{ user.FirstName }}!
+          </ng-container>
+        </button>
+
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item small" href="#">Profile</a></li>
+          <li><button class="dropdown-item small" (click)="authService.logout()">Logout</button></li>
+        </ul>
+      </div>
+
+    </ul>
+</div>

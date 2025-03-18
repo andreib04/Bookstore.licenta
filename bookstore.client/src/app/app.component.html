@@ -1,9 +1,9 @@
 ﻿<div class="">
-  <app-header></app-header>
+  <app-header *ngIf="!isAdminPage"></app-header>
   <router-outlet></router-outlet>
 </div>
 
-<app-footer></app-footer>
+<app-footer *ngIf="!isAdminPage"></app-footer>
 
 
 
