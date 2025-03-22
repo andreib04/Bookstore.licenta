@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
 
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeComponent,},
   {path: 'books', component: BooksPageComponent},
   {path: 'magazines', component: MagazinesPageComponent},
   {path: 'categories', component: CategoriesPageComponent},
@@ -23,7 +23,7 @@ const routes: Routes = [
 
   {
     path: 'admin',
-    component: AdminPanelComponent,
+    loadChildren: () => import('./features/admin-panel/admin-panel/admin-panel.module').then(m => m.AdminPanelModule),
     canActivate: [AuthGuard, RoleGuard],
     data: {expectedRole: 'Admin'},
   },

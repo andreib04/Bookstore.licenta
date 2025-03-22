@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './features/login-page/login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { HomeComponent } from './features/home-page/home/home.component';
-import { AdminPanelComponent } from './features/admin-panel/admin-panel/admin-panel.component';
 import {AuthInterceptor} from './core/interceptors/auth.interceptor';
 import { HeaderComponent } from './shared/components/header/header/header.component';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar/search-bar.component';
@@ -17,14 +16,13 @@ import { CategoriesPageComponent } from './features/categories-page/categories-p
 import { RegisterComponent } from './features/register-page/register/register.component';
 import { CartPageComponent } from './features/cart-page/cart-page/cart-page.component';
 import { FooterComponent } from './shared/components/footer/footer/footer.component';
-import {RouterModule} from '@angular/router';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    AdminPanelComponent,
     HeaderComponent,
     SearchBarComponent,
     BooksPageComponent,
@@ -32,14 +30,18 @@ import {RouterModule} from '@angular/router';
     CategoriesPageComponent,
     RegisterComponent,
     CartPageComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,
     AppRoutingModule, ReactiveFormsModule,
+    CommonModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+  ],
+  exports: [
+
   ],
   bootstrap: [AppComponent]
 })
