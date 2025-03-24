@@ -13,7 +13,6 @@
     <Folder Include="src\app\core\services\auth\" />
     <Folder Include="src\app\features\admin-panel\admin-panel\pages\" />
     <Folder Include="src\app\features\admin-panel\components\" />
-    <Folder Include="src\app\features\admin-panel\pages\" />
     <Folder Include="src\app\features\books-page\" />
     <Folder Include="src\app\features\cart-page\" />
     <Folder Include="src\app\features\categories-page\" />

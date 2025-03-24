@@ -50,7 +50,7 @@
             </div>
 
             <div class="mb-2">
-              <label for="confirmPasswordInput" class="form-label small">Cofirm Password</label>
+              <label for="confirmPasswordInput" class="form-label small">Confirm Password</label>
               <input type="password" class="form-control form-control-sm" id="confirmPasswordInput" formControlName="confirmPassword" placeholder="Confirm Password">
               <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid" class="error">
                 <span *ngIf="form.get('password')?.errors?.['required']">Confirm Password is required.</span>

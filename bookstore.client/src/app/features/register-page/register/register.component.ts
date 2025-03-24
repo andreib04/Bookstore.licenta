@@ -11,7 +11,7 @@ import { Router} from '@angular/router';
 })
 export class RegisterComponent {
 
-  public form: FormGroup;
+  form: FormGroup;
 
 
   constructor(private userService: UsersServiceService, private router: Router) {

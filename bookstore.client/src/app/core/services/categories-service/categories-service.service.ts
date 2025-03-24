@@ -10,7 +10,7 @@ import {Magazine} from '../../models/magazine';
 })
 export class CategoriesServiceService {
 
-  baseURL = environment.baseURL;
+  baseURL = "https://localhost:44305/";
   apiPATH = "api/Category";
   constructor(private http: HttpClient) { }
 

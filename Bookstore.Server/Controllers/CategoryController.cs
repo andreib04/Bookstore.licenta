@@ -34,7 +34,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Policy = "Admin")]
+    [AllowAnonymous]
     public async Task<IActionResult> AddCategory([FromBody] CategoryDTO category)
     {
         await _categoryService.AddCategoryAsync(category);

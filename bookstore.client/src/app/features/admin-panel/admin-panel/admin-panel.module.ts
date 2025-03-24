@@ -8,6 +8,9 @@ import { AdmindashboardComponent } from './pages/admin-dashboard/admindashboard.
 import { AdminBooksComponent } from './pages/admin-books/admin-books.component';
 import { AdminMagazinesComponent } from './pages/admin-magazines/admin-magazines.component';
 import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
+import { AddUserPageComponent } from './pages/admin-users/add-user-page/add-user-page.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { AdminCategoriesComponent } from './pages/admin-categories/admin-categories.component';
 
 
 
@@ -17,11 +20,15 @@ import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
     AdmindashboardComponent,
     AdminBooksComponent,
     AdminMagazinesComponent,
-    AdminUsersComponent
+    AdminUsersComponent,
+    AddUserPageComponent,
+    AdminCategoriesComponent
   ],
-  imports: [
-    CommonModule,
-    AdminPanelRoutingModule,
-  ]
+    imports: [
+        CommonModule,
+        AdminPanelRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+    ]
 })
 export class AdminPanelModule { }
