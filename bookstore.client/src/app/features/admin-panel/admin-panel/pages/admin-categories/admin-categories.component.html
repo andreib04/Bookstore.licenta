@@ -19,8 +19,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="" *ngFor="let category of categories">
-      <th scope="row">{{category.CategoryId}}</th>
+    <tr *ngFor="let category of categories">
+      <th>{{category.CategoryId }}</th>
       <td>{{category.CategoryName}}</td>
       <td>
         <button class="btn btn-success"><i class="bi bi-pencil-fill"></i></button>
@@ -29,6 +29,10 @@
     </tr>
     </tbody>
   </table>
+
+  <ng-template #noData>
+    <p>No categories available.</p>
+  </ng-template>
 
 </div>
 

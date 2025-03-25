@@ -16,33 +16,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="">
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>abc</td>
-      <td>abc</td>
-      <td>
-        <button class="btn btn-success"><i class="bi bi-pencil-fill"></i></button>
-        <button class="btn btn-danger ms-2"><i class="bi bi-trash-fill"></i></button>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>abc</td>
-      <td>abc</td>
-      <td>
-        <button class="btn btn-success"><i class="bi bi-pencil-fill"></i></button>
-        <button class="btn btn-danger ms-2"><i class="bi bi-trash-fill"></i></button>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>abc</td>
-      <td>abc</td>
+    <tr class="" *ngFor="let user of users">
+      <th>{{user.Id}}</th>
+      <td>{{user.FirstName}}</td>
+      <td>{{user.LastName }}</td>
+      <td>{{user.Email}}</td>
+      <td>{{user.Role}}</td>
       <td>
         <button class="btn btn-success"><i class="bi bi-pencil-fill"></i></button>
         <button class="btn btn-danger ms-2"><i class="bi bi-trash-fill"></i></button>

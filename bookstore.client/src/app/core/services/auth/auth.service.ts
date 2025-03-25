@@ -93,7 +93,7 @@ export class AuthService {
     }catch(error){
       console.error("Error decoding token: ", error);
       return{
-        Id: '',
+        Id: 0,
         FirstName: '',
         LastName: '',
         Email: '',
