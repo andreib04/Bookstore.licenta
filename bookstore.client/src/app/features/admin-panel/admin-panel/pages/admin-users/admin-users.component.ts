@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {User} from '../../../../../core/models/user';
 import {UsersServiceService} from '../../../../../core/services/users-service/users-service.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-admin-users',
@@ -19,10 +20,21 @@ export class AdminUsersComponent {
     }
   ];
 
-  constructor(private usersService: UsersServiceService) {
+  user: User = {} as User;
+
+  constructor(private usersService: UsersServiceService, private activatedRoute: ActivatedRoute) {
+    let id: number = +this.activatedRoute.snapshot.params['id'];
+
     this.usersService.getUsers().subscribe((data) =>{
       this.users = data;
       console.log('Users data: ', this.users);
+    })
+  }
+
+  deleteUser(){
+    this.usersService.deleteUser(this.user.Id).subscribe((data) =>{
+      console.log('Deleted user: ', data);
+      window.location.reload();
     })
   }
 }

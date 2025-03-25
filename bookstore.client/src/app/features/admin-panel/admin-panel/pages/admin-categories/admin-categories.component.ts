@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CategoriesServiceService} from '../../../../../core/services/categories-service/categories-service.service';
 import {Category} from '../../../../../core/models/category';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-admin-categories',
@@ -11,12 +12,15 @@ import {Category} from '../../../../../core/models/category';
 export class AdminCategoriesComponent implements OnInit {
 
   categories: Category[] = [];
+  category: Category = {} as Category;
 
   form: FormGroup = new FormGroup({
     categoryName: new FormControl<string>('', [Validators.required])
   });
 
-  constructor(private categoryService: CategoriesServiceService, private cdr: ChangeDetectorRef) {
+  constructor(private categoryService: CategoriesServiceService, private cdr: ChangeDetectorRef
+  ,private activatedRoute: ActivatedRoute) {
+    let id: number = +this.activatedRoute.snapshot.params['id'];
   }
 
   ngOnInit() {
@@ -28,7 +32,7 @@ export class AdminCategoriesComponent implements OnInit {
       next: (data) => {
         console.log('Categories data: ', data);
         this.categories = data;
-        this.cdr.detectChanges();
+        console.log('Category array: ', this.categories);
       },
       error: (error) => console.log('Error fetching data', error)
     })
@@ -51,5 +55,12 @@ export class AdminCategoriesComponent implements OnInit {
       console.log(this.form.errors);
       console.log('Form is invalid');
     }
+  }
+
+  deleteCategory(){
+    this.categoryService.deleteCategory(this.category.CategoryId).subscribe(res => {
+      console.log('Deleted category', res);
+      window.location.reload();
+    })
   }
 }

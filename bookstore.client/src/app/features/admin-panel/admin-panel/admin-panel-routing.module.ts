@@ -7,6 +7,8 @@ import {AdminMagazinesComponent} from './pages/admin-magazines/admin-magazines.c
 import {AdminUsersComponent} from './pages/admin-users/admin-users.component';
 import {AddUserPageComponent} from './pages/admin-users/add-user-page/add-user-page.component';
 import {AdminCategoriesComponent} from './pages/admin-categories/admin-categories.component';
+import {AuthGuard} from '../../../core/guards/auth.guard';
+import {RoleGuard} from '../../../core/guards/role-guard.guard';
 
 
 const routes: Routes = [
