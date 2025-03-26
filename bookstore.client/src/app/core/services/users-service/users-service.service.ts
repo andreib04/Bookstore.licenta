@@ -13,7 +13,7 @@ export class UsersServiceService {
   apiPATH = "api/User";
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<User[]>{
+   getUsers(): Observable<User[]>{
     return this.http.get<User[]>(`${this.baseURL}${this.apiPATH}`);
   }
 

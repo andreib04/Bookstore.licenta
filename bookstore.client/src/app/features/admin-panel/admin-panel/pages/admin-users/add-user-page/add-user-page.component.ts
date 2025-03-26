@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {User} from '../../../../../../core/models/user';
 import {UsersServiceService} from '../../../../../../core/services/users-service/users-service.service';
 import {Router} from '@angular/router';
@@ -22,17 +22,26 @@ export class AddUserPageComponent {
         Validators.minLength(8),
       ]),
       confirmPassword: new FormControl<string>('', [Validators.required]),
-    })
+    },
+      { validators: this.matchingValidator }
+    );
   }
+
+  matchingValidator: ValidatorFn = (form: AbstractControl): ValidationErrors | null => {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+
+    return password && confirmPassword && password !== confirmPassword ? {passwordmatcherror: true} : null;
+  };
 
   onSubmit(){
     if(this.form.valid){
       let user: User = {
-        FirstName: this.form.controls['firstName'].value,
-        LastName: this.form.controls['lastName'].value,
-        Role: this.form.controls['role'].value,
-        Email: this.form.controls['email'].value,
-        Password: this.form.controls['password'].value,
+        firstName: this.form.controls['firstName'].value,
+        lastName: this.form.controls['lastName'].value,
+        role: this.form.controls['role'].value,
+        email: this.form.controls['email'].value,
+        password: this.form.controls['password'].value,
       } as User;
 
       this.userService.postUser(user).subscribe(res => {

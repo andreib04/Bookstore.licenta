@@ -11,6 +11,7 @@ import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
 import { AddUserPageComponent } from './pages/admin-users/add-user-page/add-user-page.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AdminCategoriesComponent } from './pages/admin-categories/admin-categories.component';
+import { EditUserPageComponent } from './pages/admin-users/edit-user-page/edit-user-page.component';
 
 
 
@@ -22,7 +23,8 @@ import { AdminCategoriesComponent } from './pages/admin-categories/admin-categor
     AdminMagazinesComponent,
     AdminUsersComponent,
     AddUserPageComponent,
-    AdminCategoriesComponent
+    AdminCategoriesComponent,
+    EditUserPageComponent
   ],
     imports: [
         CommonModule,

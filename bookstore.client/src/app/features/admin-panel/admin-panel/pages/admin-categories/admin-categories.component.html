@@ -16,12 +16,13 @@
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Category</th>
+      <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let category of categories">
-      <th>{{category.CategoryId }}</th>
-      <td>{{category.CategoryName}}</td>
+      <th>{{category.categoryId }}</th>
+      <td>{{category.categoryName}}</td>
       <td>
         <button class="btn btn-success"><i class="bi bi-pencil-fill"></i></button>
         <button class="btn btn-danger ms-2" (click)="deleteCategory()"><i class="bi bi-trash-fill"></i></button>
@@ -31,7 +32,7 @@
   </table>
 
   <ng-template #noData>
-    <p>No categories available.</p>
+    <p>No categories available. {{noData}}</p>
   </ng-template>
 
 </div>

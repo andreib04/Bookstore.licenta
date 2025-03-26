@@ -83,22 +83,22 @@ export class AuthService {
       console.log("Decoded token payload: ",payload);
 
       return{
-        Id: payload?.id || '',
-        FirstName: payload?.first_name || '',
-        LastName: payload?.last_name || '',
-        Email: payload?.email || '',
-        Password: '',
-        Role: payload?.role || 'Member',
+        id: payload?.id || '',
+        firstName: payload?.first_name || '',
+        lastName: payload?.last_name || '',
+        email: payload?.email || '',
+        password: '',
+        role: payload?.role || 'Member',
       };
     }catch(error){
       console.error("Error decoding token: ", error);
       return{
-        Id: 0,
-        FirstName: '',
-        LastName: '',
-        Email: '',
-        Password: '',
-        Role: 'Member',
+        id: 0,
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        role: 'Member',
       }
     }
   }

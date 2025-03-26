@@ -11,7 +11,12 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class AdminCategoriesComponent implements OnInit {
 
-  categories: Category[] = [];
+  categories: Category[] = [
+    {
+      categoryId: 1,
+      categoryName: "Romance"
+    }
+  ];
   category: Category = {} as Category;
 
   form: FormGroup = new FormGroup({
@@ -30,9 +35,7 @@ export class AdminCategoriesComponent implements OnInit {
   fetchItems(){
     this.categoryService.getCategory().subscribe({
       next: (data) => {
-        console.log('Categories data: ', data);
         this.categories = data;
-        console.log('Category array: ', this.categories);
       },
       error: (error) => console.log('Error fetching data', error)
     })
@@ -41,11 +44,10 @@ export class AdminCategoriesComponent implements OnInit {
   onSubmit(){
     if(this.form.valid){
       let category: Category = {
-        CategoryName: this.form.controls['categoryName'].value
+        categoryName: this.form.controls['categoryName'].value
       } as Category;
 
       this.categoryService.postCategory(category).subscribe(res => {
-        console.log(res);
         console.log('Category added successfully.');
         this.fetchItems();
         this.form.reset();
@@ -58,7 +60,7 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   deleteCategory(){
-    this.categoryService.deleteCategory(this.category.CategoryId).subscribe(res => {
+    this.categoryService.deleteCategory(this.category.categoryId).subscribe(res => {
       console.log('Deleted category', res);
       window.location.reload();
     })

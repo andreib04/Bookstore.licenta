@@ -9,7 +9,7 @@ import {Book} from '../../models/book';
 })
 export class BooksServiceService {
 
-  baseURL = environment.baseURL;
+  baseURL = "https://localhost:44305/";
   apiPATH = "api/book";
   constructor(private http: HttpClient) { }
 

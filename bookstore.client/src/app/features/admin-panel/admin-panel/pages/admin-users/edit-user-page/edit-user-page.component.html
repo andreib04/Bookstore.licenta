@@ -5,7 +5,7 @@
       <div class="col-md-6">
         <div class="content p-3">
           <div class="welcome">
-            <h3 class="welcome_h">Add user</h3>
+            <h3 class="welcome_h">Edit user #{{user.id}} </h3>
           </div>
 
           <form [formGroup]="form" (ngSubmit)="onSubmit()"  class="register-form">
@@ -44,7 +44,7 @@
               Passwords do not match.
             </div>
 
-            <button class="btn btn-primary btn-sm" type="submit" [disabled]="form.invalid">Add User</button>
+            <button class="btn btn-primary btn-sm" type="submit" [disabled]="form.invalid">Edit User</button>
 
           </form>
         </div>

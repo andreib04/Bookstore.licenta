@@ -9,7 +9,7 @@ import {Magazine} from '../../models/magazine';
 })
 export class MagazinesServiceService {
 
-  baseURL = environment.baseURL;
+  baseURL = "https://localhost:44305/";
   apiPATH = "api/Magazine";
   constructor(private http: HttpClient) { }
 

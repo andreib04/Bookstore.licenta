@@ -55,10 +55,10 @@ export class RegisterComponent {
   onSubmit(){
     if(this.form.valid){
       let user: User = {
-        FirstName: this.form.controls['firstName'].value,
-        LastName: this.form.controls['lastName'].value,
-        Email: this.form.controls['email'].value,
-        Password: this.form.controls['password'].value,
+        firstName: this.form.controls['firstName'].value,
+        lastName: this.form.controls['lastName'].value,
+        email: this.form.controls['email'].value,
+        password: this.form.controls['password'].value,
       } as User;
 
       this.userService.postUser(user).subscribe(res => {

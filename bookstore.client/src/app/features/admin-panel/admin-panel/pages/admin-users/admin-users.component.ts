@@ -1,38 +1,40 @@
-import { Component } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {User} from '../../../../../core/models/user';
 import {UsersServiceService} from '../../../../../core/services/users-service/users-service.service';
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',
   styleUrl: './admin-users.component.css'
 })
-export class AdminUsersComponent {
-  users: User[] = [
-    {
-      Id: 2,
-      FirstName: "abc",
-      LastName: "aaa",
-      Email: "abc@gmail.com",
-      Password: '',
-      Role: "Admin"
-    }
-  ];
-
+export class AdminUsersComponent implements OnInit {
+  //protected users!: User[];
   user: User = {} as User;
 
-  constructor(private usersService: UsersServiceService, private activatedRoute: ActivatedRoute) {
-    let id: number = +this.activatedRoute.snapshot.params['id'];
+  public allUsers: Array<User> = new Array<User>();
 
-    this.usersService.getUsers().subscribe((data) =>{
-      this.users = data;
-      console.log('Users data: ', this.users);
-    })
+  public userService: UsersServiceService
+  constructor(private usersService: UsersServiceService, private cdr: ChangeDetectorRef) {
+  this.userService = usersService;
   }
 
+   ngOnInit(): void{
+     this.getAllRegisteredUsers();
+    }
+
+    getAllRegisteredUsers(){
+      this.userService
+        .getUsers()
+        .subscribe({
+          next: (result: Array<User>) => {
+            this.allUsers = result;
+            this.cdr.detectChanges();
+        }
+      })
+    }
+
   deleteUser(){
-    this.usersService.deleteUser(this.user.Id).subscribe((data) =>{
+    this.usersService.deleteUser(this.user.id).subscribe((data) =>{
       console.log('Deleted user: ', data);
       window.location.reload();
     })

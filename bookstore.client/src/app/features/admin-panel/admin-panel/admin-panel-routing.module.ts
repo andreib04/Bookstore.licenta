@@ -9,6 +9,7 @@ import {AddUserPageComponent} from './pages/admin-users/add-user-page/add-user-p
 import {AdminCategoriesComponent} from './pages/admin-categories/admin-categories.component';
 import {AuthGuard} from '../../../core/guards/auth.guard';
 import {RoleGuard} from '../../../core/guards/role-guard.guard';
+import {EditUserPageComponent} from './pages/admin-users/edit-user-page/edit-user-page.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
 
 
       {path: 'users', component: AdminUsersComponent},
-      {path: 'addUser', component: AddUserPageComponent},
+      {path: 'add-user', component: AddUserPageComponent},
+      {path: 'edit-user/:id', component: EditUserPageComponent},
 
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     ]
