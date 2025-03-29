@@ -23,10 +23,7 @@ export class AdminCategoriesComponent implements OnInit {
     categoryName: new FormControl<string>('', [Validators.required])
   });
 
-  constructor(private categoryService: CategoriesServiceService, private cdr: ChangeDetectorRef
-  ,private activatedRoute: ActivatedRoute) {
-    let id: number = +this.activatedRoute.snapshot.params['id'];
-  }
+  constructor(private categoryService: CategoriesServiceService, private cdr: ChangeDetectorRef,) {}
 
   ngOnInit() {
     this.fetchItems();
@@ -57,6 +54,52 @@ export class AdminCategoriesComponent implements OnInit {
       console.log(this.form.errors);
       console.log('Form is invalid');
     }
+  }
+
+  editCategory(category: Category){
+    if (!category) {
+      console.error('Tried to edit a null category');
+      return;
+    }
+
+    category.isEditing = true;
+    category.tempName = category.categoryName;
+  }
+
+  saveCategory(category: Category){
+    if(!category || !category.categoryId){
+      console.error('Invalid category: ', category);
+      return;
+    }
+
+    if(!category.tempName?.trim())
+      return;
+
+    const updatedCategory = { ...category, categoryName: category.tempName };
+
+    this.categoryService.updateCategory(category.categoryId, updatedCategory).subscribe({
+      next: (res) => {
+        console.log('api response', res);
+
+        if(!res){
+          console.error('api returned null');
+          return;
+        }
+
+        category.categoryName = res.categoryName;
+        category.isEditing = false;
+        console.log('Category updated successfully: ', res);
+
+        window.location.reload();
+      },
+      error: (err) => {
+        console.error('Error updating category: ', err);
+      }
+    })
+  }
+
+  cancelEdit(category: Category){
+    category.isEditing = false;
   }
 
   deleteCategory(){

@@ -42,13 +42,19 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize(Policy = "Admin")]
+    //[Authorize(Policy = "Admin")]
+    [AllowAnonymous]
     public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryDTO category)
     {
         if (id != category.CategoryId)
             return BadRequest();
         
+        /*var updatedCategory = await _categoryService.UpdateCategoryAsync(category);
+        
+        return Ok(updatedCategory);*/
+        
         await _categoryService.UpdateCategoryAsync(category);
+
         return NoContent();
     }
 
