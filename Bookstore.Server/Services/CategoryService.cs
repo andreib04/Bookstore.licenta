@@ -31,14 +31,16 @@ public class CategoryService : ICategoryService
         await _categoryRepository.AddCategoryAsync(category.ToModel());
     }
 
-    public async Task UpdateCategoryAsync(CategoryDTO category)
+    public async Task<Category> UpdateCategoryAsync(CategoryDTO category)
     {
         var dbCategory = await _categoryRepository.GetCategoryByIdAsync(category.CategoryId);
         
         dbCategory.CategoryId = category.CategoryId;
         dbCategory.CategoryName = category.CategoryName;
 
-        await _categoryRepository.UpdateCategoryAsync(dbCategory);
+       await _categoryRepository.UpdateCategoryAsync(dbCategory);
+        
+       return dbCategory;
     }
 
     public async Task DeleteCategoryAsync(int id)

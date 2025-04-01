@@ -12,5 +12,5 @@ public class ItemDTO
     public int Stock { get; set; }
     public string ItemType { get; set; }
     public string Image { get; set; }       
-    public CategoryDTO CategoryDTO { get; set; }
+    public CategoryDTO Category { get; set; }
 }

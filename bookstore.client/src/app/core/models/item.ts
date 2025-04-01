@@ -8,6 +8,5 @@ export interface Item{
   stock: number;
   itemType: string;
   image: string;
-  categoryId: number;
   category: Category;
 }

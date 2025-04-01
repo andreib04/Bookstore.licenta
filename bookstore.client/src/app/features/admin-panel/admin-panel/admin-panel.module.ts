@@ -12,8 +12,8 @@ import { AddUserPageComponent } from './pages/admin-users/add-user-page/add-user
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AdminCategoriesComponent } from './pages/admin-categories/admin-categories.component';
 import { EditUserPageComponent } from './pages/admin-users/edit-user-page/edit-user-page.component';
-
-
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from '../../../core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,9 @@ import { EditUserPageComponent } from './pages/admin-users/edit-user-page/edit-u
         AdminPanelRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-    ]
+    ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+  ]
 })
 export class AdminPanelModule { }

@@ -22,7 +22,7 @@ public class LoginController : ControllerBase
         try
         {
             var token = await _userService.LoginUser(userLogin.Email, userLogin.Password);
-            return Ok(new { Token = token });
+            return Ok(token);
         }
         catch (KeyNotFoundException)
         {
