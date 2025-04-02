@@ -10,6 +10,7 @@ import {AdminCategoriesComponent} from './pages/admin-categories/admin-categorie
 import {AuthGuard} from '../../../core/guards/auth.guard';
 import {RoleGuard} from '../../../core/guards/role-guard.guard';
 import {EditUserPageComponent} from './pages/admin-users/edit-user-page/edit-user-page.component';
+import {GenericEditComponent} from './pages/generic-edit/generic-edit.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
       {path: 'magazines', component: AdminMagazinesComponent},
       {path: 'categories', component: AdminCategoriesComponent},
 
+      { path: 'edit/:model/:id', component: GenericEditComponent },
 
       {path: 'users', component: AdminUsersComponent},
       {path: 'add-user', component: AddUserPageComponent},

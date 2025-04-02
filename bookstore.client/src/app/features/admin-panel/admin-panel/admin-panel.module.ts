@@ -14,6 +14,7 @@ import { AdminCategoriesComponent } from './pages/admin-categories/admin-categor
 import { EditUserPageComponent } from './pages/admin-users/edit-user-page/edit-user-page.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../../../core/interceptors/auth.interceptor';
+import { GenericEditComponent } from './pages/generic-edit/generic-edit.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {AuthInterceptor} from '../../../core/interceptors/auth.interceptor';
     AdminUsersComponent,
     AddUserPageComponent,
     AdminCategoriesComponent,
-    EditUserPageComponent
+    EditUserPageComponent,
+    GenericEditComponent
   ],
     imports: [
         CommonModule,

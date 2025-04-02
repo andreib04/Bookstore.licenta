@@ -1,0 +1,12 @@
+<form [formGroup]="form" (ngSubmit)="saveChanges()">
+  <div *ngFor="let field of form.controls | keyvalue">
+    <label>{{field.key}}</label>
+
+    <input *ngIf="isNumberField(field.key)" type="number" [formControlName]="field.key" class="form-control" />
+
+    <input *ngIf="!isNumberField(field.key)" type="text" [formControlName]="field.key" class="form-control" />
+
+  </div>
+
+  <button type="submit">Save</button>
+</form>
