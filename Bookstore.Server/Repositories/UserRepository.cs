@@ -35,6 +35,11 @@ public class UserRepository : IUserRepository
         return user;
     }
 
+    public async Task<bool> EmailExistsAsync(string email)
+    {
+        return await _dbContext.Users.AnyAsync(u => u.Email.ToLower() == email.ToLower());
+    }
+
     public async Task AddUser(User user)
     {
         _dbContext.Users.Add(user);

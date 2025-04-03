@@ -1,5 +1,11 @@
 <div class="p-0 m-0">
 
+  <div class="image d-flex w-100">
+    <div class="flex-fill">
+      <img style="max-height: 100px" class="w-100 object-fit-cover rounded" src="https://images.unsplash.com/photo-1515891396453-6d7e56096a39?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="https://placehold.co/600x400">
+    </div>
+  </div>
+
   <div class="mt-3 mb-3">
     <button class="btn btn-primary fs-5">Add Magazine</button>
   </div>
@@ -27,7 +33,7 @@
       <td>{{magazine.category.categoryName}}</td>
       <td>{{magazine.releaseDate | date: 'shortDate'}}</td>
       <td>
-        <button class="btn btn-success"><i class="bi bi-pencil-fill"></i></button>
+        <button (click)="goToEditPage('magazine', magazine.id)" class="btn btn-success"><i class="bi bi-pencil-fill"></i></button>
         <button class="btn btn-danger ms-2" (click)="deleteMagazine()"><i class="bi bi-trash-fill"></i></button>
       </td>
     </tr>

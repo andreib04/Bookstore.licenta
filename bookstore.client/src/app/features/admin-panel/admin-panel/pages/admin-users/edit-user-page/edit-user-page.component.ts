@@ -3,6 +3,7 @@ import {UsersServiceService} from '../../../../../../core/services/users-service
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {User} from '../../../../../../core/models/user';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-edit-user-page',
@@ -13,7 +14,10 @@ export class EditUserPageComponent {
   user: User = {} as User;
 
   form: FormGroup;
-  constructor(private userService: UsersServiceService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private userService: UsersServiceService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private location: Location) {
     this.user.id = +activatedRoute.snapshot.params['id'];
 
     this.userService.getOneUser(this.user.id).subscribe(res => {
@@ -30,10 +34,10 @@ export class EditUserPageComponent {
       lastName: new FormControl<string>('', [Validators.required]),
       role: new FormControl<string>('', [Validators.required]),
       email: new FormControl<string>('', [Validators.required, Validators.email]),
-      password: new FormControl<string>('', [Validators.required, Validators.minLength(8)]),
-      confirmPassword: new FormControl<string>('', [Validators.required])
+      /*password: new FormControl<string>('', [Validators.required, Validators.minLength(8)]),
+      confirmPassword: new FormControl<string>('', [Validators.required])*/
     },
-      { validators: this.matchingValidator }
+      //{ validators: this.matchingValidator }
     );
   }
 
@@ -51,7 +55,7 @@ export class EditUserPageComponent {
         firstName: this.form.controls['firstName'].value,
         lastName: this.form.controls['lastName'].value,
         role: this.form.controls['role'].value,
-        password: this.form.controls['password'].value
+        /*password: this.form.controls['password'].value*/
       } as User;
 
       this.userService.updateUser(this.user.id, this.user).subscribe(res => {
@@ -59,5 +63,9 @@ export class EditUserPageComponent {
         this.router.navigate(['admin/users']);
       })
     }
+  }
+
+  backLocation(){
+    this.location.back();
   }
 }

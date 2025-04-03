@@ -72,6 +72,11 @@ public class UserService : IUserService
 
     public async Task AddUser(User user)
     {
+        if (await _userRepository.EmailExistsAsync(user.Email))
+        {
+            return;
+        }
+        
         user.Password = _passwordHasher.HashPassword(user, user.Password);
         await _userRepository.AddUser(user);
     }

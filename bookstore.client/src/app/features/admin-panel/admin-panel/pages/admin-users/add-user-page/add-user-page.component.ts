@@ -3,6 +3,7 @@ import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, 
 import {User} from '../../../../../../core/models/user';
 import {UsersServiceService} from '../../../../../../core/services/users-service/users-service.service';
 import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-add-user-page',
@@ -11,7 +12,7 @@ import {Router} from '@angular/router';
 })
 export class AddUserPageComponent {
   form: FormGroup;
-  constructor(private userService: UsersServiceService, private router: Router){
+  constructor(private userService: UsersServiceService, private router: Router, private location: Location){
     this.form = new FormGroup({
       firstName: new FormControl<string>('', [Validators.required]),
       lastName: new FormControl<string>('', [Validators.required]),
@@ -55,6 +56,10 @@ export class AddUserPageComponent {
       console.log(this.form.errors);
       console.log('Form is invalid!');
     }
+  }
+
+  backLocation(){
+    this.location.back();
   }
 
 }

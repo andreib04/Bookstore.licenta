@@ -30,7 +30,7 @@
               <input type="email" class="form-control form-control-sm" id="emailInput" formControlName="email" placeholder="example@email.com">
             </div>
 
-            <div class="mb-2">
+            <!--<div class="mb-2">
               <label for="passwordInput" class="form-label small">Password</label>
               <input type="password" class="form-control form-control-sm" id="passwordInput" formControlName="password" placeholder="Password">
             </div>
@@ -42,11 +42,13 @@
 
             <div *ngIf="form.errors?.['passwordmatcherror']" class="error">
               Passwords do not match.
-            </div>
+            </div>-->
 
             <button class="btn btn-primary btn-sm" type="submit" [disabled]="form.invalid">Edit User</button>
 
           </form>
+
+          <button class="btn btn-success" (click)="backLocation()">Go back</button>
         </div>
       </div>
 

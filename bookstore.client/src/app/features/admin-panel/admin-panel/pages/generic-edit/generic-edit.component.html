@@ -1,12 +1,21 @@
+<h3 class="mb-3 fw-bold">Edit</h3>
+
 <form [formGroup]="form" (ngSubmit)="saveChanges()">
-  <div *ngFor="let field of form.controls | keyvalue">
-    <label>{{field.key}}</label>
+  <div *ngFor="let field of formFields">
+    <label>{{ field }}</label>
 
-    <input *ngIf="isNumberField(field.key)" type="number" [formControlName]="field.key" class="form-control" />
-
-    <input *ngIf="!isNumberField(field.key)" type="text" [formControlName]="field.key" class="form-control" />
-
+    <input *ngIf="isNumberField(field)" type="number" [formControlName]="field" class="form-control" />
+    <input *ngIf="!isNumberField(field)" type="text" [formControlName]="field" class="form-control" />
   </div>
 
-  <button type="submit">Save</button>
+  <label>Category</label>
+  <select formControlName="category" class="form-control">
+    <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.categoryName }}</option>
+  </select>
+
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-primary mt-3 fs-5" style="width: 120px; height: 50px" type="submit">Save</button>
+    <button class="btn btn-success mt-3 fs-5" style="width: 120px; height: 50px" (click)="backLocation()">Go back</button>
+  </div>
+
 </form>

@@ -83,7 +83,7 @@ public class UserController : ControllerBase
    public async Task<IActionResult> AddUser([FromBody] User user)
    {
       try
-      {
+      { 
          await _userService.AddUser(user);
          return Ok();
       }

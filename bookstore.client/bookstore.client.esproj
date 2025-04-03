@@ -23,6 +23,5 @@
     <Folder Include="src\app\shared\components\footer\" />
     <Folder Include="src\app\shared\components\header\" />
     <Folder Include="src\app\shared\components\search-bar\" />
-    <Folder Include="src\app\shared\pipes\" />
   </ItemGroup>
 </Project>
