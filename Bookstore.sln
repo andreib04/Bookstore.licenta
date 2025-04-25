@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.Server", "Booksto
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "bookstore.client", "bookstore.client\bookstore.client.esproj", "{8992408F-29B7-498F-9AE7-641FFC3C0663}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bookstore-Repo", "Bookstore-Repo", "{6345EACC-01FE-4629-9779-2CE980245744}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

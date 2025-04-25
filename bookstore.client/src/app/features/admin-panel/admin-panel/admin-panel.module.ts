@@ -15,6 +15,8 @@ import { EditUserPageComponent } from './pages/admin-users/edit-user-page/edit-u
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../../../core/interceptors/auth.interceptor';
 import { GenericEditComponent } from './pages/generic-edit/generic-edit.component';
+import { AddBookComponent } from './pages/admin-books/add-book/add-book.component';
+import { AddMagazineComponent } from './pages/admin-magazines/add-magazine/add-magazine.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { GenericEditComponent } from './pages/generic-edit/generic-edit.componen
     AddUserPageComponent,
     AdminCategoriesComponent,
     EditUserPageComponent,
-    GenericEditComponent
+    GenericEditComponent,
+    AddBookComponent,
+    AddMagazineComponent
   ],
     imports: [
         CommonModule,

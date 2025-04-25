@@ -11,6 +11,8 @@ import {AuthGuard} from '../../../core/guards/auth.guard';
 import {RoleGuard} from '../../../core/guards/role-guard.guard';
 import {EditUserPageComponent} from './pages/admin-users/edit-user-page/edit-user-page.component';
 import {GenericEditComponent} from './pages/generic-edit/generic-edit.component';
+import {AddBookComponent} from './pages/admin-books/add-book/add-book.component';
+import {AddMagazineComponent} from './pages/admin-magazines/add-magazine/add-magazine.component';
 
 
 const routes: Routes = [
@@ -19,15 +21,20 @@ const routes: Routes = [
     component: AdminPanelComponent,
     children:[
       { path: 'dashboard', component: AdmindashboardComponent},
+
       {path: 'books', component: AdminBooksComponent},
+          { path: 'add-book', component: AddBookComponent },
+
       {path: 'magazines', component: AdminMagazinesComponent},
+          { path: 'add-magazine', component: AddMagazineComponent },
+
       {path: 'categories', component: AdminCategoriesComponent},
 
       { path: 'edit/:model/:id', component: GenericEditComponent },
 
       {path: 'users', component: AdminUsersComponent},
-      {path: 'add-user', component: AddUserPageComponent},
-      {path: 'edit-user/:id', component: EditUserPageComponent},
+          {path: 'add-user', component: AddUserPageComponent},
+          {path: 'edit-user/:id', component: EditUserPageComponent},
 
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     ]

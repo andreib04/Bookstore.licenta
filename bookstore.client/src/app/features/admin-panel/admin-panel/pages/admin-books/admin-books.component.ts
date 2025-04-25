@@ -21,8 +21,14 @@ export class AdminBooksComponent implements OnInit{
   }
 
   getAllBooks(){
-    this.bookService.getBooks().subscribe(res => {
-      this.allBooks = res;
+    this.bookService.getBooks().subscribe({
+      next: (books) => {
+        this.allBooks = books;
+        console.log(this.allBooks);
+      },
+      error: (error) => {
+        console.log(error);
+      }
     })
   }
 

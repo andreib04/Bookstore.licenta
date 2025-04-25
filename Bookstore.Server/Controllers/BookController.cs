@@ -54,13 +54,14 @@ public class BookController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Policy = "Admin")]
+    /*[Authorize(Policy = "Admin")]*/
+    [AllowAnonymous]
     public async Task<IActionResult> AddBook([FromBody]BookDTO book)
     {
         try
         {
             await _service.AddAsync(book);
-            return Ok();
+            return Ok(book);
         }
         catch(KeyNotFoundException e)
         {
