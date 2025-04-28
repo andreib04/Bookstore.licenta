@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Bookstore.Server.DTOs;
 
 namespace Bookstore.Server.Data.Models
 {

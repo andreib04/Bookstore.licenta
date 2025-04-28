@@ -38,6 +38,7 @@ public class MagazineRepository : IRepository<Magazine>
 
     public async Task<Magazine> AddAsync(Magazine magazine)
     {
+        magazine.ReleaseDate = DateTime.UtcNow;
         magazine.ItemType = "Magazine";
         _dbContext.Magazines.Add(magazine);
         await _dbContext.SaveChangesAsync();

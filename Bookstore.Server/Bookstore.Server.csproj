@@ -33,6 +33,8 @@
     <ProjectReference Include="..\bookstore.client\bookstore.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\Bookstore.Repositories\Bookstore.Repositories.csproj" />
+    <ProjectReference Include="..\Bookstore.Services\Bookstore.Services.csproj" />
   </ItemGroup>
 
 </Project>

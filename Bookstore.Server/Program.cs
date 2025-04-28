@@ -1,4 +1,5 @@
 using System.Text;
+using Bookstore.Server.Configurations;
 using Bookstore.Server.Data;
 using Bookstore.Server.Data.Models;
 using Bookstore.Server.DTO;
@@ -8,6 +9,7 @@ using Bookstore.Server.Services;
 using Bookstore.Server.Validations;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -38,6 +40,8 @@ builder.Services.AddTransient<IUserService, UserService>();
 
 builder.Services.AddTransient<AbstractValidator<User>, UserValidator>();
 
+builder.Services.ConfigureAuthorization();
+	
 const string policyName = "Policy";
 
 builder.Services.AddCors(options =>

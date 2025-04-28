@@ -102,10 +102,10 @@ export class AdminCategoriesComponent implements OnInit {
     category.isEditing = false;
   }
 
-  deleteCategory(){
-    this.categoryService.deleteCategory(this.category.categoryId).subscribe(res => {
+  deleteCategory(id: number){
+    this.categoryService.deleteCategory(id).subscribe(res => {
       console.log('Deleted category', res);
-      window.location.reload();
+      this.categories = this.categories.filter(c => c.categoryId !== id)
     })
   }
 }

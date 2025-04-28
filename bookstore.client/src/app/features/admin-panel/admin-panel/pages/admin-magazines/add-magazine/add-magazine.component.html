@@ -36,17 +36,26 @@
 
             <div class="mb-2">
               <label for="itemTypeInput" class="form-label small">Item Type</label>
-              <input type="text" class="form-control form-control-sm" id="itemTypeInput" formControlName="itemType" placeholder="Book">
+              <input type="text" class="form-control form-control-sm" id="itemTypeInput" formControlName="itemType" placeholder="Magazine">
             </div>
 
             <div class="mb-2">
-              <label for="imageInput" class="form-label">Select image</label>
+              <label for="imageInput" class="form-label">Select image (Max size: 2MB)</label>
               <input (change)="onFileChange($event)" class="form-control" type="file" id="imageInput" formControlName="image">
+              <div *ngIf="errorMessage" style="color: red">
+                {{ errorMessage }}
+              </div>
             </div>
 
             <div class="mb-2">
-              <label for="categoryInput" class="form-label small">Category</label>
-              <input type="text" class="form-control form-control-sm" id="categoryInput" formControlName="category" placeholder="Drama">
+              <label for="categorySelect" class="form-label small">Category</label>
+              <select
+                id="categorySelect"
+                class="form-select"
+                (change)="onCategoryChange(catSelect.value)"
+                #catSelect>
+                <option *ngFor="let cat of categories" [value]="cat.categoryId">{{ cat.categoryName }}</option>
+              </select>
             </div>
 
 

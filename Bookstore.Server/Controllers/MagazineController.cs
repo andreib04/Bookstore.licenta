@@ -1,6 +1,7 @@
 using Bookstore.Server.Data.Models;
 using Bookstore.Server.DTOs;
 using Bookstore.Server.Services;
+using Bookstore.Services.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -54,7 +55,7 @@ public class MagazineController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = UserRolesConstants.Admin)]
     public async Task<IActionResult> AddMagazine([FromBody] MagazineDTO magazine)
     {
         try
@@ -69,7 +70,7 @@ public class MagazineController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = UserRolesConstants.Admin)]
     public async Task<IActionResult> UpdateMagazine(int id, [FromBody] MagazineDTO magazine)
     {
         if (id != magazine.Id)
@@ -87,7 +88,7 @@ public class MagazineController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = UserRolesConstants.Admin)]
     public async Task<IActionResult> DeleteMagazine(int id)
     {
         try

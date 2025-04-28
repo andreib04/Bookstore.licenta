@@ -31,7 +31,7 @@
         <button *ngIf="category.isEditing" (click)="saveCategory(category)" class="btn btn-success"><i class="bi bi-check-lg"></i></button>
         <button *ngIf="category.isEditing" (click)="cancelEdit(category)" class="btn btn-danger"><i class="bi bi-x-lg"></i></button>
 
-        <button class="btn btn-danger ms-2" (click)="deleteCategory()"><i class="bi bi-trash-fill"></i></button>
+        <button class="btn btn-danger ms-2" (click)="deleteCategory(category.categoryId)"><i class="bi bi-trash-fill"></i></button>
       </td>
     </tr>
     </tbody>

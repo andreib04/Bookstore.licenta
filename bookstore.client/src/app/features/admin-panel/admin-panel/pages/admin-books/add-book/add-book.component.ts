@@ -14,9 +14,9 @@ import {CategoriesServiceService} from '../../../../../../core/services/categori
 })
 export class AddBookComponent implements OnInit{
   form: FormGroup;
-  base64Image: string = '';
   allBooks: Book[] = [];
   categories: Category[] = [];
+  errorMessage: string = '';
 
   constructor(private booksService: BooksServiceService, private location: Location, private categoriesService: CategoriesServiceService) {
     this.form = new FormGroup({
@@ -54,6 +54,18 @@ export class AddBookComponent implements OnInit{
   onFileChange(event: Event){
     const file = (event.target as HTMLInputElement)?.files?.[0];
     if(file) {
+
+      const maxSize = 2 * 1024 * 1024;
+
+      if(file.size > maxSize){
+        this.errorMessage = 'File size exceeds 2 MB';
+        this.form.get('image')?.setValue('');
+        this.form.get('image')?.updateValueAndValidity();
+        return;
+      }else{
+        this.errorMessage = '';
+      }
+
       const reader = new FileReader();
       reader.onload = () => {
         const base64 = (reader.result as string);

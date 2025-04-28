@@ -11,7 +11,7 @@ export class AdminUsersComponent implements OnInit {
   //protected users!: User[];
   user: User = {} as User;
 
-  public allUsers: Array<User> = new Array<User>();
+  allUsers: User[] = [];
 
   public userService: UsersServiceService
   constructor(private usersService: UsersServiceService, private cdr: ChangeDetectorRef) {
@@ -33,10 +33,10 @@ export class AdminUsersComponent implements OnInit {
       })
     }
 
-  deleteUser(){
-    this.usersService.deleteUser(this.user.id).subscribe((data) =>{
+  deleteUser(id: number){
+    this.usersService.deleteUser(id).subscribe((data) =>{
       console.log('Deleted user: ', data);
-      window.location.reload();
+      //this.allUsers = this.allUsers.find(u => u.id !== id)
     })
   }
 }

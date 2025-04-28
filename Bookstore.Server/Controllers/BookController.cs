@@ -1,6 +1,8 @@
+using System.Text.RegularExpressions;
 using Bookstore.Server.Data.Models;
 using Bookstore.Server.DTO;
 using Bookstore.Server.Services;
+using Bookstore.Services.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,6 +37,38 @@ public class BookController : ControllerBase
         }
     }
 
+    [HttpGet("{id}/image")]
+    public async Task<IActionResult> GetBookImage(int id)
+    {
+        var book = await _service.GetByIdAsync(id);
+
+        if (book == null || string.IsNullOrEmpty(book.Image))
+        {
+            return NotFound("Image not found");
+        }
+        
+        var base64String = book.Image;
+        
+        var dataUriPrefix = "data:image/jpeg;base64,";
+        if (base64String.StartsWith(dataUriPrefix))
+        {
+            base64String = base64String.Substring(dataUriPrefix.Length);
+        }
+        
+        base64String = Regex.Replace(base64String, @"[^A-Za-z0-9\+/=]", "");
+
+        try
+        {
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+            
+            return File(imageBytes, "image/jpeg");  
+        }
+        catch (FormatException ex)
+        {
+            return BadRequest("Invalid base64 string: " + ex.Message);
+        }
+    }
+
     [HttpGet("{id}")]
     [AllowAnonymous]
     public async Task<IActionResult> GetBookById(int id)
@@ -54,8 +88,7 @@ public class BookController : ControllerBase
     }
 
     [HttpPost]
-    /*[Authorize(Policy = "Admin")]*/
-    [AllowAnonymous]
+    [Authorize(Policy = UserRolesConstants.Admin)]
     public async Task<IActionResult> AddBook([FromBody]BookDTO book)
     {
         try
@@ -70,7 +103,7 @@ public class BookController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = UserRolesConstants.Admin)]
     public async Task<IActionResult> UpdateBook(int id,[FromBody] BookDTO book)
     {
         if(id != book.Id)
@@ -88,7 +121,7 @@ public class BookController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = UserRolesConstants.Admin)]
     public async Task<IActionResult> DeleteBook(int id)
     {
         try

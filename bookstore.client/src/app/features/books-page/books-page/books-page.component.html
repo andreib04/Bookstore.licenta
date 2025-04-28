@@ -17,7 +17,7 @@
 
   <div class="sorting d-flex w-100 justify-content-between align-items-center mt-5">
     <div class="leftSide">
-      <h5>Books</h5>
+      <h3 class="fw-bold">Books</h3>
     </div>
     <div class="rightSide d-flex">
       <div class="dropdown filtering">
@@ -49,296 +49,26 @@
     <div class="row">
       <div class="col-md-3 category-sidebar small">
         <h5 class="mb-3">Categories</h5>
-        <div class="list-group">
-          <a href="#" class="list-group-item list-group-item-action active">All</a>
-          <a href="#" class="list-group-item list-group-item-action">Technology</a>
-          <a href="#" class="list-group-item list-group-item-action">Health</a>
-          <a href="#" class="list-group-item list-group-item-action">Business</a>
-          <a href="#" class="list-group-item list-group-item-action">Sports</a>
-          <a href="#" class="list-group-item list-group-item-action">Entertainment</a>
+        <div class="list-group" *ngFor="let cat of allCategories">
+          <a href="#" class="list-group-item list-group-item-action">{{ cat.categoryName }}</a>
         </div>
       </div>
 
       <div class="col-md-9 books d-flex flex-wrap gap-3">
-        <div class="card">
+        <div class="card" *ngFor="let book of allBooks">
           <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
+               [src]="book.image"
+               alt="Image not found">
           <div class="card-body">
             <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
+              <p class="firstLine-item fw-bold">{{ book.title }}</p>
+              <p class="firstLine-item fw-bold">{{ book.price }}</p>
             </div>
-            <span class="author">Author</span><br>
+            <span class="author">{{ book.author }}</span><br>
             <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
           </div>
         </div>
 
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Book Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Author</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
 
       </div>
     </div>

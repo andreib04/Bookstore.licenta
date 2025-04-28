@@ -34,7 +34,7 @@
       <td>{{magazine.releaseDate | date: 'shortDate'}}</td>
       <td>
         <button (click)="goToEditPage('magazine', magazine.id)" class="btn btn-success"><i class="bi bi-pencil-fill"></i></button>
-        <button class="btn btn-danger ms-2" (click)="deleteMagazine()"><i class="bi bi-trash-fill"></i></button>
+        <button class="btn btn-danger ms-2" (click)="deleteMagazine(magazine.id)"><i class="bi bi-trash-fill"></i></button>
       </td>
     </tr>
     </tbody>

@@ -26,9 +26,9 @@ export class AdminMagazinesComponent implements OnInit{
     })
   }
 
-  deleteMagazine(){
-    this.magazineService.deleteMagazine(this.magazine.id).subscribe(res => {
-      console.log('Deleted magazine: ', res);
+  deleteMagazine(id: number){
+    this.magazineService.deleteMagazine(id).subscribe(res => {
+      this.allMagazines = this.allMagazines.filter(m => m.id !== id);
     })
   }
 

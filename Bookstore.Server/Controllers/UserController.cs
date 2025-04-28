@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Bookstore.Server.Data.Models;
 using Bookstore.Server.Services;
 using Bookstore.Server.Validations;
+using Bookstore.Services.Constants;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
@@ -94,7 +95,7 @@ public class UserController : ControllerBase
    }
 
    [HttpPut("{id}")]
-   [Authorize(Policy = "Admin")]
+   [Authorize(Policy = UserRolesConstants.Admin)]
    public async Task<IActionResult> EditUser(int id, [FromBody] User user)
    {
       if (id != user.Id)
@@ -112,7 +113,7 @@ public class UserController : ControllerBase
    }
 
    [HttpDelete("{id}")]
-   [Authorize(Policy = "Admin")]
+   [Authorize(Policy = UserRolesConstants.Admin)]
    public async Task<IActionResult> DeleteUser(int id)
    {
       try

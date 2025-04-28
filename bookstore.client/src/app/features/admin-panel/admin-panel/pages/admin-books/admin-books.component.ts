@@ -32,9 +32,9 @@ export class AdminBooksComponent implements OnInit{
     })
   }
 
-  deleteBook(){
-    this.bookService.deleteBook(this.book.id).subscribe(res => {
-      console.log('Deleted book', res);
+  deleteBook(id: number){
+    this.bookService.deleteBook(id).subscribe(res => {
+      this.allBooks = this.allBooks.filter(b => b.id !== id);
     })
   }
 

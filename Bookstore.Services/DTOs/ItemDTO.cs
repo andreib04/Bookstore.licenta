@@ -1,4 +1,3 @@
-using Bookstore.Server.Data.Models;
 using Bookstore.Server.DTOs;
 
 namespace Bookstore.Server.DTO;

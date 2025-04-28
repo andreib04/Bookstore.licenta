@@ -9,6 +9,14 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "bookstore.client", "booksto
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bookstore-Repo", "Bookstore-Repo", "{6345EACC-01FE-4629-9779-2CE980245744}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bookstore-Services", "Bookstore-Services", "{AD8F81E9-2830-4F80-B0BE-1AC3A5833E21}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bookstore-API", "Bookstore-API", "{7B4F99F8-31FA-4A9C-B734-FFE816D1EED3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.Repositories", "Bookstore.Repositories\Bookstore.Repositories.csproj", "{47A5B178-1111-44B2-A296-A263E056BC71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.Services", "Bookstore.Services\Bookstore.Services.csproj", "{541DCF49-236F-43FD-810F-477BDF60901C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,11 +33,24 @@ Global
 		{8992408F-29B7-498F-9AE7-641FFC3C0663}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8992408F-29B7-498F-9AE7-641FFC3C0663}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8992408F-29B7-498F-9AE7-641FFC3C0663}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{47A5B178-1111-44B2-A296-A263E056BC71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47A5B178-1111-44B2-A296-A263E056BC71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47A5B178-1111-44B2-A296-A263E056BC71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47A5B178-1111-44B2-A296-A263E056BC71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{541DCF49-236F-43FD-810F-477BDF60901C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541DCF49-236F-43FD-810F-477BDF60901C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541DCF49-236F-43FD-810F-477BDF60901C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{541DCF49-236F-43FD-810F-477BDF60901C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DC123016-A0FB-4E2B-8393-2A50C5BFD620}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1BB6ACF6-B322-4A81-83FE-7228C92B0CFC} = {7B4F99F8-31FA-4A9C-B734-FFE816D1EED3}
+		{47A5B178-1111-44B2-A296-A263E056BC71} = {6345EACC-01FE-4629-9779-2CE980245744}
+		{541DCF49-236F-43FD-810F-477BDF60901C} = {AD8F81E9-2830-4F80-B0BE-1AC3A5833E21}
 	EndGlobalSection
 EndGlobal

@@ -1,6 +1,5 @@
 using Bookstore.Server.Data;
 using Bookstore.Server.Data.Models;
-using Bookstore.Server.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bookstore.Server.Repositories;
@@ -16,12 +15,21 @@ public class BookRepository : IRepository<Book>
     
     public async Task<IEnumerable<Book>> GetAllAsync()
     {
-        return await _dBContext.Books
-            .Where(i => i.ItemType == "Book")
-            .Include(i => i.Category)
-            .ToListAsync();
+        try
+        {
+            var books = await _dBContext.Books
+                .Where(i => i.ItemType == "Book")
+                .Include(i => i.Category)
+                .ToListAsync();
+            return books;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
-
+    
+    
     public async Task<Book> GetByIdAsync(int id)
     {
         var book = await _dBContext.Books

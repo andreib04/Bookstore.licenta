@@ -4,6 +4,7 @@ using System.Text;
 using Bookstore.Server.Data.Models;
 using Bookstore.Server.Repositories;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Bookstore.Server.Services;

@@ -1,6 +1,7 @@
 using Bookstore.Server.Data.Models;
 using Bookstore.Server.DTOs;
 using Bookstore.Server.Services;
+using Bookstore.Services.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,7 +35,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = UserRolesConstants.Admin)]
     public async Task<IActionResult> AddCategory([FromBody] CategoryDTO category)
     {
         await _categoryService.AddCategoryAsync(category);
@@ -42,7 +43,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = UserRolesConstants.Admin)]
     public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryDTO category)
     {
         if (id != category.CategoryId)
@@ -54,7 +55,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = UserRolesConstants.Admin)]
     public async Task<IActionResult> DeleteCategory(int id)
     {
         await _categoryService.DeleteCategoryAsync(id);

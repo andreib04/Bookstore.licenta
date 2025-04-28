@@ -1,10 +1,11 @@
-<div class="cartPage container">
-  <div class="d-flex justify-content-between p-4">
-    <h1 class="fw-bold ms-5">My Cart</h1>
-    <button routerLink="/books" class="btn btn-outline-dark rounded-5 me-5"><i class="bi bi-arrow-left"></i> Continue shopping</button>
-  </div>
+<div class="d-flex justify-content-between p-4">
+  <h1 class="fw-bold ms-5">My Cart</h1>
+  <button routerLink="/books" class="btn btn-outline-dark rounded-5 me-5"><i class="bi bi-arrow-left"></i> Continue shopping</button>
+</div>
 
-  <div class="product-display">
+<div class="page-container d-flex justify-content-between p-4" style="gap: 20px;">
+
+  <div class="product-display" style="width: 70%;">
     <div class="d-flex flex-row align-items-center p-2 fs-4 fw-bold justify-content-around">
       <div>Product</div>
       <div>Details</div>
@@ -12,43 +13,50 @@
       <div>Price</div>
     </div>
 
-    <div class="card d-flex flex-row align-items-center p-3 gap-4 justify-content-around">
-      <div class="product-img">
-        <img class="object-fit-cover" style="width: 180px; height: 250px;"
-             src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-             alt="Image not found">
-      </div>
 
-      <div class="product-details">
-        <div class="title">
-          <h4 class="fw-bold">Lorem ipsum</h4>
+   <!--HERE GOES THE PRODUCTS FROM THE CART -->
+    <div class="d-flex flex-wrap flex-column">
+      <div class="card d-flex flex-row align-items-center p-3 gap-4 justify-content-around mt-2">
+        <div class="product-img">
+          <img class="object-fit-cover" style="width: 180px; height: 250px;"
+               src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+               alt="Image not found">
         </div>
-        <div class="details">
-          <p class="fs-4 mb-1">Author</p>
-          <div class="text-truncate" style="max-width: 300px;">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea eius illo illum saepe ullam ut.
+
+        <div class="product-details">
+          <div class="title">
+            <h4 class="fw-bold">Lorem ipsum</h4>
+          </div>
+          <div class="details">
+            <p class="fs-4 mb-1">Author</p>
+            <div class="text-truncate" style="max-width: 300px;">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea eius illo illum saepe ullam ut.
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="product-count">
-        <div class="d-flex align-items-center gap-2">
-          <button id="decrease" class="btn btn-outline-primary" (click)="decrease()">-</button>
-          <span id="counterValue" class="fw-bold text-center fs-5">{{count}}</span>
-          <button id="increase" class="btn btn-outline-primary" (click)="increase()">+</button>
+        <div class="product-count">
+          <div class="d-flex align-items-center gap-2">
+            <button id="decrease" class="btn btn-outline-primary" (click)="decrease()">-</button>
+            <span id="counterValue" class="fw-bold text-center fs-5">{{count}}</span>
+            <button id="increase" class="btn btn-outline-primary" (click)="increase()">+</button>
+          </div>
         </div>
-      </div>
 
-      <div class="product-price">
-        <h4 class="m-0">$10.00</h4>
+        <div class="product-price">
+          <h4 class="m-0">$10.00</h4>
+        </div>
       </div>
 
     </div>
+
+
   </div>
 
 
-  <div class="checkout mt-5 d-flex justify-content-end">
-    <div class="card rounded" style="max-width: 400px; ">
+  <div class="checkout card rounded mt-5 d-flex flex-column justify-content-between p-3" style="width: 15%; height: 300px;">
+
+    <div>
       <div class="d-flex justify-content-around mt-2">
         <span class="text-uppercase">Subtotal:</span>
         <span class="fw-bold fs-5">$10.00</span>
@@ -61,12 +69,16 @@
         <span class="text-uppercase fw-bold fs-5">Total:</span>
         <span class="fw-bold fs-5">$10.00</span>
       </div>
-      <div class="checkout-btn mt-3">
-        <button class="btn btn-primary d-flex justify-content-between fs-5" style="width: 400px">
-          <span class="ms-2">Checkout</span>
-          <span class="me-2">$10.00</span>
-        </button>
-      </div>
     </div>
+
+    <div class="checkout-btn">
+      <button class="btn btn-primary d-flex justify-content-between fs-5 w-100">
+        <span class="ms-2">Checkout</span>
+        <span class="me-2">$10.00</span>
+      </button>
+    </div>
+
   </div>
+
+
 </div>

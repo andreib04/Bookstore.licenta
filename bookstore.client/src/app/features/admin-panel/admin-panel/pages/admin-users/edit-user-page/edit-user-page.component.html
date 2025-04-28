@@ -14,7 +14,6 @@
               <input type="text" class="form-control form-control-sm" id="firstNameInput" formControlName="firstName" placeholder="John">
             </div>
 
-
             <div class="mb-2">
               <label for="lastNameInput" class="form-label small">Last name</label>
               <input type="text" class="form-control form-control-sm" id="lastNameInput" formControlName="lastName" placeholder="Doe">
@@ -29,20 +28,6 @@
               <label for="emailInput" class="form-label small">Email</label>
               <input type="email" class="form-control form-control-sm" id="emailInput" formControlName="email" placeholder="example@email.com">
             </div>
-
-            <!--<div class="mb-2">
-              <label for="passwordInput" class="form-label small">Password</label>
-              <input type="password" class="form-control form-control-sm" id="passwordInput" formControlName="password" placeholder="Password">
-            </div>
-
-            <div class="mb-2">
-              <label for="confirmPasswordInput" class="form-label small">Confirm Password</label>
-              <input type="password" class="form-control form-control-sm" id="confirmPasswordInput" formControlName="confirmPassword" placeholder="Confirm Password">
-            </div>
-
-            <div *ngIf="form.errors?.['passwordmatcherror']" class="error">
-              Passwords do not match.
-            </div>-->
 
             <button class="btn btn-primary btn-sm" type="submit" [disabled]="form.invalid">Edit User</button>
 

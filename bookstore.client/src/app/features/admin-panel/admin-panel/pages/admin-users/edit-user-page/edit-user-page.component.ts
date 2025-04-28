@@ -34,10 +34,7 @@ export class EditUserPageComponent {
       lastName: new FormControl<string>('', [Validators.required]),
       role: new FormControl<string>('', [Validators.required]),
       email: new FormControl<string>('', [Validators.required, Validators.email]),
-      /*password: new FormControl<string>('', [Validators.required, Validators.minLength(8)]),
-      confirmPassword: new FormControl<string>('', [Validators.required])*/
     },
-      //{ validators: this.matchingValidator }
     );
   }
 

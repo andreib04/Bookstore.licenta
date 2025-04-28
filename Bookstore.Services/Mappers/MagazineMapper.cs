@@ -16,7 +16,7 @@ public static class MagazineMapper
             Image = magazine.Image,
             ItemType = magazine.ItemType,
             Publisher = magazine.Publisher,
-            ReleaseDate = magazine.ReleaseDate,
+            //ReleaseDate = magazine.ReleaseDate,
             Category = magazine.Category.ToDTO()
         };
     }
@@ -33,7 +33,7 @@ public static class MagazineMapper
             Image = magazineDTO.Image,
             ItemType = magazineDTO.ItemType,
             Publisher = magazineDTO.Publisher,
-            ReleaseDate = magazineDTO.ReleaseDate,
+            //ReleaseDate = magazineDTO.ReleaseDate,
             CategoryId = magazineDTO.Category.CategoryId
         };
     }

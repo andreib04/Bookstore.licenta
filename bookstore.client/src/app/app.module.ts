@@ -17,6 +17,7 @@ import { RegisterComponent } from './features/register-page/register/register.co
 import { CartPageComponent } from './features/cart-page/cart-page/cart-page.component';
 import { FooterComponent } from './shared/components/footer/footer/footer.component';
 import {CommonModule} from '@angular/common';
+import {AuthService} from './core/services/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {CommonModule} from '@angular/common';
     CommonModule
   ],
   providers: [
+    AuthService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
   exports: [

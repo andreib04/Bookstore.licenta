@@ -42,7 +42,7 @@ public class MagazineService : IService<MagazineDTO>
         dbMagazine.Price = magazine.Price;
         dbMagazine.Stock = magazine.Stock;
         dbMagazine.Image = magazine.Image;
-        dbMagazine.ReleaseDate = magazine.ReleaseDate;
+        //dbMagazine.ReleaseDate = magazine.ReleaseDate;
         
         await _magazineRepository.UpdateAsync(dbMagazine);
     }

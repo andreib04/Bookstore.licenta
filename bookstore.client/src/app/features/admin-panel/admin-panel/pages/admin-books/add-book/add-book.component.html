@@ -40,8 +40,11 @@
             </div>
 
             <div class="mb-2">
-              <label for="imageInput" class="form-label">Select image</label>
+              <label for="imageInput" class="form-label">Select image (Max size: 2MB)</label>
               <input  (change)="onFileChange($event)" class="form-control" type="file" id="imageInput" formControlName="image">
+              <div *ngIf="errorMessage" style="color: red">
+                {{ errorMessage }}
+              </div>
             </div>
 
             <div class="mb-2">
@@ -54,8 +57,6 @@
                 <option *ngFor="let cat of categories" [value]="cat.categoryId">{{ cat.categoryName }}</option>
               </select>
             </div>
-
-
 
             <button class="btn btn-primary btn-sm" type="submit" [disabled]="form.invalid">Add Book</button>
 
