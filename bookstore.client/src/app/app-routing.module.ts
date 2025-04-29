@@ -10,6 +10,8 @@ import {MagazinesPageComponent} from './features/magazines-page/magazines-page/m
 import {CategoriesPageComponent} from './features/categories-page/categories-page/categories-page.component';
 import {RegisterComponent} from './features/register-page/register/register.component';
 import {CartPageComponent} from './features/cart-page/cart-page/cart-page.component';
+ import {BookPageComponent} from './features/books-page/book-page/book-page.component';
+ import {MagazinePageComponent} from './features/magazines-page/magazine-page/magazine-page.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -17,7 +19,10 @@ const routes: Routes = [
 
   {path: 'home', component: HomeComponent,},
   {path: 'books', component: BooksPageComponent},
+        { path: 'book/:id', component: BookPageComponent },
+
   {path: 'magazines', component: MagazinesPageComponent},
+        { path: 'magazine/:id', component: MagazinePageComponent },
   {path: 'categories', component: CategoriesPageComponent},
   {path: 'cart', component:CartPageComponent},
 

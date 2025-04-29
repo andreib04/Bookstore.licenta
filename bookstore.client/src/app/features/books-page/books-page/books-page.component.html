@@ -1,5 +1,12 @@
 <div class="container shadow-left-right p-3">
 
+  <div *ngIf="isLoading" class="d-flex justify-content-center align-items-center overlay">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+
   <div class="image d-flex w-100 p-5">
     <div class="flex-fill">
       <img style="max-height: 325px" class="w-100 object-fit-cover rounded" src="https://images.unsplash.com/photo-1490332695540-5acc256ec383?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="https://placehold.co/600x400">
@@ -15,7 +22,7 @@
     </div>
   </div>
 
-  <div class="sorting d-flex w-100 justify-content-between align-items-center mt-5">
+  <div  class="sorting d-flex w-100 justify-content-between align-items-center mt-5">
     <div class="leftSide">
       <h3 class="fw-bold">Books</h3>
     </div>
@@ -56,15 +63,17 @@
 
       <div class="col-md-9 books d-flex flex-wrap gap-3">
         <div class="card" *ngFor="let book of allBooks">
-          <img class="card-image w-100 object-fit-cover"
+          <img class="card-image w-100 object-fit-cover pointer"
                [src]="book.image"
-               alt="Image not found">
+               alt="Image not found"
+               (error)="book.image = fallbackUrl"
+               routerLink="/book/{{book.id}}">
           <div class="card-body">
             <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">{{ book.title }}</p>
-              <p class="firstLine-item fw-bold">{{ book.price }}</p>
+              <p class="firstLine-item fw-bold pointer" routerLink="/book/{{book.id}}">{{ book.title }}</p>
+              <p class="firstLine-item fw-bold pointer" routerLink="/book/{{book.id}}">${{ book.price }}</p>
             </div>
-            <span class="author">{{ book.author }}</span><br>
+            <span class="author pointer" routerLink="/book/{{book.id}}">{{ book.author }}</span><br>
             <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
           </div>
         </div>

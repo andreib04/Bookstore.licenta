@@ -18,6 +18,8 @@ import { CartPageComponent } from './features/cart-page/cart-page/cart-page.comp
 import { FooterComponent } from './shared/components/footer/footer/footer.component';
 import {CommonModule} from '@angular/common';
 import {AuthService} from './core/services/auth/auth.service';
+import { BookPageComponent } from './features/books-page/book-page/book-page.component';
+import { MagazinePageComponent } from './features/magazines-page/magazine-page/magazine-page.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import {AuthService} from './core/services/auth/auth.service';
     RegisterComponent,
     CartPageComponent,
     FooterComponent,
+    BookPageComponent,
+    MagazinePageComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,

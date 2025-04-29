@@ -1,0 +1,68 @@
+<div class="page-main p-1 container shadow">
+
+  <div class="page-header p-5 me-5 ms-5">
+    <div>
+      <button class="btn btn-outline-dark rounded-5 me-5" routerLink="/books">
+        <i class="bi bi-arrow-left"></i>
+        <span class="fs-5 ps-2">Back to books</span>
+      </button>
+    </div>
+
+  </div>
+
+  <div class="main-content me-5 ms-5 p-2 d-flex">
+
+    <div class="leftSide" style="margin-left: 70px">
+      <img style="width: 500px; height: 700px"
+           [src]="book.image"
+           alt="Image not found"
+           (error)="book.image = fallbackUrl">
+    </div>
+
+    <div class="rightSide p-4 mt-3 d-flex flex-column justify-content-between" style="margin-left: 50px; height: 700px;">
+        <div>
+            <div class="title">
+              <h2 class="fw-bold">{{ book.title }}</h2>
+            </div><br>
+
+            <div class="fw-bold">
+              <h4 style="color: darkorange"><i>{{ book.author }}</i></h4>
+            </div>
+
+            <div class="details" style="margin-top: 100px">
+              <div class="d-flex">
+                <span class="fw-bold me-3" style="width: 200px;">Original</span>
+                <span style="font-size: 16px">{{ book.title }}</span>
+              </div>
+              <div class="d-flex mt-2">
+                <span class="fw-bold me-3" style="width: 200px;">Category</span>
+                <span style="font-size: 16px">{{ book.category.categoryName }}</span>
+              </div>
+              <div class="d-flex mt-2">
+                <span class="fw-bold me-3" style="width: 200px;">Stock</span>
+                <span style="font-size: 16px">{{ book.stock }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <h5 class="fw-semibold">Description</h5>
+            <p class="text-muted" style="font-size: 15px;">
+              {{ book.description }}
+            </p>
+          </div>
+
+
+          <div class="d-flex justify-content-end mt-auto" style="margin-left:150px">
+            <div class="cart-btn d-flex align-items-center">
+              <span class="me-3 fs-3 align-items-center">${{ book.price }}</span>
+              <button class="btn btn-outline-dark fs-4">Add to cart</button>
+            </div>
+          </div>
+
+    </div>
+
+
+  </div>
+
+</div>
