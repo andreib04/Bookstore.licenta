@@ -13,10 +13,12 @@ namespace Bookstore.Server.Controllers;
 public class BookController : ControllerBase
 {
     private readonly IService<BookDTO> _service;
+    private readonly SortingService _sortingService;
 
-    public BookController(IService<BookDTO> service)
+    public BookController(IService<BookDTO> service, SortingService sortingService)
     {
         _service = service;
+        _sortingService = sortingService;
     }
 
     [HttpGet]
@@ -84,6 +86,60 @@ public class BookController : ControllerBase
             {
                 StatusCode = 500
             };
+        }
+    }
+
+    [HttpGet("latest/{count}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetLatestBooks(int count)
+    {
+        try
+        {
+            var books = await _service.GetLatestAsync(count);
+            return Ok(books);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Something went wrong: {ex.Message}");
+        }
+    }
+
+    [HttpGet("sorted")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetSortedProducts(string sortBy = "price", string sortOrder = "asc")
+    {
+        var books = await _service.GetAllAsync();
+
+        IEnumerable<BookDTO> sortedBooks;
+
+        if (sortBy == "price")
+        {
+            sortedBooks = await _sortingService.QuickSortAsync<BookDTO>(books, b => b.Price, sortOrder);
+        }
+        else if (sortBy == "name")
+        {
+            sortedBooks = await _sortingService.QuickSortAsync<BookDTO>(books, b => b.Title, sortOrder);
+        }
+        else
+        {
+            sortedBooks = books;
+        }
+        
+        return Ok(sortedBooks);
+    }
+
+    [HttpGet("paginated")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetPaginatedBooks(int page = 1, int perPage = 20)
+    {
+        try
+        {
+            var (books, totalCount) = await _service.GetPaginatedAsync(page, perPage);
+            return Ok(new { books, totalCount });
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
         }
     }
 

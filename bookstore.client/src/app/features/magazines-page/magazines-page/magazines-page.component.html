@@ -32,11 +32,18 @@
           Sorting
         </button>
         <ul class="dropdown-menu dropdown-menu-light">
-          <li><a class="dropdown-item active small" href="#">Ascending</a></li>
-          <li><a class="dropdown-item small" href="#">Descending</a></li>
-          <li><a class="dropdown-item small" href="#">Alphabetic</a></li>
-          <li><a class="dropdown-item small" href="#">Price (ascending)</a></li>
-          <li><a class="dropdown-item small" href="#">Price (descending)</a></li>
+          <li><a class="dropdown-item small pointer"
+                 (click)="sortMagazines('name', 'asc')"
+                 [class.active]="activeSort.sortBy === 'name' && activeSort.sortOrder === 'asc'">Name (ascending)</a></li>
+          <li><a class="dropdown-item small pointer"
+                 (click)="sortMagazines('name', 'desc')"
+                 [class.active]="activeSort.sortBy === 'name' && activeSort.sortOrder === 'desc'">Name (descending)</a></li>
+          <li><a class="dropdown-item small pointer"
+                 (click)="sortMagazines('price', 'asc')"
+                 [class.active]="activeSort.sortBy === 'price' && activeSort.sortOrder === 'asc'">Price (ascending)</a></li>
+          <li><a class="dropdown-item small pointer"
+                 (click)="sortMagazines('price', 'desc')"
+                 [class.active]="activeSort.sortBy === 'price' && activeSort.sortOrder === 'desc'">Price (descending)</a></li>
         </ul>
       </div>
       <div class="dropdown per-page ms-3">

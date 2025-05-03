@@ -12,13 +12,45 @@ public class MagazineRepository : IRepository<Magazine>
     {
         _dbContext = dbContext;
     }
-    
+
     public async Task<IEnumerable<Magazine>> GetAllAsync()
     {
-        return await _dbContext.Magazines
-            .Where(i => i.ItemType == "Magazine")
-            .Include(i => i.Category)
-            .ToListAsync();
+        try
+        {
+            var magazines = await _dbContext.Magazines
+                .Where(i => i.ItemType == "Magazine")
+                .Include(i => i.Category)
+                .ToListAsync();
+            
+            return magazines;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+    
+    public async Task<(IEnumerable<Magazine> item, int totalCount)> GetPaginatedAsync(int page, int perPage)
+    {
+        int skip = (page - 1) * perPage;
+
+        try
+        {
+            var magazines = await _dbContext.Magazines
+                .Where(i => i.ItemType == "Magazine")
+                .Include(i => i.Category)
+                .Skip(skip)
+                .Take(perPage)
+                .ToListAsync();
+            
+            var totalCount = await _dbContext.Magazines.CountAsync();
+            
+            return (magazines, totalCount);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 
     public async Task<Magazine> GetByIdAsync(int id)
@@ -34,6 +66,17 @@ public class MagazineRepository : IRepository<Magazine>
         }
 
         return magazine;
+    }
+
+    public async Task<IEnumerable<Magazine>> GetLatestAsync(int count)
+    {
+        var magazines = await _dbContext.Magazines
+            .OrderByDescending(m => m.ReleaseDate)
+            .Include(i => i.Category)
+            .Take(count)
+            .ToListAsync();
+
+        return magazines;
     }
 
     public async Task<Magazine> AddAsync(Magazine magazine)

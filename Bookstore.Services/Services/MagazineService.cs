@@ -20,10 +20,25 @@ public class MagazineService : IService<MagazineDTO>
         return list.ToMagazineDTOList();
     }
 
+    public async Task<(IEnumerable<MagazineDTO> item, int totalCount)> GetPaginatedAsync(int page, int perPage)
+    {
+        var (magazines, totalCount) = await _magazineRepository.GetPaginatedAsync(page, perPage);
+
+        var magazinesDto = magazines.Select(m => m.ToMagazineDTO()).ToList();
+        
+        return (magazinesDto, totalCount);
+    }
+
     public async Task<MagazineDTO> GetByIdAsync(int id)
     {
         var magazine = await _magazineRepository.GetByIdAsync(id);
         return magazine.ToMagazineDTO();
+    }
+
+    public async Task<IEnumerable<MagazineDTO>> GetLatestAsync(int count)
+    {
+        var magazines = await _magazineRepository.GetLatestAsync(count);
+        return magazines.ToMagazineDTOList();
     }
 
     public async Task<MagazineDTO> AddAsync(MagazineDTO magazine)

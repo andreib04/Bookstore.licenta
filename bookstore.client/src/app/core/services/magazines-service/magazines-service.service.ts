@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Magazine} from '../../models/magazine';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,14 @@ export class MagazinesServiceService {
 
   getOneMagazine(id: number): Observable<Magazine> {
     return this.http.get<Magazine>(`${this.baseURL}${this.apiPATH}/${id}`);
+  }
+
+  getLatestMagazines(count: number = 3): Observable<Magazine[]>{
+    return this.http.get<Magazine[]>(`${this.baseURL}${this.apiPATH}/latest/${count}`);
+  }
+
+  getSortedMagazines(sortBy: string, sortOrder: string): Observable<Magazine[]>{
+    return this.http.get<Magazine[]>(`${this.baseURL}${this.apiPATH}/sorted?sortBy=${sortBy}&sortOrder=${sortOrder}`);
   }
 
   postMagazine(magazine: Magazine): Observable<Magazine> {

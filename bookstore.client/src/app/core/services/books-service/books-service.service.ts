@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Book} from '../../models/book';
@@ -19,6 +18,18 @@ export class BooksServiceService {
 
   getOneBook(id: number): Observable<Book> {
     return this.http.get<Book>(`${this.baseURL}${this.apiPATH}/${id}`);
+  }
+
+  getLatestBooks(count: number = 3): Observable<Book[]>{
+    return this.http.get<Book[]>(`${this.baseURL}${this.apiPATH}/latest/${count}`);
+  }
+
+  getSortedBooks(sortBy: string, sortOrder: string): Observable<Book[]>{
+    return this.http.get<Book[]>(`${this.baseURL}${this.apiPATH}/sorted?sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  }
+
+  getPaginatedBooks(page: number, perPage: number): Observable<Book[]>{
+    return this.http.get<Book[]>(`${this.baseURL}${this.apiPATH}/paginated?page=${page}&perPage=${perPage}`);
   }
 
   postBook(book: Book): Observable<Book> {

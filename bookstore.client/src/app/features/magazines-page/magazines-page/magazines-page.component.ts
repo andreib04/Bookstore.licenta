@@ -14,6 +14,8 @@ export class MagazinesPageComponent implements OnInit{
   allCategories: Category[] = [];
   fallBackUrl = "https://images.unsplash.com/photo-1596382940920-9f73b2d15901?q=80&w=1274&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
   isLoading = false;
+  activeSort: {sortBy: string, sortOrder: string} = {sortBy: '', sortOrder: ''};
+
 
   constructor(private magazineService: MagazinesServiceService, private categoriesService: CategoriesServiceService){}
 
@@ -46,5 +48,19 @@ export class MagazinesPageComponent implements OnInit{
         console.log(error);
       }
     })
+  }
+
+  sortMagazines(sortBy: string, sortOrder: string){
+    this.isLoading = true;
+    this.activeSort = {sortBy, sortOrder};
+    this.magazineService.getSortedMagazines(sortBy, sortOrder).subscribe(
+      data => {
+        this.allMagazines = data;
+        this.isLoading = false;
+      },
+      error => {
+        console.error("Error sorting magazines", error);
+    }
+    )
   }
 }

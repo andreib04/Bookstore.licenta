@@ -22,12 +22,27 @@ public class BookService : IService<BookDTO>
         return list.ToBookDTOList();
     }
 
+    public async Task<(IEnumerable<BookDTO> item, int totalCount)> GetPaginatedAsync(int page, int perPage)
+    {
+        var (books, totalCount) = await _bookRepository.GetPaginatedAsync(page, perPage);
+        
+        var booksDto = books.Select(b => b.ToBookDto()).ToList();
+        
+        return (booksDto, totalCount);
+    }
+
     public async Task<BookDTO> GetByIdAsync(int id)
     {
         var book = await _bookRepository.GetByIdAsync(id);
         return book.ToBookDto();
     }
 
+    public async Task<IEnumerable<BookDTO>> GetLatestAsync(int count)
+    {
+        var books = await _bookRepository.GetLatestAsync(count);
+        return books.ToBookDTOList();
+    }
+    
     public async Task<BookDTO> AddAsync(BookDTO book)
     {
         await _bookRepository.AddAsync(book.ToBookModel());

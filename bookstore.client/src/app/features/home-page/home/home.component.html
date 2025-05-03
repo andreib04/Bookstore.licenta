@@ -47,44 +47,18 @@
       <h3 class="fw-bold">Last released Books</h3>
     </div>
     <div class="books d-flex justify-content-center flex-wrap gap-4">
-      <div class="card" style="flex: 0 0 30%;">
-        <img class="card-image w-100 object-fit-cover"
-             src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-             alt="Book Image">
+      <div *ngFor="let book of latestBooks" class="card" style="flex: 0 0 30%;">
+        <img class="card-image w-100 object-fit-cover pointer"
+             [src]="book.image"
+             alt="Book Image"
+             (error)="book.image = fallbackUrl"
+             routerLink="/book/{{book.id}}">
         <div class="card-body">
           <div class="firstLine d-flex justify-content-between">
-            <p class="firstLine-item fw-bold">Title</p>
-            <p class="firstLine-item fw-bold">$10.00</p>
+            <p class="firstLine-item fw-bold pointer" routerLink="/book/{{book.id}}">{{ book.title }}</p>
+            <p class="firstLine-item fw-bold pointer" routerLink="/book/{{book.id}}">{{ book.price }}</p>
           </div>
-          <span class="author">Author</span><br>
-          <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-        </div>
-      </div>
-
-      <div class="card" style="flex: 0 0 30%;">
-        <img class="card-image w-100 object-fit-cover"
-             src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-             alt="Book Image">
-        <div class="card-body">
-          <div class="firstLine d-flex justify-content-between">
-            <p class="firstLine-item fw-bold">Title</p>
-            <p class="firstLine-item fw-bold">$10.00</p>
-          </div>
-          <span class="author">Author</span><br>
-          <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-        </div>
-      </div>
-
-      <div class="card" style="flex: 0 0 30%;">
-        <img class="card-image w-100 object-fit-cover"
-             src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-             alt="Book Image">
-        <div class="card-body">
-          <div class="firstLine d-flex justify-content-between">
-            <p class="firstLine-item fw-bold">Title</p>
-            <p class="firstLine-item fw-bold">$10.00</p>
-          </div>
-          <span class="author">Author</span><br>
+          <span class="author pointer" routerLink="/book/{{book.id}}">{{ book.author }}</span><br>
           <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
         </div>
       </div>
@@ -110,42 +84,18 @@
         <h3 class="fw-bold">Last released Magazines</h3>
       </div>
       <div class="magazines d-flex justify-content-center flex-wrap gap-4">
-        <div class="card" style="flex: 0 0 30%;">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1515443423862-b79d32c1b8f7?q=80&w=1387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Magazine Image">
+        <div *ngFor="let magazine of latestMagazines" class="card" style="flex: 0 0 30%;">
+          <img class="card-image w-100 object-fit-cover pointer"
+               [src]="magazine.image"
+               alt="Magazine Image"
+               (error)="magazine.image = fallbackUrl"
+               routerLink="/magazine/{{magazine.id}}">
           <div class="card-body">
             <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
+              <p class="firstLine-item fw-bold pointer" routerLink="/magazine/{{magazine.id}}">{{ magazine.title }}</p>
+              <p class="firstLine-item fw-bold pointer" routerLink="/magazine/{{magazine.id}}">{{ magazine.price }}</p>
             </div>
-            <span class="author">Publisher</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-        <div class="card" style="flex: 0 0 30%;">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1515443423862-b79d32c1b8f7?q=80&w=1387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Magazine Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Publisher</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
-          </div>
-        </div>
-        <div class="card" style="flex: 0 0 30%;">
-          <img class="card-image w-100 object-fit-cover"
-               src="https://images.unsplash.com/photo-1515443423862-b79d32c1b8f7?q=80&w=1387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-               alt="Magazine Image">
-          <div class="card-body">
-            <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold">Title</p>
-              <p class="firstLine-item fw-bold">$10.00</p>
-            </div>
-            <span class="author">Publisher</span><br>
+            <span class="author pointer" routerLink="/magazine/{{magazine.id}}">{{ magazine.publisher }}</span><br>
             <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
           </div>
         </div>

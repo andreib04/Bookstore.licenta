@@ -28,6 +28,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 
 builder.Services.AddScoped<IRepository<Book>, BookRepository>();
 builder.Services.AddTransient<IService<BookDTO>, BookService>();
+builder.Services.AddScoped<SortingService>();
 
 builder.Services.AddScoped<IRepository<Magazine>, MagazineRepository>();
 builder.Services.AddTransient<IService<MagazineDTO>, MagazineService>();

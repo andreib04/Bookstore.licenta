@@ -12,7 +12,7 @@ public class BookRepository : IRepository<Book>
     {
         _dBContext = dBContext;
     }
-    
+
     public async Task<IEnumerable<Book>> GetAllAsync()
     {
         try
@@ -21,7 +21,31 @@ public class BookRepository : IRepository<Book>
                 .Where(i => i.ItemType == "Book")
                 .Include(i => i.Category)
                 .ToListAsync();
+
             return books;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+    
+    public async Task<(IEnumerable<Book> item, int totalCount)> GetPaginatedAsync(int page, int perPage)
+    {
+        int skip = (page - 1) * perPage;
+        
+        try
+        {
+            var books = await _dBContext.Books
+                .Where(i => i.ItemType == "Book")
+                .Include(i => i.Category)
+                .Skip(skip)
+                .Take(perPage)
+                .ToListAsync();
+            
+            var totalCount = await _dBContext.Books.CountAsync();
+            
+            return (books, totalCount);
         }
         catch (Exception ex)
         {
@@ -42,6 +66,22 @@ public class BookRepository : IRepository<Book>
         }
         
         return book; 
+    }
+
+    public async Task<IEnumerable<Book>> GetLatestAsync(int count)
+    {
+        try
+        {
+            return await _dBContext.Books
+                .OrderByDescending(b => b.Id)
+                .Include(i => i.Category)
+                .Take(count)
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 
     public async Task<Book> AddAsync(Book book)

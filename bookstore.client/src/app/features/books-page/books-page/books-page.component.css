@@ -5,6 +5,11 @@
   background-color: #fff;
 }
 
+.dropdown-item:hover{
+  background-color: #007bff;
+  color: white;
+}
+
 .category-sidebar{
   min-height: 100vh;
   border-right: 1px solid #ddd;

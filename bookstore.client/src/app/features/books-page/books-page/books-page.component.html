@@ -32,11 +32,18 @@
           Sorting
         </button>
         <ul class="dropdown-menu dropdown-menu-light">
-          <li><a class="dropdown-item active small" href="#">Ascending</a></li>
-          <li><a class="dropdown-item small" href="#">Descending</a></li>
-          <li><a class="dropdown-item small" href="#">Alphabetic</a></li>
-          <li><a class="dropdown-item small" href="#">Price (ascending)</a></li>
-          <li><a class="dropdown-item small" href="#">Price (descending)</a></li>
+          <li><a class="dropdown-item small pointer"
+                 (click)="sortBooks('name', 'asc')"
+                 [class.active]="activeSort.sortBy === 'name' && activeSort.sortOrder === 'asc'">Name (ascending)</a></li>
+          <li><a class="dropdown-item small pointer"
+                 (click)="sortBooks('name', 'desc')"
+                 [class.active]="activeSort.sortBy === 'name' && activeSort.sortOrder === 'desc'">Name (descending)</a></li>
+          <li><a class="dropdown-item small pointer"
+                 (click)="sortBooks('price', 'asc')"
+                 [class.active]="activeSort.sortBy === 'price' && activeSort.sortOrder === 'asc'">Price (ascending)</a></li>
+          <li><a class="dropdown-item small pointer"
+                 (click)="sortBooks('price', 'desc')"
+                 [class.active]="activeSort.sortBy === 'price' && activeSort.sortOrder === 'desc'">Price (descending)</a></li>
         </ul>
       </div>
       <div class="dropdown per-page ms-3">
@@ -87,17 +94,13 @@
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-end">
         <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
+          <button class="btn btn-primary" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
         <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
+          <span>{{ currentPage }} of {{ totalCount / perPage }}</span>
+        </li>
+        <li class="page-item">
+          <button class="btn btn-primary" (click)="changePage(currentPage + 1)" [disabled]="currentPage * perPage >= totalCount">Next</button>
         </li>
       </ul>
     </nav>
