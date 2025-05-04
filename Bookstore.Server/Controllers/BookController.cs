@@ -130,7 +130,7 @@ public class BookController : ControllerBase
 
     [HttpGet("paginated")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetPaginatedBooks(int page = 1, int perPage = 20)
+    public async Task<IActionResult> GetPaginatedBooks(int page, int perPage, string sortBy, string sortOrder)
     {
         try
         {

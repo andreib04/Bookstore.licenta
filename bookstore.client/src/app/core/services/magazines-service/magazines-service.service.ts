@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Magazine} from '../../models/magazine';
+import {PaginatedMagazineRes} from '../../models/paginatedMagazineRes';
 
 
 @Injectable({
@@ -27,6 +28,10 @@ export class MagazinesServiceService {
 
   getSortedMagazines(sortBy: string, sortOrder: string): Observable<Magazine[]>{
     return this.http.get<Magazine[]>(`${this.baseURL}${this.apiPATH}/sorted?sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  }
+
+  getPaginatedMagazines(page: number, perPage: number): Observable<PaginatedMagazineRes>{
+    return this.http.get<PaginatedMagazineRes>(`${this.baseURL}${this.apiPATH}/paginated?page=${page}&perPage=${perPage}`);
   }
 
   postMagazine(magazine: Magazine): Observable<Magazine> {

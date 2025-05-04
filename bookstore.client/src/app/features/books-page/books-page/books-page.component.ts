@@ -3,6 +3,7 @@ import {BooksServiceService} from '../../../core/services/books-service/books-se
 import {Book} from '../../../core/models/book';
 import {CategoriesServiceService} from '../../../core/services/categories-service/categories-service.service';
 import {Category} from '../../../core/models/category';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-books-page',
@@ -19,48 +20,41 @@ export class BooksPageComponent implements OnInit {
   currentPage = 1;
   perPage = 20;
 
+
   constructor(private bookService: BooksServiceService, private categoriesService: CategoriesServiceService){}
 
   ngOnInit() {
-    //this.loadBooks();
-    this.getAllBooks();
+    this.loadBooks();
     this.getAllCategories();
   }
 
-  //FIX PAGINATION
-  /*loadBooks(page: number = this.currentPage, perPage: number = this.perPage){
-    this.bookService.getPaginatedBooks(page, perPage).subscribe(
-      data => {
-        console.log(data);
-
-        if(data)
-
+  loadBooks(){
+    this.isLoading = true;
+    this.bookService.getPaginatedBooks(this.currentPage, this.perPage).subscribe({
+      next: (data) => {
         this.allBooks = data.books;
         this.totalCount = data.totalCount;
-      },
-      error => {
-        console.error('error fetching: ', error);
-      }
-    )
-  }*/
-
-  changePage(page: number){
-    this.currentPage = page;
-    //this.loadBooks(page, this.perPage);
-  }
-
-  getAllBooks(){
-    this.isLoading = true;
-    this.bookService.getBooks().subscribe({
-      next: (books) => {
-        this.allBooks = books;
-        console.log(this.allBooks);
         this.isLoading = false;
       },
       error: (error) => {
         console.log(error);
       }
     })
+  }
+
+  changePage(page: number){
+    this.currentPage = page;
+    this.loadBooks();
+  }
+
+  changePerPage(count: number){
+    this.perPage = count;
+    this.currentPage = 1;
+    this.loadBooks();
+  }
+
+  get totalPages(){
+    return Math.ceil(this.totalCount / this.perPage);
   }
 
   getAllCategories(){
@@ -79,14 +73,15 @@ export class BooksPageComponent implements OnInit {
   sortBooks(sortBy: string, sortOrder: string){
     this.isLoading = true;
     this.activeSort = {sortBy, sortOrder};
-    this.bookService.getSortedBooks(sortBy, sortOrder).subscribe(
-      data => {
+    this.bookService.getSortedBooks(sortBy, sortOrder).subscribe({
+      next: (data) => {
         this.allBooks = data;
+        //this.loadBooks();
         this.isLoading = false;
       },
-      error => {
-        console.error("Error sorting books", error);
+      error: (error) => {
+        console.log(error);
       }
-    );
+    })
   }
 }

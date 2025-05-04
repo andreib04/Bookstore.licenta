@@ -13,30 +13,31 @@ import {CategoriesServiceService} from '../../../../../../core/services/categori
   styleUrl: './add-book.component.css'
 })
 export class AddBookComponent implements OnInit{
-  form: FormGroup;
+  form!: FormGroup;
   allBooks: Book[] = [];
   categories: Category[] = [];
   errorMessage: string = '';
 
   constructor(private booksService: BooksServiceService, private location: Location, private categoriesService: CategoriesServiceService) {
+  }
+
+  ngOnInit() {
+    this.categoriesService.getCategory().subscribe(data => {
+      this.categories = data;
+    })
+
     this.form = new FormGroup({
       title: new FormControl<string>('', [Validators.required]),
       author: new FormControl<string>('', [Validators.required]),
       description: new FormControl<string>('', [Validators.required]),
       price: new FormControl<number>(0, [Validators.required]),
       stock: new FormControl<number>(0, [Validators.required]),
-      itemType: new FormControl<string>('', [Validators.required]),
+      itemType: new FormControl<string>('Book', [Validators.required]),
       image: new FormControl<string>('', [Validators.required]),
       category: new FormGroup({
         categoryId: new FormControl<number | null>(null, Validators.required),
         categoryName: new FormControl('', Validators.required),
       })
-    })
-  }
-
-  ngOnInit() {
-    this.categoriesService.getCategory().subscribe(data => {
-      this.categories = data;
     })
   }
 

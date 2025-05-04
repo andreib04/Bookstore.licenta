@@ -51,9 +51,9 @@
           Per page
         </button>
         <ul class="dropdown-menu dropdown-menu-light">
-          <li><a class="dropdown-item active small" href="#">20</a></li>
-          <li><a class="dropdown-item small" href="#">40</a></li>
-          <li><a class="dropdown-item small" href="#">60</a></li>
+          <li><a class="dropdown-item small" (click)="changePerPage(20)">20</a></li>
+          <li><a class="dropdown-item small" (click)="changePerPage(40)">40</a></li>
+          <li><a class="dropdown-item small" (click)="changePerPage(60)">60</a></li>
         </ul>
       </div>
     </div>
@@ -89,24 +89,24 @@
     </div>
   </div>
 
-  <div class="container">
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-end">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-</div>
+  <div class="pagination-container d-flex justify-content-end align-items-center me-5">
+    <button
+      (click)="changePage(currentPage - 1)"
+      [disabled]="currentPage === 1"
+      class="pagination-button prev me-2">
+      &laquo; Previous
+    </button>
+
+    <span class="page-info fw-bold">
+    Page {{ currentPage }} of {{ totalPages }}
+  </span>
+
+    <button
+      (click)="changePage(currentPage + 1)"
+      [disabled]="currentPage >= totalPages"
+      class="pagination-button next ms-2">
+      Next &raquo;
+    </button>
+  </div>
 </div>
 
