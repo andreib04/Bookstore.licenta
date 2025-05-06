@@ -42,6 +42,12 @@ public class BookService : IService<BookDTO>
         var books = await _bookRepository.GetLatestAsync(count);
         return books.ToBookDTOList();
     }
+
+    public async Task<IEnumerable<BookDTO>> GetByCategory(int categoryId)
+    {
+        var books = await _bookRepository.GetByCategory(categoryId);
+        return books.ToBookDTOList();
+    }
     
     public async Task<BookDTO> AddAsync(BookDTO book)
     {

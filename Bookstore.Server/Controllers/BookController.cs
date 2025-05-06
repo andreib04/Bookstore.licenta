@@ -38,38 +38,7 @@ public class BookController : ControllerBase
             };
         }
     }
-
-    [HttpGet("{id}/image")]
-    public async Task<IActionResult> GetBookImage(int id)
-    {
-        var book = await _service.GetByIdAsync(id);
-
-        if (book == null || string.IsNullOrEmpty(book.Image))
-        {
-            return NotFound("Image not found");
-        }
-        
-        var base64String = book.Image;
-        
-        var dataUriPrefix = "data:image/jpeg;base64,";
-        if (base64String.StartsWith(dataUriPrefix))
-        {
-            base64String = base64String.Substring(dataUriPrefix.Length);
-        }
-        
-        base64String = Regex.Replace(base64String, @"[^A-Za-z0-9\+/=]", "");
-
-        try
-        {
-            byte[] imageBytes = Convert.FromBase64String(base64String);
-            
-            return File(imageBytes, "image/jpeg");  
-        }
-        catch (FormatException ex)
-        {
-            return BadRequest("Invalid base64 string: " + ex.Message);
-        }
-    }
+    
 
     [HttpGet("{id}")]
     [AllowAnonymous]
@@ -101,6 +70,21 @@ public class BookController : ControllerBase
         catch (Exception ex)
         {
             throw new Exception($"Something went wrong: {ex.Message}");
+        }
+    }
+
+    [HttpGet("byCategory")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetBookByCategory(int categoryId)
+    {
+        try
+        {
+            var books = await _service.GetByCategory(categoryId);
+            return Ok(books);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
         }
     }
 

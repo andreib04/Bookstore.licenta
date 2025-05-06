@@ -64,7 +64,7 @@
       <div class="col-md-3 category-sidebar small">
         <h5 class="mb-3">Categories</h5>
         <div class="list-group" *ngFor="let cat of allCategories">
-          <a href="#" class="list-group-item list-group-item-action">{{ cat.categoryName }}</a>
+          <a (click)="getByCategory(cat.categoryId)" class="list-group-item list-group-item-action">{{ cat.categoryName }}</a>
         </div>
       </div>
 

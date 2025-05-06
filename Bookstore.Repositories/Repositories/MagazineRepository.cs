@@ -2,6 +2,7 @@ using Bookstore.Server.Data;
 using Bookstore.Server.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Bookstore.Server.Repositories;
 
 public class MagazineRepository : IRepository<Magazine>
@@ -70,13 +71,33 @@ public class MagazineRepository : IRepository<Magazine>
 
     public async Task<IEnumerable<Magazine>> GetLatestAsync(int count)
     {
-        var magazines = await _dbContext.Magazines
-            .OrderByDescending(m => m.ReleaseDate)
-            .Include(i => i.Category)
-            .Take(count)
-            .ToListAsync();
+        try
+        {
+            return await _dbContext.Magazines
+                        .OrderByDescending(m => m.ReleaseDate)
+                        .Include(i => i.Category)
+                        .Take(count)
+                        .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
 
-        return magazines;
+    public async Task<IEnumerable<Magazine>> GetByCategory(int categoryId)
+    {
+        try
+        {
+            return await _dbContext.Magazines
+                .Include(m => m.Category)
+                .Where(m => m.CategoryId == categoryId)
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 
     public async Task<Magazine> AddAsync(Magazine magazine)

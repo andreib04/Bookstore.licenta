@@ -41,6 +41,12 @@ public class MagazineService : IService<MagazineDTO>
         return magazines.ToMagazineDTOList();
     }
 
+    public async Task<IEnumerable<MagazineDTO>> GetByCategory(int categoryId)
+    {
+        var magazines = await _magazineRepository.GetByCategory(categoryId);
+        return magazines.ToMagazineDTOList();   
+    }
+
     public async Task<MagazineDTO> AddAsync(MagazineDTO magazine)
     {
         await _magazineRepository.AddAsync(magazine.ToMagazineModel());

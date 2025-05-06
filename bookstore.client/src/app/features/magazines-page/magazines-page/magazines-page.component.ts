@@ -68,6 +68,19 @@ export class MagazinesPageComponent implements OnInit{
     })
   }
 
+  getByCategory(categoryId: number){
+    this.isLoading = true;
+    this.magazineService.getMagazineByCategory(categoryId).subscribe({
+      next: (data) => {
+        this.allMagazines = data;
+        this.isLoading = false;
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+  }
+
   sortMagazines(sortBy: string, sortOrder: string){
     this.isLoading = true;
     this.activeSort = {sortBy, sortOrder};

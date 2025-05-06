@@ -42,6 +42,19 @@ export class BooksPageComponent implements OnInit {
     })
   }
 
+  getByCategory(categoryId: number){
+    this.isLoading = true;
+    this.bookService.getBookByCategory(categoryId).subscribe({
+      next: (data) => {
+        this.allBooks = data;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
   changePage(page: number){
     this.currentPage = page;
     this.loadBooks();

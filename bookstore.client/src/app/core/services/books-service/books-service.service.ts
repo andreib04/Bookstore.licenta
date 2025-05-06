@@ -25,6 +25,10 @@ export class BooksServiceService {
     return this.http.get<Book[]>(`${this.baseURL}${this.apiPATH}/latest/${count}`);
   }
 
+  getBookByCategory(categoryId: number): Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.baseURL}${this.apiPATH}/byCategory?categoryId=${categoryId}`);
+  }
+
   getSortedBooks(sortBy: string, sortOrder: string): Observable<Book[]>{
     return this.http.get<Book[]>(`${this.baseURL}${this.apiPATH}/sorted?sortBy=${sortBy}&sortOrder=${sortOrder}`);
   }

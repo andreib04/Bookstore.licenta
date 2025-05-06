@@ -70,6 +70,21 @@ public class MagazineController : ControllerBase
             throw new Exception($"Something went wrong {ex.Message}");
         }
     }
+
+    [HttpGet("byCategory")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetMagazineByCategory(int categoryId)
+    {
+        try
+        {
+            var magazines = await _magazineService.GetByCategory(categoryId);
+            return Ok(magazines);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
     
     [HttpGet("sorted")]
     public async Task<IActionResult> GetSortedProducts(string sortBy = "price", string sortOrder = "asc")

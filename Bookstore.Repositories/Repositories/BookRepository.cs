@@ -84,6 +84,21 @@ public class BookRepository : IRepository<Book>
         }
     }
 
+    public async Task<IEnumerable<Book>> GetByCategory(int categoryId)
+    {
+        try
+        {
+            return await _dBContext.Books
+                .Include(b => b.Category)
+                .Where(b => b.CategoryId == categoryId)
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
     public async Task<Book> AddAsync(Book book)
     {
         book.ItemType = "Book";

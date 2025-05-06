@@ -26,6 +26,10 @@ export class MagazinesServiceService {
     return this.http.get<Magazine[]>(`${this.baseURL}${this.apiPATH}/latest/${count}`);
   }
 
+  getMagazineByCategory(categoryId: number): Observable<Magazine[]> {
+    return this.http.get<Magazine[]>(`${this.baseURL}${this.apiPATH}/byCategory?categoryId=${categoryId}`);
+  }
+
   getSortedMagazines(sortBy: string, sortOrder: string): Observable<Magazine[]>{
     return this.http.get<Magazine[]>(`${this.baseURL}${this.apiPATH}/sorted?sortBy=${sortBy}&sortOrder=${sortOrder}`);
   }
