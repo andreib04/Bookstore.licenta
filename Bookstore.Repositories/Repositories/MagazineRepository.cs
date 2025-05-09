@@ -30,29 +30,6 @@ public class MagazineRepository : IRepository<Magazine>
             throw new Exception(ex.Message);
         }
     }
-    
-    public async Task<(IEnumerable<Magazine> item, int totalCount)> GetPaginatedAsync(int page, int perPage)
-    {
-        int skip = (page - 1) * perPage;
-
-        try
-        {
-            var magazines = await _dbContext.Magazines
-                .Where(i => i.ItemType == "Magazine")
-                .Include(i => i.Category)
-                .Skip(skip)
-                .Take(perPage)
-                .ToListAsync();
-            
-            var totalCount = await _dbContext.Magazines.CountAsync();
-            
-            return (magazines, totalCount);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
-    }
 
     public async Task<Magazine> GetByIdAsync(int id)
     {
@@ -85,14 +62,16 @@ public class MagazineRepository : IRepository<Magazine>
         }
     }
 
-    public async Task<IEnumerable<Magazine>> GetByCategory(int categoryId)
+    public async Task<IEnumerable<Magazine>> GetByCategoryAsync(int categoryId)
     {
         try
         {
-            return await _dbContext.Magazines
-                .Include(m => m.Category)
-                .Where(m => m.CategoryId == categoryId)
+            var magazines = await _dbContext.Magazines
+                .Where(i => i.ItemType == "Magazine" && i.CategoryId == categoryId)
+                .Include(i => i.Category)
                 .ToListAsync();
+
+            return magazines;
         }
         catch (Exception ex)
         {

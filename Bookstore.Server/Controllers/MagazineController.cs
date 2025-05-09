@@ -12,12 +12,10 @@ namespace Bookstore.Server.Controllers;
 public class MagazineController : ControllerBase
 {
     private readonly IService<MagazineDTO> _magazineService;
-    private readonly SortingService _sortingService;
 
-    public MagazineController(IService<MagazineDTO> magazineService, SortingService sortingService)
+    public MagazineController(IService<MagazineDTO> magazineService)
     {
         _magazineService = magazineService;
-        _sortingService = sortingService;
     }
 
     [HttpGet]
@@ -71,56 +69,42 @@ public class MagazineController : ControllerBase
         }
     }
 
-    [HttpGet("byCategory")]
+    [HttpGet("sorted-paginated")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetMagazineByCategory(int categoryId)
+    public async Task<IActionResult> GetSortedPaginated(
+        [FromQuery] int page = 1,
+        [FromQuery] int perPage = 20,
+        [FromQuery] string sortBy = "price",
+        [FromQuery] string sortOrder = "desc")
     {
         try
         {
-            var magazines = await _magazineService.GetByCategory(categoryId);
-            return Ok(magazines);
+            var (magazines, totalCount) = await _magazineService.GetSortedPaginatedAsync(page, perPage, sortBy, sortOrder);
+            return Ok(new { items = magazines, totalCount });
         }
         catch (Exception ex)
         {
-            throw new Exception(ex.Message);
+            throw new Exception($"Something went wrong: {ex.Message}");
         }
     }
-    
-    [HttpGet("sorted")]
-    public async Task<IActionResult> GetSortedProducts(string sortBy = "price", string sortOrder = "asc")
-    {
-        var magazines = await _magazineService.GetAllAsync();
 
-        IEnumerable<MagazineDTO> sortedBooks;
-
-        if (sortBy == "price")
-        {
-            sortedBooks = await _sortingService.QuickSortAsync<MagazineDTO>(magazines, m => m.Price, sortOrder);
-        }
-        else if (sortBy == "name")
-        {
-            sortedBooks = await _sortingService.QuickSortAsync<MagazineDTO>(magazines, m => m.Title, sortOrder);
-        }
-        else
-        {
-            sortedBooks = magazines;
-        }
-        
-        return Ok(sortedBooks);
-    }
-
-    [HttpGet("paginated")]
+    [HttpGet("by-category/{categoryId}")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetPaginatedMagazines(int page = 1, int perPage = 20)
+    public async Task<IActionResult> GetSortedPaginatedByCategory(
+        int categoryId,
+        [FromQuery] int page = 1,
+        [FromQuery] int perPage = 20,
+        [FromQuery] string sortBy = "price",
+        [FromQuery] string sortOrder = "desc")
     {
         try
         {
-            var (magazines, totalCount) = await _magazineService.GetPaginatedAsync(page, perPage);
-            return Ok(new { magazines, totalCount });
+            var (magazines, totalCount) = await _magazineService.GetSortedPaginatedByCategoryAsync(categoryId, page, perPage, sortBy, sortOrder);
+            return Ok(new { items = magazines, totalCount });
         }
         catch (Exception ex)
         {
-            throw new Exception(ex.Message);
+            throw new Exception($"Something went wrong: {ex.Message}");
         }
     }
 

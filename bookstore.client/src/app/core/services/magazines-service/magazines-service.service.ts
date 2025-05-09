@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Magazine} from '../../models/magazine';
 import {PaginatedMagazineRes} from '../../models/paginatedMagazineRes';
+import {PaginatedBookRes} from '../../models/paginatedBookRes';
 
 
 @Injectable({
@@ -26,16 +27,26 @@ export class MagazinesServiceService {
     return this.http.get<Magazine[]>(`${this.baseURL}${this.apiPATH}/latest/${count}`);
   }
 
-  getMagazineByCategory(categoryId: number): Observable<Magazine[]> {
-    return this.http.get<Magazine[]>(`${this.baseURL}${this.apiPATH}/byCategory?categoryId=${categoryId}`);
+  getSortedPaginated(page: number, perPage: number, sortBy: string, sortOrder: string): Observable<PaginatedMagazineRes>{
+    return this.http.get<PaginatedMagazineRes>(`${this.baseURL}${this.apiPATH}/sorted-paginated`, {
+      params: {
+        page,
+        perPage,
+        sortBy,
+        sortOrder
+      }
+    });
   }
 
-  getSortedMagazines(sortBy: string, sortOrder: string): Observable<Magazine[]>{
-    return this.http.get<Magazine[]>(`${this.baseURL}${this.apiPATH}/sorted?sortBy=${sortBy}&sortOrder=${sortOrder}`);
-  }
-
-  getPaginatedMagazines(page: number, perPage: number): Observable<PaginatedMagazineRes>{
-    return this.http.get<PaginatedMagazineRes>(`${this.baseURL}${this.apiPATH}/paginated?page=${page}&perPage=${perPage}`);
+  getByCategory(categoryId: number, page: number, perPage: number, sortBy: string, sortOrder: string): Observable<PaginatedMagazineRes>{
+    return this.http.get<PaginatedMagazineRes>(`${this.baseURL}${this.apiPATH}/by-category/${categoryId}`, {
+      params: {
+        page,
+        perPage,
+        sortBy,
+        sortOrder
+      }
+    });
   }
 
   postMagazine(magazine: Magazine): Observable<Magazine> {

@@ -8,10 +8,12 @@ namespace Bookstore.Server.Services;
 public class MagazineService : IService<MagazineDTO>
 {
     private readonly IRepository<Magazine> _magazineRepository;
+    private readonly SortingService _sortingService;
 
-    public MagazineService(IRepository<Magazine> magazineRepository)
+    public MagazineService(IRepository<Magazine> magazineRepository, SortingService sortingService)
     {
         _magazineRepository = magazineRepository;
+        _sortingService = sortingService;
     }
     
     public async Task<IEnumerable<MagazineDTO>> GetAllAsync()
@@ -20,13 +22,26 @@ public class MagazineService : IService<MagazineDTO>
         return list.ToMagazineDTOList();
     }
 
-    public async Task<(IEnumerable<MagazineDTO> item, int totalCount)> GetPaginatedAsync(int page, int perPage)
+    public async Task<(IEnumerable<MagazineDTO> items, int totalCount)> GetSortedPaginatedAsync(int page, int perPage,
+        string sortBy, string sortOrder)
     {
-        var (magazines, totalCount) = await _magazineRepository.GetPaginatedAsync(page, perPage);
+        var allMagazines = await _magazineRepository.GetAllAsync();
+        var allMagazinesDto = allMagazines.Select(m => m.ToMagazineDTO()).ToList();
+        var sortedMagazines = await _sortingService.QuickSortAsync<MagazineDTO>(allMagazinesDto, GetKeySelector(sortBy), sortOrder);
 
-        var magazinesDto = magazines.Select(m => m.ToMagazineDTO()).ToList();
-        
-        return (magazinesDto, totalCount);
+        var paginated = sortedMagazines.Skip((page - 1) * perPage).Take(perPage);
+        return (paginated, sortedMagazines.Count());
+    }
+    
+    public async Task<(IEnumerable<MagazineDTO> items, int totalCount)> GetSortedPaginatedByCategoryAsync(int categoryId, int page, int perPage,
+        string sortBy, string sortOrder)
+    {
+        var filteredMagazines = await _magazineRepository.GetByCategoryAsync(categoryId);
+        var filteredMagazinesDto = filteredMagazines.Select(m => m.ToMagazineDTO()).ToList();
+        var sortedMagazines = await _sortingService.QuickSortAsync<MagazineDTO>(filteredMagazinesDto, GetKeySelector(sortBy), sortOrder);
+
+        var paginated = sortedMagazines.Skip((page - 1) * perPage).Take(perPage);
+        return (paginated, sortedMagazines.Count());
     }
 
     public async Task<MagazineDTO> GetByIdAsync(int id)
@@ -39,12 +54,6 @@ public class MagazineService : IService<MagazineDTO>
     {
         var magazines = await _magazineRepository.GetLatestAsync(count);
         return magazines.ToMagazineDTOList();
-    }
-
-    public async Task<IEnumerable<MagazineDTO>> GetByCategory(int categoryId)
-    {
-        var magazines = await _magazineRepository.GetByCategory(categoryId);
-        return magazines.ToMagazineDTOList();   
     }
 
     public async Task<MagazineDTO> AddAsync(MagazineDTO magazine)
@@ -71,5 +80,15 @@ public class MagazineService : IService<MagazineDTO>
     public async Task DeleteAsync(int id)
     {
         await _magazineRepository.DeleteAsync(id);
+    }
+
+    private Func<MagazineDTO, object> GetKeySelector(string sortBy)
+    {
+        return sortBy.ToLower() switch
+        {
+            "title" => magazine => magazine.Title,
+            "price" => magazine => magazine.Price,
+            _ => magazine => magazine.Id
+        };
     }
 }

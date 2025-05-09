@@ -10,10 +10,12 @@ namespace Bookstore.Server.Services;
 public class BookService : IService<BookDTO>
 {
     private readonly IRepository<Book> _bookRepository;
+    private readonly SortingService _sortingService;
 
-    public BookService(IRepository<Book> bookRepository)
+    public BookService(IRepository<Book> bookRepository, SortingService sortingService)
     {
         _bookRepository = bookRepository;
+        _sortingService = sortingService;
     }
     
     public async Task<IEnumerable<BookDTO>> GetAllAsync()
@@ -22,13 +24,27 @@ public class BookService : IService<BookDTO>
         return list.ToBookDTOList();
     }
 
-    public async Task<(IEnumerable<BookDTO> item, int totalCount)> GetPaginatedAsync(int page, int perPage)
+    public async Task<(IEnumerable<BookDTO> items, int totalCount)> GetSortedPaginatedAsync(int page, int perPage,
+        string sortBy, string sortOrder)
     {
-        var (books, totalCount) = await _bookRepository.GetPaginatedAsync(page, perPage);
+        var allBooks = await _bookRepository.GetAllAsync();
+        var allBooksDto = allBooks.Select(b => b.ToBookDto()).ToList();
+        var sortedBooks = await _sortingService.QuickSortAsync<BookDTO>(allBooksDto, GetKeySelector(sortBy), sortOrder);
+
+        var paginated = sortedBooks.Skip((page - 1) * perPage).Take(perPage);
+        return (paginated, sortedBooks.Count());
+    }
+
+    public async Task<(IEnumerable<BookDTO> items, int totalCount)> GetSortedPaginatedByCategoryAsync(int categoryId,
+        int page, int perPage,
+        string sortBy, string sortOrder)
+    {
+        var filteredBooks = await _bookRepository.GetByCategoryAsync(categoryId);
+        var filteredBooksDto = filteredBooks.Select(b => b.ToBookDto()).ToList();
+        var sortedBooks = await _sortingService.QuickSortAsync<BookDTO>(filteredBooksDto, GetKeySelector(sortBy), sortOrder);
         
-        var booksDto = books.Select(b => b.ToBookDto()).ToList();
-        
-        return (booksDto, totalCount);
+        var paginated = sortedBooks.Skip((page - 1) * perPage).Take(perPage);
+        return (paginated, sortedBooks.Count());
     }
 
     public async Task<BookDTO> GetByIdAsync(int id)
@@ -40,12 +56,6 @@ public class BookService : IService<BookDTO>
     public async Task<IEnumerable<BookDTO>> GetLatestAsync(int count)
     {
         var books = await _bookRepository.GetLatestAsync(count);
-        return books.ToBookDTOList();
-    }
-
-    public async Task<IEnumerable<BookDTO>> GetByCategory(int categoryId)
-    {
-        var books = await _bookRepository.GetByCategory(categoryId);
         return books.ToBookDTOList();
     }
     
@@ -72,5 +82,15 @@ public class BookService : IService<BookDTO>
     public async Task DeleteAsync(int id)
     {
         await _bookRepository.DeleteAsync(id);
+    }
+
+    private Func<BookDTO, object> GetKeySelector(string sortBy)
+    {
+        return sortBy.ToLower() switch
+        {
+            "title" => book => book.Title,
+            "price" => book => book.Price,
+            _ => book => book.Id
+        };
     }
 }

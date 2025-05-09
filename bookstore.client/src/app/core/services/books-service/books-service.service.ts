@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Book} from '../../models/book';
 import {PaginatedBookRes} from '../../models/paginatedBookRes';
@@ -25,16 +25,46 @@ export class BooksServiceService {
     return this.http.get<Book[]>(`${this.baseURL}${this.apiPATH}/latest/${count}`);
   }
 
-  getBookByCategory(categoryId: number): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.baseURL}${this.apiPATH}/byCategory?categoryId=${categoryId}`);
+  getSortedPaginated(page: number, perPage: number, sortBy: string, sortOrder: string): Observable<PaginatedBookRes>{
+    return this.http.get<PaginatedBookRes>(`${this.baseURL}${this.apiPATH}/sorted-paginated`, {
+      params: {
+        page,
+        perPage,
+        sortBy,
+        sortOrder
+      }
+    });
   }
 
-  getSortedBooks(sortBy: string, sortOrder: string): Observable<Book[]>{
-    return this.http.get<Book[]>(`${this.baseURL}${this.apiPATH}/sorted?sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  getByCategory(categoryId: number, page: number, perPage: number, sortBy: string, sortOrder: string): Observable<PaginatedBookRes>{
+    return this.http.get<PaginatedBookRes>(`${this.baseURL}${this.apiPATH}/by-category/${categoryId}`, {
+      params: {
+        page,
+        perPage,
+        sortBy,
+        sortOrder
+      }
+    });
   }
 
-  getPaginatedBooks(page: number, perPage: number): Observable<PaginatedBookRes>{
-    return this.http.get<PaginatedBookRes>(`${this.baseURL}${this.apiPATH}/paginated?page=${page}&perPage=${perPage}`);
+  getProcessedBooks(
+    page: number,
+    perPage: number,
+    sortBy: string,
+    sortOrder: string,
+    categoryId?: number
+  ):Observable<PaginatedBookRes>{
+    let params = new HttpParams()
+      .set('page', page)
+      .set('perPage', perPage)
+      .set('sortBy', sortBy)
+      .set('sortOrder', sortOrder);
+
+    if(categoryId !== undefined && categoryId !== null){
+      params = params.set('categoryId', categoryId);
+    }
+
+    return this.http.get<PaginatedBookRes>(`${this.baseURL}${this.apiPATH}/processed`, {params});
   }
 
   postBook(book: Book): Observable<Book> {

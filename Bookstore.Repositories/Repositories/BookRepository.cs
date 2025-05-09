@@ -30,30 +30,6 @@ public class BookRepository : IRepository<Book>
         }
     }
     
-    public async Task<(IEnumerable<Book> item, int totalCount)> GetPaginatedAsync(int page, int perPage)
-    {
-        int skip = (page - 1) * perPage;
-        
-        try
-        {
-            var books = await _dBContext.Books
-                .Where(i => i.ItemType == "Book")
-                .Include(i => i.Category)
-                .Skip(skip)
-                .Take(perPage)
-                .ToListAsync();
-            
-            var totalCount = await _dBContext.Books.CountAsync();
-            
-            return (books, totalCount);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
-    }
-    
-    
     public async Task<Book> GetByIdAsync(int id)
     {
         var book = await _dBContext.Books
@@ -84,14 +60,16 @@ public class BookRepository : IRepository<Book>
         }
     }
 
-    public async Task<IEnumerable<Book>> GetByCategory(int categoryId)
+    public async Task<IEnumerable<Book>> GetByCategoryAsync(int categoryId)
     {
         try
         {
-            return await _dBContext.Books
-                .Include(b => b.Category)
-                .Where(b => b.CategoryId == categoryId)
+            var books = await _dBContext.Books
+                .Where(i => i.ItemType == "Book" && i.CategoryId == categoryId)
+                .Include(i => i.Category)
                 .ToListAsync();
+
+            return books;
         }
         catch (Exception ex)
         {

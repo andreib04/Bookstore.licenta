@@ -1,5 +1,3 @@
-using System.Text.RegularExpressions;
-using Bookstore.Server.Data.Models;
 using Bookstore.Server.DTO;
 using Bookstore.Server.Services;
 using Bookstore.Services.Constants;
@@ -13,12 +11,10 @@ namespace Bookstore.Server.Controllers;
 public class BookController : ControllerBase
 {
     private readonly IService<BookDTO> _service;
-    private readonly SortingService _sortingService;
 
-    public BookController(IService<BookDTO> service, SortingService sortingService)
+    public BookController(IService<BookDTO> service)
     {
         _service = service;
-        _sortingService = sortingService;
     }
 
     [HttpGet]
@@ -73,57 +69,46 @@ public class BookController : ControllerBase
         }
     }
 
-    [HttpGet("byCategory")]
+    [HttpGet("sorted-paginated")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetBookByCategory(int categoryId)
+    public async Task<IActionResult> GetSortedPaginated(
+        [FromQuery] int page = 1,
+        [FromQuery] int perPage = 20,
+        [FromQuery] string sortBy = "price",
+        [FromQuery] string sortOrder = "desc")
     {
         try
         {
-            var books = await _service.GetByCategory(categoryId);
-            return Ok(books);
+            var (books, totalCount) = await _service.GetSortedPaginatedAsync(page, perPage, sortBy, sortOrder);
+            return Ok(new
+            {
+                items = books, 
+                totalCount
+            });
         }
         catch (Exception ex)
         {
-            throw new Exception(ex.Message);
+            throw new Exception($"Something went wrong: {ex.Message}");
         }
     }
 
-    [HttpGet("sorted")]
+    [HttpGet("by-category/{categoryId}")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetSortedProducts(string sortBy = "price", string sortOrder = "asc")
-    {
-        var books = await _service.GetAllAsync();
-
-        IEnumerable<BookDTO> sortedBooks;
-
-        if (sortBy == "price")
-        {
-            sortedBooks = await _sortingService.QuickSortAsync<BookDTO>(books, b => b.Price, sortOrder);
-        }
-        else if (sortBy == "name")
-        {
-            sortedBooks = await _sortingService.QuickSortAsync<BookDTO>(books, b => b.Title, sortOrder);
-        }
-        else
-        {
-            sortedBooks = books;
-        }
-        
-        return Ok(sortedBooks);
-    }
-
-    [HttpGet("paginated")]
-    [AllowAnonymous]
-    public async Task<IActionResult> GetPaginatedBooks(int page, int perPage, string sortBy, string sortOrder)
+    public async Task<IActionResult> GetSortedPaginatedByCategory(
+        int categoryId,
+        [FromQuery] int page = 1,
+        [FromQuery] int perPage = 20,
+        [FromQuery] string sortBy = "price",
+        [FromQuery] string sortOrder = "desc")
     {
         try
         {
-            var (books, totalCount) = await _service.GetPaginatedAsync(page, perPage);
-            return Ok(new { books, totalCount });
+            var (books, totalCount) = await _service.GetSortedPaginatedByCategoryAsync(categoryId, page, perPage, sortBy, sortOrder);
+            return Ok(new { items = books, totalCount });
         }
         catch (Exception ex)
         {
-            throw new Exception(ex.Message);
+            throw new Exception($"Something went wrong: {ex.Message}");
         }
     }
 

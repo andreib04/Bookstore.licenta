@@ -34,6 +34,13 @@
   padding: 1px;
 }
 
+.categories-title{
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  padding: 10px;
+}
+
 .pagination-container {
   display: flex;
   justify-content: center;

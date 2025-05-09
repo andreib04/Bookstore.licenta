@@ -1,6 +1,6 @@
 import {Magazine} from './magazine';
 
 export interface PaginatedMagazineRes{
-  magazines: Magazine[];
+  items: Magazine[];
   totalCount: number;
 }

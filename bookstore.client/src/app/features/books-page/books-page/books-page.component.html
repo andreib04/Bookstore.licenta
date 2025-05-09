@@ -62,25 +62,27 @@
   <div class="container mt-4">
     <div class="row">
       <div class="col-md-3 category-sidebar small">
-        <h5 class="mb-3">Categories</h5>
+        <h5 [class.active]="!categoryId" (click)="selectCategory(undefined)" class="mb-3 categories-title text-white">Categories</h5>
         <div class="list-group" *ngFor="let cat of allCategories">
-          <a (click)="getByCategory(cat.categoryId)" class="list-group-item list-group-item-action">{{ cat.categoryName }}</a>
+          <a [class.active]="categoryId === cat.categoryId"
+             (click)="selectCategory(cat.categoryId)"
+             class="list-group-item list-group-item-action pointer">{{ cat.categoryName }}</a>
         </div>
       </div>
 
-      <div class="col-md-9 books d-flex flex-wrap gap-3">
-        <div class="card" *ngFor="let book of allBooks">
+      <div class="col-md-9 books d-flex flex-wrap gap-3 align-items-start h-100">
+        <div class="card" style="width: 20rem" *ngFor="let book of allBooks">
           <img class="card-image w-100 object-fit-cover pointer"
                [src]="book.image"
                alt="Image not found"
                (error)="book.image = fallbackUrl"
                routerLink="/book/{{book.id}}">
-          <div class="card-body">
+          <div class="card-body overflow-hidden">
             <div class="firstLine d-flex justify-content-between">
-              <p class="firstLine-item fw-bold pointer" routerLink="/book/{{book.id}}">{{ book.title }}</p>
+              <p class="firstLine-item fw-bold pointer text-truncate mb-0" routerLink="/book/{{book.id}}">{{ book.title }}</p>
               <p class="firstLine-item fw-bold pointer" routerLink="/book/{{book.id}}">${{ book.price }}</p>
             </div>
-            <span class="author pointer" routerLink="/book/{{book.id}}">{{ book.author }}</span><br>
+            <span class="author pointer text-truncate" routerLink="/book/{{book.id}}">{{ book.author }}</span><br>
             <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
           </div>
         </div>

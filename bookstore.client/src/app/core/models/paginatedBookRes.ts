@@ -1,6 +1,6 @@
 import {Book} from './book';
 
 export interface PaginatedBookRes{
-  books: Book[];
+  items: Book[];
   totalCount: number;
 }
