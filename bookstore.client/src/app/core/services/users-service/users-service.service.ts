@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../../models/user';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,16 @@ export class UsersServiceService {
 
    getUsers(): Observable<User[]>{
     return this.http.get<User[]>(`${this.baseURL}${this.apiPATH}`);
+  }
+
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.http.get<{ exists: boolean }>(`${this.baseURL}${this.apiPATH}/check-email`, {
+      params: { email }
+    }).pipe(
+      map(response => {
+        return response.exists;
+      })
+    );
   }
 
   getOneUser(id: number): Observable<User> {

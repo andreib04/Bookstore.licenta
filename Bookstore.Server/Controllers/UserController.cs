@@ -60,6 +60,20 @@ public class UserController : ControllerBase
       }
    }
 
+   [HttpGet("check-email")]
+   public async Task<IActionResult> CheckEmail(string email)
+   {
+      try
+      {
+         var exists = await _userService.EmailExistsAsync(email);
+         return Ok(new {exists});
+      }
+      catch (Exception ex)
+      {
+         throw new Exception(ex.Message);
+      }
+   }
+
    [HttpGet("{id}")]
    [AllowAnonymous]
    public async Task<IActionResult> GetUserById(int id)

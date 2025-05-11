@@ -65,6 +65,11 @@ public class UserService : IUserService
         return list;
     }
 
+    public Task<bool> EmailExistsAsync(string email)
+    {
+        return _userRepository.EmailExistsAsync(email);
+    }
+
     public async Task<User?> GetUserById(string id)
     {
         var user = await _userRepository.GetUserById(id);

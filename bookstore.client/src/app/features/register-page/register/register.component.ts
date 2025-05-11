@@ -3,6 +3,7 @@ import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, 
 import {User} from '../../../core/models/user';
 import {UsersServiceService} from '../../../core/services/users-service/users-service.service';
 import { Router} from '@angular/router';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,13 @@ export class RegisterComponent {
     this.form = new FormGroup({
       firstName: new FormControl<string>('', [Validators.required]),
       lastName: new FormControl<string>('', [Validators.required]),
-      email: new FormControl<string>('', [Validators.required, Validators.email]),
+      email: new FormControl<string>(
+        '',
+        {
+          validators: [Validators.required, Validators.email],
+          asyncValidators: [this.emailExistsValidator(this.userService)],
+          updateOn: 'blur'
+        }),
       password: new FormControl<string>('', [
         Validators.required,
         Validators.minLength(8),
@@ -36,6 +43,14 @@ export class RegisterComponent {
 
     return password && confirmPassword && password !== confirmPassword ? {passwordmatcherror: true} : null;
   };
+
+  emailExistsValidator(userService: UsersServiceService){
+    return (control: AbstractControl) => {
+      return userService.checkEmailExists(control.value).pipe(
+        map(exists => exists ? { emailTaken: true } : null)
+      );
+    }
+  }
 
   passwordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const password = control.value;
