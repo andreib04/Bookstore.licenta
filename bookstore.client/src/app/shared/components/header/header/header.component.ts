@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AuthService} from '../../../../core/services/auth/auth.service';
-import {User} from '../../../../core/models/user';
+import {AuthService} from '../../../../core/services/auth.service';
+import {CartService} from '../../../../core/services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +11,15 @@ import {User} from '../../../../core/models/user';
 export class HeaderComponent implements OnInit {
   isLoggedIn$!: Observable<boolean>;
   currentUser$!: Observable<any>;
+  cartCount: number = 0;
 
-  constructor(protected authService: AuthService) {}
+  constructor(protected authService: AuthService, private cartService: CartService) {}
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn();
     this.currentUser$ = this.authService.getCurrentUser();
+
+    this.cartService.cartCount$.subscribe(count => {
+      this.cartCount = count;
+    })
   }
 }

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {MagazinesServiceService} from '../../../../../../core/services/magazines-service/magazines-service.service';
+import {MagazinesServiceService} from '../../../../../../core/services/magazines-service.service';
 import {Location} from '@angular/common';
-import {CategoriesServiceService} from '../../../../../../core/services/categories-service/categories-service.service';
+import {CategoriesServiceService} from '../../../../../../core/services/categories-service.service';
 import {Category} from '../../../../../../core/models/category';
 import {Magazine} from '../../../../../../core/models/magazine';
 

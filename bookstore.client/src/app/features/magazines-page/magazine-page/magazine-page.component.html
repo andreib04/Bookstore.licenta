@@ -55,7 +55,7 @@
 
       <div class="cart-btn d-flex justify-content-end align-items-center mt-4">
         <span class="me-3 fs-3 align-items-center">${{ magazine.price }}</span>
-        <button class="btn btn-outline-dark fs-4">Add to cart</button>
+        <button (click)="addToCart(magazine)" class="btn btn-outline-dark fs-4">Add to cart</button>
       </div>
     </div>
 

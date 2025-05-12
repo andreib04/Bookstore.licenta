@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Magazine} from '../../models/magazine';
-import {PaginatedMagazineRes} from '../../models/paginatedMagazineRes';
-import {PaginatedBookRes} from '../../models/paginatedBookRes';
+import {Magazine} from '../models/magazine';
+import {PaginatedMagazineRes} from '../models/paginatedMagazineRes';
 
 
 @Injectable({

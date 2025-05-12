@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {User} from '../../../core/models/user';
-import {UsersServiceService} from '../../../core/services/users-service/users-service.service';
+import {UsersServiceService} from '../../../core/services/users-service.service';
 import { Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 

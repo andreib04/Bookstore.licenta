@@ -10,7 +10,6 @@
   <ItemGroup>
     <Folder Include="src\app\core\guards\" />
     <Folder Include="src\app\core\interceptors\" />
-    <Folder Include="src\app\core\services\auth\" />
     <Folder Include="src\app\features\admin-panel\admin-panel\pages\" />
     <Folder Include="src\app\features\books-page\" />
     <Folder Include="src\app\features\cart-page\" />

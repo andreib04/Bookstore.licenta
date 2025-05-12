@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {BooksServiceService} from '../../../../../../core/services/books-service/books-service.service';
-import {Router} from '@angular/router';
+import {BooksServiceService} from '../../../../../../core/services/books-service.service';
 import {Book} from '../../../../../../core/models/book';
 import {Location} from '@angular/common';
 import {Category} from '../../../../../../core/models/category';
-import {CategoriesServiceService} from '../../../../../../core/services/categories-service/categories-service.service';
+import {CategoriesServiceService} from '../../../../../../core/services/categories-service.service';
 
 @Component({
   selector: 'app-add-book',

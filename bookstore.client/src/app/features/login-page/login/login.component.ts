@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {AuthService} from '../../../core/services/auth/auth.service';
+import {AuthService} from '../../../core/services/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserLogin} from '../../../core/models/userLogin';

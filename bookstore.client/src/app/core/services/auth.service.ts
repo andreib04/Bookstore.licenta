@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, tap} from 'rxjs';
-import {User} from '../../models/user';
+import {User} from '../models/user';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {UserLogin} from '../../models/userLogin';
+import {UserLogin} from '../models/userLogin';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,8 @@ export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
   private currentUser = new BehaviorSubject<User | null>(this.getUserFromStorage());
+
+  isLoggedIn$ = this.loggedIn.asObservable();
   constructor(private http: HttpClient, private router: Router) { }
 
   baseURL = "https://localhost:44305/";
@@ -49,6 +51,10 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
+  setLoggedIn(status: boolean){
+    this.loggedIn.next(status);
+  }
+
   getCurrentUser(): Observable<User | null>{
     return this.currentUser.asObservable();
   }
@@ -69,10 +75,6 @@ export class AuthService {
       console.error("Invalid JSON in localStorage", error);
       return null;
     }
-  }
-
-  getSomething(): User | null {
-    return this.getUserFromStorage();
   }
 
 

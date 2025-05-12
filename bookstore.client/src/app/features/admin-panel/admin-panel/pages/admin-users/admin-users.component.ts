@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {User} from '../../../../../core/models/user';
-import {UsersServiceService} from '../../../../../core/services/users-service/users-service.service';
+import {UsersServiceService} from '../../../../../core/services/users-service.service';
 
 @Component({
   selector: 'app-admin-users',

@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../../core/services/auth/auth.service';
+import {AuthService} from '../../../core/services/auth.service';
 import {User} from '../../../core/models/user';
-import {BooksServiceService} from '../../../core/services/books-service/books-service.service';
-import {MagazinesServiceService} from '../../../core/services/magazines-service/magazines-service.service';
+import {BooksServiceService} from '../../../core/services/books-service.service';
+import {MagazinesServiceService} from '../../../core/services/magazines-service.service';
 import {Book} from '../../../core/models/book';
 import {Magazine} from '../../../core/models/magazine';
+import {CartService} from '../../../core/services/cart.service';
+import {CartItem} from '../../../core/models/cartItem';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +23,8 @@ export class HomeComponent implements OnInit{
 
   constructor(public authService: AuthService,
               private booksService: BooksServiceService,
-              private magazinesService: MagazinesServiceService) {}
+              private magazinesService: MagazinesServiceService,
+              private cartService: CartService) {}
 
   ngOnInit() {
     this.getCurrentUser();
@@ -44,6 +47,18 @@ export class HomeComponent implements OnInit{
   getLatestMagazines(){
     this.magazinesService.getLatestMagazines().subscribe(magazines => {
       this.latestMagazines = magazines;
+    })
+  }
+
+  addToCart(product: Book | Magazine, type: 'Book' | 'Magazine'){
+    const item: CartItem = {
+      productId: product.id,
+      productType: type,
+      quantity: 1
+    } as CartItem;
+
+    this.cartService.addToCart(item).subscribe(() => {
+      console.log("Product added to cart!")
     })
   }
 }

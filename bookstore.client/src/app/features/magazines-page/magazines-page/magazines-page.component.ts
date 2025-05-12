@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Magazine} from '../../../core/models/magazine';
 import {Category} from '../../../core/models/category';
-import {MagazinesServiceService} from '../../../core/services/magazines-service/magazines-service.service';
-import {CategoriesServiceService} from '../../../core/services/categories-service/categories-service.service';
+import {MagazinesServiceService} from '../../../core/services/magazines-service.service';
+import {CategoriesServiceService} from '../../../core/services/categories-service.service';
+import {Book} from '../../../core/models/book';
+import {CartItem} from '../../../core/models/cartItem';
+import {CartService} from '../../../core/services/cart.service';
 
 @Component({
   selector: 'app-magazines-page',
@@ -27,7 +30,7 @@ export class MagazinesPageComponent implements OnInit{
 
   categoryId?: number = undefined;
 
-  constructor(private magazineService: MagazinesServiceService, private categoriesService: CategoriesServiceService){}
+  constructor(private magazineService: MagazinesServiceService, private categoriesService: CategoriesServiceService, private cartService: CartService){}
 
   ngOnInit() {
     this.getAllCategories();
@@ -76,6 +79,18 @@ export class MagazinesPageComponent implements OnInit{
 
   get totalPages(){
     return Math.ceil(this.totalCount / this.perPage);
+  }
+
+  addToCart(magazine: Magazine){
+    const item: CartItem = {
+      productId: magazine.id,
+      productType: 'Magazine',
+      quantity: 1
+    } as CartItem;
+
+    this.cartService.addToCart(item).subscribe(() => {
+      console.log("Product added to cart!")
+    })
   }
 
   getAllCategories(){

@@ -26,6 +26,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DatabaseContext>(options =>
 				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddTransient<ICartService, CartService>();
+
 builder.Services.AddScoped<IRepository<Book>, BookRepository>();
 builder.Services.AddTransient<IService<BookDTO>, BookService>();
 builder.Services.AddScoped<SortingService>();

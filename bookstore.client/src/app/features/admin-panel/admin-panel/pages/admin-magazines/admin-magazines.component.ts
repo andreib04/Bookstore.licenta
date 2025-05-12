@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MagazinesServiceService} from '../../../../../core/services/magazines-service/magazines-service.service';
+import {MagazinesServiceService} from '../../../../../core/services/magazines-service.service';
 import {Magazine} from '../../../../../core/models/magazine';
 import {Router} from '@angular/router';
 

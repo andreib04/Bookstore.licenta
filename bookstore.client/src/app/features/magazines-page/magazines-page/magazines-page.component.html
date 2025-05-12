@@ -82,7 +82,7 @@
               <p class="firstLine-item fw-bold pointer" routerLink="/magazine/{{magazine.id}}">${{ magazine.price }}</p>
             </div>
             <span class="author pointer text-truncate" routerLink="/magazine/{{magazine.id}}">{{ magazine.publisher }}</span><br>
-            <button class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
+            <button (click)="addToCart(magazine)" class="btn btn-outline-dark mt-2">Add <i class="bi bi-bag"></i></button>
           </div>
         </div>
 

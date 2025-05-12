@@ -30,8 +30,19 @@
     <div class="collapse navbar-collapse" id="rightSide">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item align-items-center d-flex">
-          <a class="cart-link" routerLink="/cart"><i class="bi bi-cart4"></i></a>
+          <a class="cart-link position-relative" routerLink="/cart">
+            <i class="bi bi-cart4 fs-4"></i>
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge bg-danger text-white d-flex align-items-center justify-content-center"
+              style="font-size: 0.75rem; width: 20px; height: 20px; border-radius: 50%;"
+              *ngIf="cartCount > 0">
+
+              {{ cartCount }}
+    </span>
+          </a>
         </li>
+
+
         <li class="nav-item" *ngIf="!(isLoggedIn$ | async)">
           <a class="nav-link" routerLink="/login">Sign In</a>
         </li>

@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {BooksServiceService} from '../../../core/services/books-service/books-service.service';
+import {BooksServiceService} from '../../../core/services/books-service.service';
 import {Book} from '../../../core/models/book';
-import {CategoriesServiceService} from '../../../core/services/categories-service/categories-service.service';
+import {CategoriesServiceService} from '../../../core/services/categories-service.service';
 import {Category} from '../../../core/models/category';
+import {CartService} from '../../../core/services/cart.service';
+import {CartItem} from '../../../core/models/cartItem';
 
 @Component({
   selector: 'app-books-page',
@@ -26,7 +28,9 @@ export class BooksPageComponent implements OnInit {
 
   categoryId?: number = undefined;
 
-  constructor(private bookService: BooksServiceService, private categoriesService: CategoriesServiceService){}
+  constructor(private bookService: BooksServiceService,
+              private categoriesService: CategoriesServiceService,
+              private cartService: CartService){}
 
   ngOnInit() {
     this.getAllCategories();
@@ -75,6 +79,18 @@ export class BooksPageComponent implements OnInit {
 
   get totalPages(){
     return Math.ceil(this.totalCount / this.perPage);
+  }
+
+  addToCart(book: Book){
+    const item: CartItem = {
+      productId: book.id,
+      productType: 'Book',
+      quantity: 1
+    } as CartItem;
+
+    this.cartService.addToCart(item).subscribe(() => {
+      console.log("Product added to cart!")
+    })
   }
 
   getAllCategories(){

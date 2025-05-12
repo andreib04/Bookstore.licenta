@@ -5,8 +5,19 @@
 .cart-link{
   text-decoration: none !important;
   color: black;
-  font-size: 20px;
+  font-size: 24px;
   margin-right: 10px;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
 }
 
 .dropdown-item:hover{

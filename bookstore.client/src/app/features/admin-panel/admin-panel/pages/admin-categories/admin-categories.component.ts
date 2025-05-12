@@ -1,8 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CategoriesServiceService} from '../../../../../core/services/categories-service/categories-service.service';
+import {CategoriesServiceService} from '../../../../../core/services/categories-service.service';
 import {Category} from '../../../../../core/models/category';
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-admin-categories',

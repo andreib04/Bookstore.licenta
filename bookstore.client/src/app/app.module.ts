@@ -17,7 +17,7 @@ import { RegisterComponent } from './features/register-page/register/register.co
 import { CartPageComponent } from './features/cart-page/cart-page/cart-page.component';
 import { FooterComponent } from './shared/components/footer/footer/footer.component';
 import {CommonModule} from '@angular/common';
-import {AuthService} from './core/services/auth/auth.service';
+import {AuthService} from './core/services/auth.service';
 import { BookPageComponent } from './features/books-page/book-page/book-page.component';
 import { MagazinePageComponent } from './features/magazines-page/magazine-page/magazine-page.component';
 
