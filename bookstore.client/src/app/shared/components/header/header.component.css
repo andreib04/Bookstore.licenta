@@ -9,6 +9,17 @@
   margin-right: 10px;
 }
 
+.nav-link:hover{
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.isActive{
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .bookstore{
   background-color: rgba(0, 0, 0, 0.91);
   color: white;

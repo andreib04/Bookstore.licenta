@@ -17,5 +17,4 @@ export class AppComponent {
         this.isAdminPage = event.url.startsWith('/admin');
       });
   }
-
 }

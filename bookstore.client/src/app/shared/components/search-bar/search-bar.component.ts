@@ -1,6 +1,6 @@
 import {Component, ElementRef, HostListener} from '@angular/core';
 import {debounceTime, Subject} from 'rxjs';
-import {SearchService} from '../../../../core/services/search.service';
+import {SearchService} from '../../../core/services/search.service';
 import {Router} from '@angular/router';
 
 @Component({
