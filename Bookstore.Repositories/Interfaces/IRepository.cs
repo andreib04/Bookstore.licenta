@@ -8,8 +8,10 @@ namespace Bookstore.Server.Repositories
 		Task<T> GetByIdAsync(int id);
 		Task<IEnumerable<T>> GetLatestAsync(int count);
 		Task<IEnumerable<T>> GetByCategoryAsync(int categoryId);
+		SortedList<string, List<T>> GetSortedByName();
 		Task<T> AddAsync(T entity);
 		Task UpdateAsync(T entity);
 		Task DeleteAsync(int id);
+		Task UpdateStockAsync(int productId, int quantity);
 	}
 }

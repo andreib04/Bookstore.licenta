@@ -20,8 +20,19 @@ public class CartController : ControllerBase
 
     [HttpGet]
     [AllowAnonymous]
-    public async Task<IActionResult> GetCart() => Ok(await _cartService.GetCartItemsAsync(GetUserId()));
-    
+    public async Task<IActionResult> GetCart()
+    {
+        try
+        {
+            var cart = await _cartService.GetCartItemsAsync(GetUserId());
+            return Ok(cart);
+        }
+        catch(Exception ex)
+        {
+            throw new Exception($"Something went wrong! {ex.Message}");
+        }
+    }
+
     [HttpPost("add")]
     [AllowAnonymous]
     public async Task<IActionResult> AddToCart([FromBody] CartItem item)

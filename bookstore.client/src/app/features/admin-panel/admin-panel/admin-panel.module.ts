@@ -17,6 +17,7 @@ import {AuthInterceptor} from '../../../core/interceptors/auth.interceptor';
 import { GenericEditComponent } from './pages/generic-edit/generic-edit.component';
 import { AddBookComponent } from './pages/admin-books/add-book/add-book.component';
 import { AddMagazineComponent } from './pages/admin-magazines/add-magazine/add-magazine.component';
+import { AdminOrdersComponent } from './pages/admin-orders/admin-orders.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AddMagazineComponent } from './pages/admin-magazines/add-magazine/add-m
     EditUserPageComponent,
     GenericEditComponent,
     AddBookComponent,
-    AddMagazineComponent
+    AddMagazineComponent,
+    AdminOrdersComponent
   ],
     imports: [
         CommonModule,

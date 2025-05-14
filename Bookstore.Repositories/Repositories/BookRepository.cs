@@ -29,6 +29,29 @@ public class BookRepository : IRepository<Book>
             throw new Exception(ex.Message);
         }
     }
+
+    public SortedList<string, List<Book>> GetSortedByName()
+    {
+        var books = _dBContext.Books
+            .AsNoTracking()
+            .OrderBy(b => b.Title)
+            .ToList();
+        
+        var sorted = new SortedList<string, List<Book>>();
+        foreach (var book in books)
+        {
+            var titleKey = book.Title.ToLower();
+
+            if (!sorted.ContainsKey(titleKey))
+            {
+                sorted[titleKey] = new List<Book>();
+            }
+            
+            sorted[titleKey].Add(book);
+        }
+
+        return sorted;
+    }
     
     public async Task<Book> GetByIdAsync(int id)
     {
@@ -98,5 +121,15 @@ public class BookRepository : IRepository<Book>
         _dBContext.Books.Remove(book);
         await _dBContext.SaveChangesAsync();
 
+    }
+
+    public async Task UpdateStockAsync(int productId, int quantity)
+    {
+        var book = await _dBContext.Books.FindAsync(productId);
+        if (book != null && book.Stock >= quantity)
+        {
+            book.Stock -= quantity;
+            await _dBContext.SaveChangesAsync();
+        }
     }
 }

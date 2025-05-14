@@ -129,4 +129,8 @@ export class CartService {
       });
     }
   }
+
+  clearCart(){
+    localStorage.removeItem(this.cartKey);
+  }
 }

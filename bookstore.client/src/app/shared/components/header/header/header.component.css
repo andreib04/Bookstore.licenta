@@ -9,6 +9,13 @@
   margin-right: 10px;
 }
 
+.bookstore{
+  background-color: rgba(0, 0, 0, 0.91);
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 .badge {
   position: absolute;
   top: -5px;

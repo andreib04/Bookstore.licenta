@@ -1,7 +1,6 @@
 using System.Security.Claims;
 using Bookstore.Server.Data.Models;
 using Bookstore.Server.Services;
-using Bookstore.Server.Validations;
 using Bookstore.Services.Constants;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;

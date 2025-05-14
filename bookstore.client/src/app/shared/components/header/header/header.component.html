@@ -1,5 +1,5 @@
 <nav class="fs-6 navbar navbar-expand-lg navbar-light d-flex  justify-content-between m-0">
-  <a class="navbar-brand" href="#">BOOKSTORE</a>
+  <a class="navbar-brand bookstore" routerLink="/home">BOOKLYZONE</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -15,8 +15,6 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/magazines" routerLinkActive="active">Magazines</a>
-      </li><li class="nav-item">
-        <a class="nav-link" routerLink="/categories" routerLinkActive="active">Categories</a>
       </li>
     </ul>
   </div>
@@ -61,7 +59,7 @@
             </button>
 
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item small" href="#">Profile</a></li>
+              <li><a class="dropdown-item small" routerLink="/profile">Profile</a></li>
               <li><button class="dropdown-item small" (click)="authService.logout()">Logout</button></li>
             </ul>
           </div>

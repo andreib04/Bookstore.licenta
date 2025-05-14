@@ -1,0 +1,33 @@
+<h3>Orders</h3>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Order #</th>
+      <th scope="col">User Id</th>
+      <th scope="col">Address</th>
+      <th scope="col">City</th>
+      <th scope="col">Postal Code</th>
+      <th scope="col">Country</th>
+      <th scope="col">Status</th>
+      <th scope="col">Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders">
+      <th scope="row">{{order.id}}</th>
+      <td>{{order.userId}}</td>
+      <td>{{order.address}}</td>
+      <td>{{order.city}}</td>
+      <td>{{order.postalCode}}</td>
+      <td>{{order.country}}</td>
+      <td>{{order.status}}</td>
+      <td>{{order.total | currency}}</td>
+      <td>
+        <button class="btn btn-danger ms-2"><i class="bi bi-trash-fill"></i></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

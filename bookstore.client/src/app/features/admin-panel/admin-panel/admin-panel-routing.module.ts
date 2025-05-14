@@ -13,6 +13,7 @@ import {EditUserPageComponent} from './pages/admin-users/edit-user-page/edit-use
 import {GenericEditComponent} from './pages/generic-edit/generic-edit.component';
 import {AddBookComponent} from './pages/admin-books/add-book/add-book.component';
 import {AddMagazineComponent} from './pages/admin-magazines/add-magazine/add-magazine.component';
+import {AdminOrdersComponent} from './pages/admin-orders/admin-orders.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,7 @@ const routes: Routes = [
     path: '',
     component: AdminPanelComponent,
     children:[
-      { path: 'dashboard', component: AdmindashboardComponent},
+      //{ path: 'dashboard', component: AdmindashboardComponent},
 
       {path: 'books', component: AdminBooksComponent},
           { path: 'add-book', component: AddBookComponent },
@@ -36,7 +37,9 @@ const routes: Routes = [
           {path: 'add-user', component: AddUserPageComponent},
           {path: 'edit-user/:id', component: EditUserPageComponent},
 
-      {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+      { path: 'orders', component: AdminOrdersComponent },
+
+      {path: '', redirectTo: 'books', pathMatch: 'full'},
     ]
   }
 ];

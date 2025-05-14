@@ -1,0 +1,24 @@
+<div class="container mt-4" *ngIf="user">
+  <h2>{{ user.lastName }} {{ user.firstName }}'s Profile</h2>
+
+  <h4 class="mt-4">My order History</h4>
+  <div *ngIf="orders.length === 0">No orders yet.</div>
+  <table class="table" *ngIf="orders.length > 0">
+    <thead>
+    <tr>
+      <th>Order #</th>
+      <th>Date</th>
+      <th>Total</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.id }}</td>
+      <td>{{ order.createdAt | date:'short' }}</td>
+      <td>{{ order.total | currency }}</td>
+      <td>{{ order.status }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

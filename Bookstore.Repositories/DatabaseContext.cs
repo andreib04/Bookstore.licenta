@@ -12,6 +12,8 @@ namespace Bookstore.Server.Data
 		public DbSet<Magazine> Magazines {  get; set; }
 		public DbSet<User> Users { get; set; }
 		public DbSet<CartItem> CartItems { get; set; }
+		public DbSet<Order> Orders { get; set; }
+		public DbSet<OrderItem> OrderItems { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -24,6 +26,14 @@ namespace Bookstore.Server.Data
 				.HasOne(m => m.Category)
 				.WithMany(c => c.Magazines)
 				.HasForeignKey(m => m.CategoryId);
+
+			modelBuilder.Entity<Order>()
+				.Property(o => o.Total)
+				.HasPrecision(18, 2);
+
+			modelBuilder.Entity<OrderItem>()
+				.Property(oi => oi.Price)
+				.HasPrecision(18, 2);
 		}
 	}
 }

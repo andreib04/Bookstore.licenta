@@ -3,6 +3,24 @@
   margin: auto auto;
 }
 
+.list-group-item:hover{
+  background-color: lightgray;
+}
+
+.suggestion-list{
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
 .search-bar .input-group {
   border-radius: 30px;
   overflow: hidden;

@@ -6,10 +6,7 @@ using Bookstore.Server.DTO;
 using Bookstore.Server.DTOs;
 using Bookstore.Server.Repositories;
 using Bookstore.Server.Services;
-using Bookstore.Server.Validations;
-using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -32,6 +29,7 @@ builder.Services.AddTransient<ICartService, CartService>();
 builder.Services.AddScoped<IRepository<Book>, BookRepository>();
 builder.Services.AddTransient<IService<BookDTO>, BookService>();
 builder.Services.AddScoped<SortingService>();
+builder.Services.AddScoped<SearchService>();
 
 builder.Services.AddScoped<IRepository<Magazine>, MagazineRepository>();
 builder.Services.AddTransient<IService<MagazineDTO>, MagazineService>();
@@ -42,7 +40,8 @@ builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
 
-builder.Services.AddTransient<AbstractValidator<User>, UserValidator>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<IOrderService, OrderService>();
 
 builder.Services.ConfigureAuthorization();
 	

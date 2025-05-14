@@ -31,6 +31,29 @@ public class MagazineRepository : IRepository<Magazine>
         }
     }
 
+    public SortedList<string, List<Magazine>> GetSortedByName()
+    {
+        var magazines = _dbContext.Magazines
+            .AsNoTracking()
+            .OrderBy(m => m.Title)
+            .ToList();
+
+        var sorted = new SortedList<string, List<Magazine>>();
+        foreach (var magazine in magazines)
+        {
+            var titleKey = magazine.Title.ToLower();
+
+            if (!sorted.ContainsKey(titleKey))
+            {
+                sorted[titleKey] = new List<Magazine>();
+            }
+            
+            sorted[titleKey].Add(magazine);
+        }
+
+        return sorted;
+    }
+
     public async Task<Magazine> GetByIdAsync(int id)
     {
         var magazine = await _dbContext.Magazines
@@ -100,5 +123,15 @@ public class MagazineRepository : IRepository<Magazine>
         
         _dbContext.Magazines.Remove(magazine);
         await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task UpdateStockAsync(int productId, int quantity)
+    {
+        var magazine = await _dbContext.Magazines.FindAsync(productId);
+        if (magazine != null && magazine.Stock >= quantity)
+        {
+            magazine.Stock -= quantity;
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
