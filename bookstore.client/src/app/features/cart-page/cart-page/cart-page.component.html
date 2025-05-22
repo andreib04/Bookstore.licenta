@@ -83,7 +83,7 @@
     </div>
 
     <div class="checkout-btn">
-      <button routerLink="/checkout" class="btn btn-primary d-flex justify-content-between fs-5 w-100">
+      <button (click)="onCheckout()" class="btn btn-primary d-flex justify-content-between fs-5 w-100">
         <span class="ms-2">Checkout</span>
         <span class="me-2">${{totalPrice}}</span>
       </button>

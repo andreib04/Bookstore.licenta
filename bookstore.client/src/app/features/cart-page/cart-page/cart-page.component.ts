@@ -4,7 +4,9 @@ import {CartService} from '../../../core/services/cart.service';
 import {BooksServiceService} from '../../../core/services/books-service.service';
 import {MagazinesServiceService} from '../../../core/services/magazines-service.service';
 import {map} from 'rxjs/operators';
-import {forkJoin} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
+import {AuthService} from '../../../core/services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cart-page',
@@ -12,14 +14,18 @@ import {forkJoin} from 'rxjs';
   styleUrl: './cart-page.component.css'
 })
 export class CartPageComponent implements OnInit{
-
+  isLoggedIn$!: Observable<boolean>;
   cartItems: CartItem[] = [];
   totalPrice: number = 0;
   isLoading = false;
 
   constructor(private cartService: CartService,
               private bookService: BooksServiceService,
-              private magazineService: MagazinesServiceService) {}
+              private magazineService: MagazinesServiceService,
+              private authService: AuthService,
+              private router: Router) {
+    this.isLoggedIn$ = this.authService.isLoggedIn();
+  }
 
   ngOnInit() {
     this.loadCartItems();
@@ -85,6 +91,16 @@ export class CartPageComponent implements OnInit{
         !(i.productId === item.productId && i.productType === item.productType)
       );
       this.totalPrice = this.cartItems.reduce((sum, i) => sum + i.subtotal, 0);
+    })
+  }
+
+  onCheckout(){
+    this.isLoggedIn$.subscribe(isloggedIn => {
+      if(isloggedIn){
+        this.router.navigate(['/checkout']);
+      }else{
+        this.router.navigate(['/login']);
+      }
     })
   }
 }
