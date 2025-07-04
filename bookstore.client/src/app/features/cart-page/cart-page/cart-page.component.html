@@ -32,7 +32,8 @@
         <div class="product-img">
           <img class="object-fit-cover" style="width: 180px; height: 250px;"
                [src]="item.image"
-               alt="Image not found">
+               alt="Image not found"
+               (error)="item.image = fallBackUrl">
         </div>
 
         <div class="product-details">

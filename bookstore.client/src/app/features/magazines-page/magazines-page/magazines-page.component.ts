@@ -21,7 +21,7 @@ export class MagazinesPageComponent implements OnInit{
 
   totalCount = 0;
   currentPage = 1;
-  perPage = 20;
+  perPage = 10;
 
   activeSort = {
     sortBy: 'price',

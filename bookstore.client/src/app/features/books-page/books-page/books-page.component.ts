@@ -19,7 +19,7 @@ export class BooksPageComponent implements OnInit {
 
   totalCount = 0;
   currentPage = 1;
-  perPage = 3;
+  perPage = 10;
 
   activeSort = {
     sortBy: 'price',

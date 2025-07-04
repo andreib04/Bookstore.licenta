@@ -12,6 +12,16 @@ export class AdminMagazinesComponent implements OnInit{
 
   allMagazines: Magazine[] = [];
   magazine: Magazine = {} as Magazine;
+  isLoading = false;
+
+  totalCount = 0;
+  currentPage = 1;
+  perPage = 5;
+
+  activeSort = {
+    sortBy: 'price',
+    sortOrder: 'asc'
+  }
 
   constructor(private magazineService: MagazinesServiceService, private router: Router) {
   }
@@ -20,9 +30,21 @@ export class AdminMagazinesComponent implements OnInit{
     this.getAllMagazines();
   }
 
-  getAllMagazines(){
+  /*getAllMagazines(){
     this.magazineService.getMagazines().subscribe(res => {
       this.allMagazines = res;
+    })
+  }*/
+
+  getAllMagazines(){
+    this.isLoading = true;
+    const {sortBy, sortOrder} = this.activeSort;
+
+    const request = this.magazineService.getSortedPaginated(this.currentPage, this.perPage, sortBy, sortOrder);
+    request.subscribe(res => {
+      this.allMagazines = res.items;
+      this.totalCount = res.totalCount;
+      this.isLoading = false;
     })
   }
 
@@ -36,4 +58,25 @@ export class AdminMagazinesComponent implements OnInit{
     this.router.navigate([`/admin/edit/${modelType}/${id}`]);
   }
 
+  sortMagazines(sortBy: string, sortOrder: string) {
+    this.activeSort = { sortBy, sortOrder };
+    this.currentPage = 1;
+    this.getAllMagazines();
+  }
+
+  changePage(page: number){
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.getAllMagazines();
+  }
+
+  changePerPage(count: number){
+    this.perPage = count;
+    this.currentPage = 1;
+    this.getAllMagazines();
+  }
+
+  get totalPages(){
+    return Math.ceil(this.totalCount / this.perPage);
+  }
 }
