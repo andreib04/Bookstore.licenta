@@ -47,26 +47,6 @@ export class BooksServiceService {
     });
   }
 
-  getProcessedBooks(
-    page: number,
-    perPage: number,
-    sortBy: string,
-    sortOrder: string,
-    categoryId?: number
-  ):Observable<PaginatedBookRes>{
-    let params = new HttpParams()
-      .set('page', page)
-      .set('perPage', perPage)
-      .set('sortBy', sortBy)
-      .set('sortOrder', sortOrder);
-
-    if(categoryId !== undefined && categoryId !== null){
-      params = params.set('categoryId', categoryId);
-    }
-
-    return this.http.get<PaginatedBookRes>(`${this.baseURL}${this.apiPATH}/processed`, {params});
-  }
-
   postBook(book: Book): Observable<Book> {
     return this.http.post<Book>(`${this.baseURL}${this.apiPATH}`, book);
   }

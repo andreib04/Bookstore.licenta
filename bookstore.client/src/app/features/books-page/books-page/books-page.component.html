@@ -6,7 +6,6 @@
     </div>
   </div>
 
-
   <div class="image d-flex w-100 p-5">
     <div class="flex-fill">
       <img style="max-height: 325px" class="w-100 object-fit-cover rounded" src="https://images.unsplash.com/photo-1490332695540-5acc256ec383?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="https://placehold.co/600x400">
@@ -54,8 +53,18 @@
     <div class="row">
       <div class="col-md-3 category-sidebar small">
         <h5 [class.active]="!categoryId" (click)="selectCategory(undefined)" class="mb-3 categories-title text-white">Categories</h5>
-        <div class="list-group" *ngFor="let cat of allCategories">
-          <a [class.active]="categoryId === cat.categoryId"
+
+        <input
+          type="text"
+          class="form-control mb-2"
+          placeholder="Search categories..."
+          [(ngModel)]="categorySearch"
+        />
+
+
+        <div class="list-group category-list">
+          <a *ngFor="let cat of filteredCategories"
+             [class.active]="categoryId === cat.categoryId"
              (click)="selectCategory(cat.categoryId)"
              class="list-group-item list-group-item-action pointer">{{ cat.categoryName }}</a>
         </div>

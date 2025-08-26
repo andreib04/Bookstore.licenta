@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Azure;
 using Bookstore.Server.Data.Models;
 using Bookstore.Server.Services;
 using Bookstore.Services.Constants;
@@ -56,6 +57,25 @@ public class UserController : ControllerBase
          {
             StatusCode = 500
          };
+      }
+   }
+
+   [HttpGet("paginated")]
+   [AllowAnonymous]
+   public async Task<IActionResult> GetPaginatedUsers([FromQuery] int page, [FromQuery] int perPage)
+   {
+      try
+      {
+         var (users, totalCount) = await _userService.GetPaginatedUsersAsync(page, perPage);
+         return Ok(new
+         {
+            items = users,
+            totalCount
+         });
+      }
+      catch (Exception ex)
+      {
+         throw new Exception($"Something went wrong {ex.Message}");
       }
    }
 

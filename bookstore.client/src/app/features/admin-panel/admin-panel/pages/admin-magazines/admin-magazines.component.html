@@ -61,7 +61,6 @@
       <th scope="col">Price</th>
       <th scope="col">Stock</th>
       <th scope="col">Category</th>
-      <th scope="col">Release Date</th>
       <th scope="col">Actions</th>
     </tr>
     </thead>
@@ -73,7 +72,6 @@
       <td>{{magazine.price}}</td>
       <td>{{magazine.stock}}</td>
       <td>{{magazine.category.categoryName}}</td>
-      <td>{{magazine.releaseDate | date: 'shortDate'}}</td>
       <td>
         <button (click)="goToEditPage('magazine', magazine.id)" class="btn btn-success"><i class="bi bi-pencil-fill"></i></button>
         <button class="btn btn-danger ms-2" (click)="deleteMagazine(magazine.id)"><i class="bi bi-trash-fill"></i></button>

@@ -5,6 +5,14 @@
   background-color: #fff;
 }
 
+
+.category-list {
+  max-height: 350px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+}
+
 .dropdown-item:hover{
   background-color: #007bff;
   color: white;

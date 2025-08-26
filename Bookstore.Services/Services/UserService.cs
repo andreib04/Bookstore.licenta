@@ -65,6 +65,13 @@ public class UserService : IUserService
         return list;
     }
 
+    public async Task<(IEnumerable<User> items, int totalCount)> GetPaginatedUsersAsync(int page, int perPage)
+    {
+        var allUsers = await _userRepository.GetAllUsers();
+        var paginated = allUsers.Skip((page - 1) * perPage).Take(perPage);
+        return (paginated, allUsers.Count());
+    }
+
     public Task<bool> EmailExistsAsync(string email)
     {
         return _userRepository.EmailExistsAsync(email);

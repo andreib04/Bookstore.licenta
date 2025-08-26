@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../models/user';
 import {map} from 'rxjs/operators';
+import {PaginatedUserRes} from '../models/paginatedUserRes';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,15 @@ export class UsersServiceService {
 
    getUsers(): Observable<User[]>{
     return this.http.get<User[]>(`${this.baseURL}${this.apiPATH}`);
+  }
+
+  getPaginatedUsers(page: number, perPage: number): Observable<PaginatedUserRes>{
+    return this.http.get<PaginatedUserRes>(`${this.baseURL}${this.apiPATH}/paginated`, {
+      params: {
+        page,
+        perPage
+      }
+    })
   }
 
   checkEmailExists(email: string): Observable<boolean> {

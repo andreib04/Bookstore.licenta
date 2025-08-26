@@ -37,6 +37,26 @@
     </tbody>
   </table>
 
+  <div class="pagination-container d-flex justify-content-end align-items-center me-5">
+    <button
+      (click)="changePage(currentPage - 1)"
+      [disabled]="currentPage === 1"
+      class="pagination-button prev me-2">
+      &laquo; Previous
+    </button>
+
+    <span class="page-info fw-bold">
+    Page {{ currentPage }} of {{ totalPages }}
+  </span>
+
+    <button
+      (click)="changePage(currentPage + 1)"
+      [disabled]="currentPage >= totalPages"
+      class="pagination-button next ms-2">
+      Next &raquo;
+    </button>
+  </div>
+
   <ng-template #noData>
     <p>No categories available. {{noData}}</p>
   </ng-template>

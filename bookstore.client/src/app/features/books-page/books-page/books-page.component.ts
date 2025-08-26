@@ -14,6 +14,7 @@ import {CartItem} from '../../../core/models/cartItem';
 export class BooksPageComponent implements OnInit {
   allBooks: Book[] = [];
   allCategories: Category[] = [];
+  categorySearch: string = '';
   fallbackUrl = "https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
   isLoading = false;
 
@@ -35,6 +36,13 @@ export class BooksPageComponent implements OnInit {
   ngOnInit() {
     this.getAllCategories();
     this.loadBooks();
+  }
+
+  get filteredCategories(){
+    if(!this.categorySearch) return this.allCategories;
+    return this.allCategories.filter(cat =>
+      cat.categoryName.toLowerCase().includes(this.categorySearch.toLowerCase())
+    );
   }
 
   loadBooks() {

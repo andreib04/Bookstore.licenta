@@ -20,6 +20,15 @@ public class CategoryService : ICategoryService
         return list.ToCategoryDTOList();
     }
 
+    public async Task<(IEnumerable<CategoryDTO> items, int totalCount)> GetPaginatedCategoriesAsync(int page,
+        int perPage)
+    {
+        var allCategories = await _categoryRepository.GetAllCategoriesAsync();
+        var allCatDto = allCategories.Select(c => c.ToDTO()).ToList();
+        var paginated = allCatDto.Skip((page - 1) * perPage).Take(perPage);
+        return (paginated, allCategories.Count());
+    }
+
     public async Task<CategoryDTO> GetCategoryByIdAsync(int id)
     {
         var category = await _categoryRepository.GetCategoryByIdAsync(id);

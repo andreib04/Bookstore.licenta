@@ -51,10 +51,6 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
-  setLoggedIn(status: boolean){
-    this.loggedIn.next(status);
-  }
-
   getCurrentUser(): Observable<User | null>{
     return this.currentUser.asObservable();
   }
@@ -76,7 +72,6 @@ export class AuthService {
       return null;
     }
   }
-
 
   private decodeToken(token: string): User{
     try{

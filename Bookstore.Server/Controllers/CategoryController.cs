@@ -26,6 +26,25 @@ public class CategoryController : ControllerBase
         return Ok(categories);
     }
 
+    [HttpGet("paginated")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetPaginated([FromQuery] int page = 1, [FromQuery] int perPage = 20)
+    {
+        try
+        {
+            var (categories, totalCount) = await _categoryService.GetPaginatedCategoriesAsync(page, perPage);
+            return Ok(new
+            {
+                items = categories,
+                totalCount
+            });
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Something went wrong: {ex.Message}");
+        }
+    }
+
     [HttpGet("{id}")]
     [AllowAnonymous]
     public async Task<IActionResult> GetCategoryById(int id)

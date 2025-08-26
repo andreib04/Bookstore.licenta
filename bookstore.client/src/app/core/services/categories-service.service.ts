@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Category} from '../models/category';
 import {Observable} from 'rxjs';
+import {PaginatedCategoryRes} from '../models/paginatedCategoryRes';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,15 @@ export class CategoriesServiceService {
 
   getCategory(): Observable<Category[]>{
     return this.http.get<Category[]>(`${this.baseURL}${this.apiPATH}`);
+  }
+
+  getPaginatedCategory(page: number, perPage: number): Observable<PaginatedCategoryRes>{
+    return this.http.get<PaginatedCategoryRes>(`${this.baseURL}${this.apiPATH}/paginated`, {
+      params: {
+        page,
+        perPage
+      }
+    });
   }
 
   getOneCategory(id: number): Observable<Category> {

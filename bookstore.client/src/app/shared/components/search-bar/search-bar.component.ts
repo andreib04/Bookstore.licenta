@@ -29,18 +29,19 @@ export class SearchBarComponent {
     this.searchChanged.next(this.searchQuery);
   }
 
-  selectSuggestion(item: any){
-    this.searchQuery = item.title;
-    this.suggestions = [];
-    this.submitSearch();
-  }
-
   submitSearch(){
     this.suggestions = [];
     this.router.navigate(['/search-results'], {
       queryParams: { query: this.searchQuery },
     })
   }
+  selectSuggestion(item: any){
+    this.searchQuery = item.title;
+    this.suggestions = [];
+    this.submitSearch();
+  }
+
+
 
   @HostListener('document:click', ['$event'])
   handleClickOutside(event: Event){

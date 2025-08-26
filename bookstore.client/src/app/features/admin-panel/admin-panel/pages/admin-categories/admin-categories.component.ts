@@ -10,6 +10,10 @@ import {Category} from '../../../../../core/models/category';
 })
 export class AdminCategoriesComponent implements OnInit {
 
+  totalCount = 0;
+  currentPage = 1;
+  perPage = 10;
+
   categories: Category[] = [
     {
       categoryId: 1,
@@ -25,7 +29,16 @@ export class AdminCategoriesComponent implements OnInit {
   constructor(private categoryService: CategoriesServiceService, private cdr: ChangeDetectorRef,) {}
 
   ngOnInit() {
-    this.fetchItems();
+    /*this.fetchItems();*/
+    this.getAllCategories();
+  }
+
+  getAllCategories(){
+    const request = this.categoryService.getPaginatedCategory(this.currentPage, this.perPage);
+    request.subscribe(res => {
+      this.categories = res.items;
+      this.totalCount = res.totalCount;
+    })
   }
 
   fetchItems(){
@@ -106,5 +119,21 @@ export class AdminCategoriesComponent implements OnInit {
       console.log('Deleted category', res);
       this.categories = this.categories.filter(c => c.categoryId !== id)
     })
+  }
+
+  changePage(page: number){
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.getAllCategories();
+  }
+
+  changePerPage(count: number){
+    this.perPage = count;
+    this.currentPage = 1;
+    this.getAllCategories();
+  }
+
+  get totalPages(){
+    return Math.ceil(this.totalCount / this.perPage);
   }
 }
