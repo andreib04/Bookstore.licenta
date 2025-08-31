@@ -1,5 +1,9 @@
 using Bookstore.Server.Data.Models;
+using Bookstore.Server.DTO;
+using Bookstore.Server.Hubs;
 using Bookstore.Server.Repositories;
+using Bookstore.Services.DTOs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Bookstore.Server.Services;
 
@@ -10,12 +14,20 @@ public class OrderService : IOrderService
     private readonly IRepository<Book> _bookRepository;
     private readonly IRepository<Magazine> _magRepository;
 
-    public OrderService(IOrderRepository orderRepository, SortingService sortingService, IRepository<Book> bookRepository, IRepository<Magazine> magRepository)
+    private readonly IHubContext<OrdersHub> _ordersHub;
+    private readonly IHubContext<InventoryHub> _inventoryHub;
+
+    public OrderService(IOrderRepository orderRepository, SortingService sortingService,
+        IRepository<Book> bookRepository, IRepository<Magazine> magRepository,
+        IHubContext<OrdersHub> ordersHub, IHubContext<InventoryHub> inventoryHub)
     {
         _orderRepository = orderRepository;
         _sortingService = sortingService;
         _bookRepository = bookRepository;
         _magRepository = magRepository;
+        
+        _ordersHub = ordersHub;
+        _inventoryHub = inventoryHub;
     }
 
     public async Task<Order> PlaceOrderAsync(Order order)
@@ -25,15 +37,50 @@ public class OrderService : IOrderService
             if (item.ProductType == "Book")
             {
                 await _bookRepository.UpdateStockAsync(item.ProductId, item.Quantity);
+                
+                //Notify the stock change
+                var book = await _bookRepository.GetByIdAsync(item.ProductId);
+                if (book != null)
+                {
+                    var stockUpdate = new ItemDTO
+                    {
+                        Id = book.Id,
+                        Stock = book.Stock,
+                    };
+                    await _inventoryHub.Clients.All.SendAsync("StockUpdated", stockUpdate);
+                }
             }
             else if (item.ProductType == "Magazine")
             {
                 await _magRepository.UpdateStockAsync(item.ProductId, item.Quantity);
+
+                var magazine = await _magRepository.GetByIdAsync(item.ProductId);
+                if (magazine != null)
+                {
+                    var stockUpdate = new ItemDTO
+                    {
+                        Id = magazine.Id,
+                        Stock = magazine.Stock
+                    };
+                    await _inventoryHub.Clients.All.SendAsync("StockUpdated", stockUpdate);
+                }
             }
         }
         
         var placedOrder = await _orderRepository.PlaceOrderAsync(order);
         await _orderRepository.ClearCartAsync(order.UserId);
+
+        var dto = new OrderDto
+        {
+            Id = placedOrder.Id,
+            Status = placedOrder.Status,
+            UserId = placedOrder.UserId
+        };
+        
+        await _ordersHub.Clients.Group("Admin").SendAsync("OrderReceived", dto);
+
+        await _ordersHub.Clients.User(order.UserId.ToString()).SendAsync("OrderStatusChanged", dto);
+        
         return placedOrder;
     }
 

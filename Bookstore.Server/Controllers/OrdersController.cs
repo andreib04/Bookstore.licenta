@@ -1,5 +1,7 @@
 using Bookstore.Server.Data.Models;
 using Bookstore.Server.Services;
+using Bookstore.Services.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bookstore.Server.Controllers;
@@ -13,6 +15,7 @@ public class OrdersController : ControllerBase
     public OrdersController(IOrderService orderService) => _orderService = orderService;
 
     [HttpPost]
+    [Authorize(Policy = UserRolesConstants.Member)]
     public async Task<IActionResult> PlaceOrder(Order order)
     {
         if (!order.Items.Any())
@@ -30,6 +33,12 @@ public class OrdersController : ControllerBase
             throw new Exception($"Something went wrong: {ex.Message}");
         }
     }
+
+    //TODO
+    // public async Task<ActionResult<Order>> UpdateOrderStatusAsync(int orderId, string status)
+    // {
+    //
+    // }
 
     [HttpGet("user/{userId}")]
     public async Task<ActionResult<List<Order>>> GetUserOrders(int userId)
