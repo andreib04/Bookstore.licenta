@@ -40,8 +40,8 @@ builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
 
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddTransient<IOrderService, OrderService>();
+//builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+//builder.Services.AddTransient<IOrderService, OrderService>();
 
 builder.Services.ConfigureAuthorization();
 	
