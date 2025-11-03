@@ -21,7 +21,7 @@ public static class AuthorizationConfiguration
             
             options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
             options.AddPolicy(PoliciesConstants.ADMIN, policy =>
-            {
+            {    
                 policy.RequireClaim(ClaimTypes.Role, admin);
             });
             
