@@ -28,6 +28,7 @@ It supports secure user authentication using **JWT**, books and magazines browsi
 - 📄 Pagination
 - #️⃣ Page size options: **20 / 40 / 60**
 - 🆕 Latest Books & Magazines on Home page
+- ✅ Searchbar with auto complete (by title)
 
 ---
 
@@ -101,7 +102,7 @@ cd Bookstore.licenta
 ### 3. Configure the database 
 ```bash
 - Ensure you have SQL Server installed and running 
-- Update the connection string in 'Bookstore.Server/appsettings.json' (or other configuration)
+- Update the connection string in 'Bookstore.Server/appsettings.json' 
 - Apply the EF migrations or manually run the SQL script to create the database schema
 ```
 
