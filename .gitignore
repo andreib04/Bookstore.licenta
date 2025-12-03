@@ -365,3 +365,7 @@ FodyWeavers.xsd
 # App settings (contains secrets)
 appsettings.json
 appsettings.Development.json
+
+#Package-lock
+package-lock.json
+package.json
